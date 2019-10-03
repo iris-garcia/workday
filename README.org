@@ -1,0 +1,67 @@
+[[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPLv3-blue.svg]]
+
+* Workday Registry API
+** What is it?
+Since last May 12, 2019 every Spanish company is required to provide
+their employees a process to record their working hours.
+
+This process can be as simple as signing in a paper the check in and
+check out for every single workday but any other process can be used
+and this is the reason for which I decided to develop this project.
+
+Initially the idea is to provide a RESTful API which could be used in
+any company to register these checks in and checks out, and allow the
+"administrators" to retrieve the data at any time they are requested
+to.
+
+** How is it going to be developed?
+- RESTful API design.
+- Test-driven development.
+- Isolated development environment (probably using Docker containers).
+- Continuous Integration.
+- Gitflow workflow.
+- Storing persistent data with NoSQL.
+- Logging services.
+
+** Which tools will be used?
+*** [[https://golang.org/][Go]]
+The open source programming language Go will be used, mainly because I
+want to try a new language and this one is becoming quite popular
+nowadays.
+
+This language will allow us to build and test the software without any
+additional dependency, however it is worth to mention this project
+will use at least the version 1.13 to take advantage of the ~go mod~
+new feature.
+
+*** [[https://www.mongodb.com/][MongoDB]]
+As a NoSQL database program, MongoDB will be used as it fits very well
+with its JSON-like documents for a RESTful API microservice.
+
+*** [[https://www.elastic.co/products/beats/filebeat][Filebeat]] / [[https://www.elastic.co/products/logstash][Logstash]]
+I am not sure yet if the final project will use Filebeat for shipping
+the logs or a Go package to ship directly to Logstash.
+
+*** [[https://travis-ci.org/][Travis CI]] / [[https://github.com/features/actions][Github Actions]]
+For Continuous Integration I want to test Travis CI and Github Actions
+and probably only Github Actions will be used in the final version.
+
+*** [[https://github.com/swaggo/swag][Swag]]
+It is very important to document a RESTful API and in this project the
+swag framework will be used to automatically generate Swagger Api
+documents.
+
+* How to contribute
+** Setup the environment
+1. Fork the repository.
+2. Clone your forked repository.
+3. Run ~docker-compose up~.
+** Add your contribution
+1. Create a new branch:
+   - ~bug/short-description~
+   - ~feature/short-description~
+2. Write tests to cover your changes.
+3. Run the tests.
+4. Push the branch to your fork.
+** Request the integration
+1. Create a Pull Request from your branch to ~develop~.
