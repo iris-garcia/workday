@@ -6,13 +6,12 @@ import (
 	"github.com/kataras/iris"
 )
 
-// Runs a HTTP server using iris web framework
-func RunHTTPServer() error {
+// Creates and returns an Iris HTTP server
+func IrisHTTPServer() (*iris.Application, error) {
 	cfg, err := LoadDBConfig("./db_config.toml")
 	if err != nil {
-		return err
+		return nil, err
 	}
-
 	fmt.Println(cfg)
 
 	app := iris.Default()
@@ -21,7 +20,5 @@ func RunHTTPServer() error {
 		ctx.JSON(iris.Map{"message": "GET to employess endpoint"})
 	})
 
-	app.Run(iris.Addr(":8080"))
-
-	return nil
+	return app, nil
 }
