@@ -17,7 +17,7 @@ jobs:
       deploy:
         provider: releases
         api_key: $WORKDAY_RELEASE
-        file: "workday"
+        file: "${GOPATH}/bin/workday"
         skip_cleanup: true
         on:
           tags: true
