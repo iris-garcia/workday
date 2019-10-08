@@ -11,13 +11,13 @@ jobs:
       go: 1.13.x
 
     - stage: Build artifact
-      script: go build .
+      script: go build cmd/workday/workday.go
 
     - stage: Release artifact to GitHub
       deploy:
         provider: releases
         api_key: $WORKDAY_RELEASE
-        file: "${GOPATH}/bin/workday"
+        file: "workday"
         skip_cleanup: true
         on:
           tags: true
