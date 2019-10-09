@@ -70,9 +70,9 @@ generate a static site.
 
 * How to contribute
 ** Setup the environment
-1. Fork the repository.
-2. Clone your forked repository.
-3. Run ~docker-compose up~.
+2. Fork the repository.
+3. Clone your forked repository.
+4. Run ~go get~.
 
 ** Add your contribution
 1. Create a new branch:
