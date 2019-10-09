@@ -1,16 +1,16 @@
-[[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPLv3-blue.svg]]
+[[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPLv3-blue.svg]] [[https://github.com/iris-garcia/workday/actions][https://github.com/iris-garcia/workday/workflows/master/badge.svg]] [[https://goreportcard.com/report/github.com/iris-garcia/workday][https://goreportcard.com/badge/github.com/iris-garcia/workday?style=flat-square]]
 
-* Workday Registry API
-** What is it?
+* Workday
+** What's the idea?
 Since last May 12, 2019 every Spanish company is required to provide
 their employees a process to record their working hours.
 
-This process can be as simple as signing in a paper the check in and
-check out for every single workday but any other process can be used
+This process can be as simple as signing in a paper the checks in and
+checks out for every single workday; but any other process can be used
 and this is the reason for which I decided to develop this project.
 
 Initially the idea is to provide a RESTful API which could be used in
-any company to register these checks in and checks out, and allow the
+any company to register those checks in and checks out, and allow the
 "administrators" to retrieve the data at any time they are requested
 to.
 
@@ -20,8 +20,9 @@ to.
 - Isolated development environment (probably using Docker containers).
 - Continuous Integration.
 - Gitflow workflow.
-- Storing persistent data with NoSQL.
+- Storing persistent data in a relational database.
 - Logging services.
+- Authentication
 
 ** Which tools will be used?
 *** [[https://golang.org/][Go]]
@@ -29,39 +30,66 @@ The open source programming language Go will be used, mainly because I
 want to try a new language and this one is becoming quite popular
 nowadays.
 
-This language will allow us to build and test the software without any
-additional dependency, however it is worth to mention this project
-will use at least the version 1.13 to take advantage of the ~go mod~
-new feature.
+*** [[https://iris-go.com/][Iris]]
+Iris is an easy to use web framework which claims to be one of the
+[[https://github.com/kataras/iris/wiki/Benchmarks][fastest]] web frameworks ever crafted.
 
-*** [[https://www.mongodb.com/][MongoDB]]
-As a NoSQL database program, MongoDB will be used as it fits very well
-with its JSON-like documents for a RESTful API microservice.
+This web framework will be used to build the HTTP server among all
+the API endpoints and some kind of authentication.
+
+*** [[https://mariadb.com/][MariaDB]]
+The relational database engine MariaDB has been choosen to persist the
+data, it is OpenSource and fulfills the requirements.
 
 *** [[https://www.elastic.co/products/beats/filebeat][Filebeat]] / [[https://www.elastic.co/products/logstash][Logstash]]
-I am not sure yet if the final project will use Filebeat for shipping
+I am not sure yet if the final version will use Filebeat for shipping
 the logs or a Go package to ship directly to Logstash.
 
-*** [[https://travis-ci.org/][Travis CI]] / [[https://github.com/features/actions][Github Actions]]
-For Continuous Integration I want to test Travis CI and Github Actions
-and probably only Github Actions will be used in the final version.
+*** Test-driven development (TDD)
+Go has support for testing built in to its toolchain which will be used to cover
+unit and integration tests.
 
-*** [[https://github.com/swaggo/swag][Swag]]
-It is very important to document a RESTful API and in this project the
-swag framework will be used to automatically generate Swagger Api
-documents.
+The framework [[https://github.com/gavv/httpexpect][httpexpect]] will be used for end-to-end tests.
+
+*** Continuous Integration
+**** [[https://travis-ci.org/][Travis CI]]
+Travis CI is an open source hosted continuous integration and
+deployment system which plays nicely with GitHub, for these reasons we
+will use it in this project.
+
+**** [[https://github.com/features/actions][Github Actions]]
+GitHub Actions is the new continuous integration and deployment system
+developed by GitHub, we will use it to run the same tests as Travis
+and probably some extra workflows to automate the generation of the
+documentation.
+
+*** [[https://github.com/OAI/OpenAPI-Specification/][OpenAPI]]
+This project will follow the OpenAPI Specification to document its API
+endpoints, probably using swagger to parse the specifications and
+generate a static site.
 
 * How to contribute
 ** Setup the environment
 1. Fork the repository.
 2. Clone your forked repository.
 3. Run ~docker-compose up~.
+
 ** Add your contribution
 1. Create a new branch:
    - ~bug/short-description~
    - ~feature/short-description~
 2. Write tests to cover your changes.
 3. Run the tests.
-4. Push the branch to your fork.
+   #+begin_src bash
+     go test -cover -v
+   #+end_src
+4. Build and run the binary
+#+begin_src bash
+  go build cmd/workday/workday.go
+  ./workday
+#+end_src
+5. Push the branch to your fork once you think everything works as
+   expected.
+
 ** Request the integration
-1. Create a Pull Request from your branch to ~develop~.
+1. Create a Pull Request from your branch to ~master~.
