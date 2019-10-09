@@ -1,4 +1,4 @@
-[[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPLv3-blue.svg]] [[https://github.com/iris-garcia/workday/actions][https://github.com/iris-garcia/workday/workflows/master/badge.svg]] [[https://goreportcard.com/report/github.com/iris-garcia/workday][https://goreportcard.com/badge/github.com/iris-garcia/workday?style=flat-square]]
+[[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPLv3-blue.svg]] [[https://travis-ci.com/iris-garcia/workday][https://travis-ci.com/iris-garcia/workday.svg?branch=master]]  [[https://github.com/iris-garcia/workday/actions][https://github.com/iris-garcia/workday/workflows/master/badge.svg]] [[https://goreportcard.com/report/github.com/iris-garcia/workday][https://goreportcard.com/badge/github.com/iris-garcia/workday?style=flat-square]]
 
 * Workday
 ** What's the idea?
