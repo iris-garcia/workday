@@ -26,7 +26,7 @@ func envVars(vars []string) bool {
 	return true
 }
 
-// Read and parse the configuration; environment variables have precedence over config file.
+// Read and parse DB configuration; environment variables have precedence over config file.
 func LoadDBConfig(filepath string) (DBConfig, error) {
 	var c DBConfig
 

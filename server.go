@@ -16,6 +16,7 @@ func IrisHTTPServer() (*iris.Application, error) {
 
 	app := iris.Default()
 
+	// TODO do db query and return the result.
 	app.Handle("GET", "/employees", func(ctx iris.Context) {
 		ctx.JSON(iris.Map{"message": "GET to employess endpoint"})
 	})
