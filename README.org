@@ -93,3 +93,7 @@ generate a static site.
 
 ** Request the integration
 1. Create a Pull Request from your branch to ~master~.
+
+
+* To be removed
+[![Build Status](https://travis-ci.com/iris-garcia/workday.svg?branch=master)](https://travis-ci.com/iris-garcia/workday)
