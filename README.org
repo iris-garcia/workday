@@ -84,10 +84,10 @@ generate a static site.
      go test -cover -v
    #+end_src
 4. Build and run the binary
-#+begin_src bash
-  go build cmd/workday/workday.go
-  ./workday
-#+end_src
+   #+begin_src bash
+     go build cmd/workday/workday.go
+     ./workday
+   #+end_src
 5. Push the branch to your fork once you think everything works as
    expected.
 
