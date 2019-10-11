@@ -1,0 +1,7 @@
+* Just a test
+#+begin_src bash
+echo "hello world!"
+#+end_src
+
+** Subheading
+Just testing that ~org~ can be used in github pages.
