@@ -6,7 +6,7 @@ import (
 )
 
 func TestConnectToDBShouldReturnDBStruct(t *testing.T) {
-	cfg := DBConfig{User: "asd"}
+	cfg := DBConfig{}
 	db, err := ConnectDB(cfg)
 	if err != nil {
 		t.Errorf("Should get a DB struct but got an error: %v", err.Error())

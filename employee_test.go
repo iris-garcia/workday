@@ -8,6 +8,14 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 )
 
+type MyCustomError struct {
+	message string
+}
+
+func (e MyCustomError) Error() string {
+	return e.message
+}
+
 func assertJSON(a interface{}, b interface{}, t *testing.T) {
 	actual, err := json.Marshal(a)
 	expected, err := json.Marshal(b)
@@ -52,6 +60,34 @@ func TestShouldCreateEmployee(t *testing.T) {
 	}
 }
 
+func TestShouldFailWhenDBExecCreateEmployee(t *testing.T) {
+	db, mock, err := sqlmock.New()
+	if err != nil {
+		t.Errorf("An error '%s' was not expected when opening a stub database connection", err)
+	}
+	defer db.Close()
+
+	if err != nil {
+		t.Errorf("Iris HTTP server failed: %v", err.Error())
+	}
+
+	mock.ExpectExec("INSERT INTO employee").WithArgs("Iris", "Garcia", 1, "secret").
+		WillReturnError(MyCustomError{message: "Error running db.Exec"})
+
+	emp := Employee{Firstname: "Iris", Lastname: "Garcia", Role: 1, Password: "secret"}
+
+	_, _, err = CreateEmployee(db, emp)
+
+	if err == nil {
+		t.Error("Expected an error when the db.Exec fails")
+	}
+
+	// make sure that all expectations were met
+	if err := mock.ExpectationsWereMet(); err != nil {
+		t.Errorf("there were unfulfilled expectations: %s", err)
+	}
+}
+
 func TestShouldFailWhenCreateEmployee(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
@@ -63,20 +99,23 @@ func TestShouldFailWhenCreateEmployee(t *testing.T) {
 		t.Errorf("Iris HTTP server failed: %v", err.Error())
 	}
 
-	res := sqlmock.result{insertID: 1, rowsAffected: 1, nil}
 	mock.ExpectExec("INSERT INTO employee").WithArgs("Iris", "Garcia", 1, "secret").
-		WillReturnResult(sqlmock.NewErrorResult())
+		WillReturnResult(sqlmock.NewErrorResult(MyCustomError{message: "DB error"}))
 
 	emp := Employee{Firstname: "Iris", Lastname: "Garcia", Role: 1, Password: "secret"}
 
 	id, rows, err := CreateEmployee(db, emp)
 
-	if id != 1 {
-		t.Error("lastID should be 1")
+	if err == nil {
+		t.Error("Expected an error when a new employee is created and the lastID is 0")
 	}
 
-	if rows != 1 {
-		t.Error("rowsAffected should be 1")
+	if id == 1 {
+		t.Error("Should not get any lastID inserted")
+	}
+
+	if rows == 1 {
+		t.Error("Should not get any row affected")
 	}
 
 	// make sure that all expectations were met
