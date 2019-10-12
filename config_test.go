@@ -6,7 +6,7 @@ import (
 )
 
 // Test envVars checks the environment variables correctly
-func TestEnvVars(t *testing.T) {
+func TestShouldGetEnvVars(t *testing.T) {
 	env_vars := []string{"VAR1", "VAR2"}
 	os.Setenv("VAR1", "value")
 	os.Setenv("VAR2", "value")
@@ -23,7 +23,7 @@ func TestEnvVars(t *testing.T) {
 }
 
 // Test DB config is read correctly from a file
-func TestDBConfigFile(t *testing.T) {
+func TestShouldGetDBConfigFromFile(t *testing.T) {
 	cfg, err := LoadDBConfig("./db_config.toml")
 	if err != nil {
 		t.Errorf("Error loading db_config file: %v", err.Error())
@@ -41,7 +41,7 @@ func TestDBConfigFile(t *testing.T) {
 }
 
 // Test DB config is read correctly from a environment variables
-func TestDBConfigEnv(t *testing.T) {
+func TestShouldGetDBConfigFromEnv(t *testing.T) {
 	os.Setenv("WORKDAY_DB_HOST", "1.1.1.1")
 	os.Setenv("WORKDAY_DB_NAME", "name")
 	os.Setenv("WORKDAY_DB_USER", "user")
@@ -60,5 +60,17 @@ func TestDBConfigEnv(t *testing.T) {
 		t.Errorf("Wrong user parameter, got %v - expected %v", cfg.User, "user")
 	} else if cfg.Password != "pass" {
 		t.Errorf("Wrong password parameter, got %v - expected %v", cfg.Password, "pass")
+	}
+
+	os.Unsetenv("WORKDAY_DB_HOST")
+	os.Unsetenv("WORKDAY_DB_NAME")
+	os.Unsetenv("WORKDAY_DB_USER")
+	os.Unsetenv("WORKDAY_DB_PASSWORD")
+}
+
+func TestShouldGetError(t *testing.T) {
+	_, err := LoadDBConfig("./random_file.toml")
+	if err == nil {
+		t.Error("Should get an error when the config file does not exists")
 	}
 }
