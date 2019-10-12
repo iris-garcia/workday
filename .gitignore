@@ -13,3 +13,9 @@
 
 # IDEs common folders
 .idea
+
+# This project's binary
+workday
+
+# Coverage reports
+coverage.html
