@@ -1,25 +1,22 @@
 package workday
 
 import (
-	"fmt"
+	"database/sql"
 
 	"github.com/kataras/iris"
 )
 
 // Creates and returns an Iris HTTP server
-func IrisHTTPServer() (*iris.Application, error) {
-	cfg, err := LoadDBConfig("./db_config.toml")
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println(cfg)
-
+func IrisHTTPServer(db *sql.DB) *iris.Application {
 	app := iris.Default()
 
-	// TODO do db query and return the result.
 	app.Handle("GET", "/employees", func(ctx iris.Context) {
-		ctx.JSON(iris.Map{"message": "GET to employess endpoint"})
+		emps, err := GetAllEmployees(db)
+		if err != nil {
+			ctx.StatusCode(iris.StatusInternalServerError)
+		}
+		ctx.JSON(emps)
 	})
 
-	return app, nil
+	return app
 }
