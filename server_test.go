@@ -1,24 +1,25 @@
-package workday
+package workday_test
 
 import (
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/kataras/iris/httptest"
+	"github.com/stretchr/testify/assert"
+
+	. "github.com/iris-garcia/workday"
 )
 
 // Test the GET /employees endpoint 200
 func TestShouldGetEmployeesEndpointStatusOK(t *testing.T) {
+	assert := assert.New(t)
 	db, mock, err := sqlmock.New()
-	if err != nil {
-		t.Errorf("An error '%s' was not expected when opening a stub database connection", err)
-	}
 	defer db.Close()
 
+	assert.Nil(err)
+	assert.NotNil(db)
+
 	app := IrisHTTPServer(db)
-	if err != nil {
-		t.Errorf("Iris HTTP server failed: %v", err.Error())
-	}
 
 	rows := sqlmock.NewRows([]string{"ID", "Firstname", "Lastname", "Role", "Password"})
 	mock.ExpectQuery("^SELECT (.+) FROM employee$").WillReturnRows(rows)
@@ -29,11 +30,12 @@ func TestShouldGetEmployeesEndpointStatusOK(t *testing.T) {
 
 // Test the GET /employees endpoint 500
 func TestShouldGetEmployeesEndpointStatusInternalError(t *testing.T) {
+	assert := assert.New(t)
 	db, _, err := sqlmock.New()
-	if err != nil {
-		t.Errorf("An error '%s' was not expected when opening a stub database connection", err)
-	}
 	defer db.Close()
+
+	assert.Nil(err)
+	assert.NotNil(db)
 
 	app := IrisHTTPServer(db)
 
