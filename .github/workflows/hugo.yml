@@ -36,7 +36,7 @@ jobs:
         echo "${GITHUB_DEPLOY_KEY}" > /home/runner/.ssh/id_rsa && \
         chmod 400 /home/runner/.ssh/id_rsa
         # git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/iris-garcia/webhooks-handler.git
-        git remote set-url origin git@github.com:iris-garcia/webhooks-handler.git
+        git remote set-url origin git@github.com:iris-garcia/workday.git
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
 
