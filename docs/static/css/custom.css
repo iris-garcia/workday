@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'RobotoNerd';
+  src: url('/fonts/Roboto_Mono_Nerd_Font_Complete.ttf')  format('truetype')
+}
+
+.asciinema-terminal {
+    font-family: 'RobotoNerd', monospace, 'Powerline Symbols';
+}
+
+.src-block-caption {
+    margin-top: -10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.ox-hugo-toc.toc .heading {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
