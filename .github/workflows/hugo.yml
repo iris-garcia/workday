@@ -41,6 +41,6 @@ jobs:
 
     - name: Commit and push changes to gh-pages
       run: |
-        git add docs/public/*
+        git add -f docs/public/*
         git commit -m "Publishing to gh-pages branch"
         git push origin gh-pages
