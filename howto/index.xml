@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>How-to on Webhooks Handler</title>
+    <link>https://iris-garcia.github.io/workday/howto/</link>
+    <description>Recent content in How-to on Webhooks Handler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Sun, 13 Oct 2019 13:32:14 +0200</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/howto/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GitHub Pages</title>
+      <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
+      <pubDate>Sun, 13 Oct 2019 13:31:25 +0200</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/howto/gh-pages/</guid>
+      <description>This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub&amp;rsquo;s Actions to automate the deployment process.
+There are different alternatives to setup GitHub pages, the one used in here is a project pages using gh-pages branch, the advantages are:
+ It keeps your source and generated website in different branches and therefore maintains version control history for both. It uses the default Hugo&amp;rsquo;s public folder.</description>
+    </item>
+    
+  </channel>
+</rss>

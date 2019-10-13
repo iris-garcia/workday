@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="description" content="Workday">
+<meta name="author" content="Iris Garcia">
+
+    <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
+
+    <title>GitHub Pages :: Webhooks Handler</title>
+
+    
+    <link href="../../css/nucleus.css?1570975356" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1570975356" rel="stylesheet">
+    <link href="../../css/hybrid.css?1570975356" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1570975356" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1570975356" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1570975356" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1570975356" rel="stylesheet">
+    <link href="../../css/theme.css?1570975356" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1570975356" rel="stylesheet">
+    
+      <link href="../../css/theme-blue.css?1570975356" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1570975356"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
+
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
+
+  </head>
+  <body class="" data-url="/howto/gh-pages/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://iris-garcia.github.io/workday/"><img src="https://iris-garcia.github.io/workday//images/logo.png"/></a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1570975356"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1570975356"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1570975356"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/howto/" title="How-to" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../howto/">
+          How-to
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/howto/gh-pages/" title="GitHub Pages" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="../../howto/gh-pages/">
+          GitHub Pages
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/iris-garcia/workday"><i class='fab fa-github' style='margin-right:10px;'></i>Workday</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://iris-garcia.github.io/tags"><i class='fas fa-tags'></i> Tags</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   GitHub Pages 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#step-1-initializing-branches">Step 1: Initializing branches</a></li>
+<li><a href="#step-2-generate-a-ssh-key-dot">Step 2: Generate a SSH key.</a></li>
+<li><a href="#step-3-add-a-deployment-key">Step 3: Add a deployment key</a></li>
+<li><a href="#step-4-add-the-github-s-action-dot">Step 4: Add the GitHub&rsquo;s Action.</a></li>
+<li><a href="#step-5-verify-the-action">Step 5: Verify the Action</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+<div class="tags">
+
+  <a class="tag-link" href="../../tags/ci">ci</a>
+
+  <a class="tag-link" href="../../tags/hugo">hugo</a>
+
+  <a class="tag-link" href="../../tags/doc">doc</a>
+
+</div>
+
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              GitHub Pages
+            </h1>
+          
+
+        
+
+
+
+
+	
+
+<p>This document ilustrates how to setup <a href="https://pages.github.com/">GitHub Pages</a> using <a href="https://gohugo.io/">Hugo</a> as
+website generator and <a href="https://github.com/features/actions">GitHub&rsquo;s Actions</a> to automate the deployment
+process.</p>
+
+<p>There are different alternatives to setup GitHub pages, the one used
+in here is a project pages using <code>gh-pages</code> branch, the advantages
+are:</p>
+
+<ul>
+<li>It keeps your source and generated website in different branches and
+therefore maintains version control history for both.</li>
+<li>It uses the default Hugo&rsquo;s <strong>public</strong> folder.</li>
+</ul>
+
+<p>So basically this project&rsquo;s repository has the following branches:</p>
+
+<ul>
+<li><strong>master</strong>: Hosts the source code of the project.</li>
+<li><strong>hugo</strong>: Hosts the source code of the documentation website.</li>
+<li><strong>gh-pages</strong>: Hosts the static assets generates by hugo.</li>
+</ul>
+
+<h2 id="step-1-initializing-branches">Step 1: Initializing branches</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># Hugo branch</span>
+git checkout -b hugo
+<span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;public&#34;</span> &gt;&gt; .gitignore
+git add .gitignore
+git commit -m <span style="color:#ed9d13">&#34;Adds .gitignore&#34;</span>
+hugo new site .
+git add .
+git commit -m <span style="color:#ed9d13">&#34;Adds initial hugo site&#34;</span>
+git push origin hugo
+
+<span style="color:#999;font-style:italic"># gh-pages branch</span>
+git checkout --orphan gh-pages
+git reset --hard
+git commit --allow-empty -m <span style="color:#ed9d13">&#34;Initializing gh-pages branch&#34;</span>
+git push origin gh-pages</code></pre></div>
+<h2 id="step-2-generate-a-ssh-key-dot">Step 2: Generate a SSH key.</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -f hugo -q -N <span style="color:#ed9d13">&#34;&#34;</span></code></pre></div>
+
+<div class="notices note" ><p>This will generate the files: <code>hugo</code> and <code>hugo.pub</code> which will be
+needed for the next steps.</p>
+</div>
+
+
+<h2 id="step-3-add-a-deployment-key">Step 3: Add a deployment key</h2>
+
+<p>Navigate to your GitHub&rsquo;s repository settings and under <strong>Deploy keys</strong>
+and add a new one using the content of the <code>hugo</code> SSH private key
+generated in the previous step.</p>
+
+<figure>
+    <img src="../../images/deploy_key.png"/> 
+</figure>
+
+
+
+<div class="notices warning" ><p>Make sure the <strong>Allow write access</strong> is checked, otherwise the GitHub&rsquo;s
+Action won&rsquo;t be able to push changes.</p>
+</div>
+
+
+<h2 id="step-4-add-the-github-s-action-dot">Step 4: Add the GitHub&rsquo;s Action.</h2>
+
+<p>Create the needed directory in the <strong>hugo</strong> branch:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git checkout hugo
+mkdir -p .github/workflows</code></pre></div>
+<p>Add a new file in the path <code>.github/workflows/gh_pages.yml</code> with the
+following content:</p>
+
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">name:<span style="color:#666"> </span>gh_pages<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>on:<span style="color:#666">
+</span><span style="color:#666">  </span>push:<span style="color:#666">
+</span><span style="color:#666">    </span>branches:<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>hugo<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>jobs:<span style="color:#666">
+</span><span style="color:#666">  </span>build:<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">    </span>runs-on:<span style="color:#666"> </span>ubuntu<span style="color:#3677a9">-18.04</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">    </span>steps:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>uses:<span style="color:#666"> </span>actions/checkout@v1<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Installs<span style="color:#666"> </span>hugo<span style="color:#666">
+</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">        cd /tmp</span><span style="color:#666">
+</span><span style="color:#666">        </span>wget<span style="color:#666"> </span>https://github.com/gohugoio/hugo/releases/download/v0<span style="color:#3677a9">.57.0</span>/hugo_0<span style="color:#3677a9">.57</span>.0_Linux-64bit.deb<span style="color:#666">
+</span><span style="color:#666">        </span>sudo<span style="color:#666"> </span>dpkg<span style="color:#666"> </span>-i<span style="color:#666"> </span>hugo_0<span style="color:#3677a9">.57</span>.0_Linux-64bit.deb<span style="color:#666">
+</span><span style="color:#666">        </span>hugo<span style="color:#666"> </span>version<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Build<span style="color:#666"> </span>hugo<span style="color:#666"> </span>site<span style="color:#666">
+</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">        rm -rf public</span><span style="color:#666">
+</span><span style="color:#666">        </span>git<span style="color:#666"> </span>worktree<span style="color:#666"> </span>add<span style="color:#666"> </span>-b<span style="color:#666"> </span>gh-pages<span style="color:#666"> </span>public<span style="color:#666"> </span>origin/gh-pages<span style="color:#666">
+</span><span style="color:#666">        </span>hugo<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Configure<span style="color:#666"> </span>git<span style="color:#666"> </span>and<span style="color:#666"> </span>deployment<span style="color:#666"> </span>key<span style="color:#666">
+</span><span style="color:#666">      </span>env:<span style="color:#666">
+</span><span style="color:#666">        </span>GITHUB_DEPLOY_KEY:<span style="color:#666"> </span>${{<span style="color:#666"> </span>secrets.GITHUB_DEPLOY_KEY<span style="color:#666"> </span>}}<span style="color:#666">
+</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">        mkdir /home/runner/.ssh</span><span style="color:#666">
+</span><span style="color:#666">        </span>ssh-keyscan<span style="color:#666"> </span>-t<span style="color:#666"> </span>rsa<span style="color:#666"> </span>github.com<span style="color:#666"> </span>&gt;/home/runner/.ssh/known_hosts<span style="color:#666">
+</span><span style="color:#666">        </span>echo<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${GITHUB_DEPLOY_KEY}&#34;</span><span style="color:#666"> </span>&gt;<span style="color:#666"> </span>/home/runner/.ssh/id_rsa<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
+</span><span style="color:#666">        </span>chmod<span style="color:#666"> </span><span style="color:#3677a9">400</span><span style="color:#666"> </span>/home/runner/.ssh/id_rsa<span style="color:#666">
+</span><span style="display:block;width:100%;background-color:#363636"><span style="color:#666">        </span>git<span style="color:#666"> </span>remote<span style="color:#666"> </span>set-url<span style="color:#666"> </span>origin<span style="color:#666"> </span>git@github.com:iris-garcia/webhooks-handler.git<span style="color:#666">
+</span></span><span style="color:#666">        </span>git<span style="color:#666"> </span>config<span style="color:#666"> </span>--global<span style="color:#666"> </span>user.name<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GitHub Action&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span>git<span style="color:#666"> </span>config<span style="color:#666"> </span>--global<span style="color:#666"> </span>user.email<span style="color:#666"> </span><span style="color:#ed9d13">&#34;action@github.com&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Commit<span style="color:#666"> </span>and<span style="color:#666"> </span>push<span style="color:#666"> </span>changes<span style="color:#666"> </span>to<span style="color:#666"> </span>gh-pages<span style="color:#666">
+</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">        cd public</span><span style="color:#666">
+</span><span style="color:#666">        </span>git<span style="color:#666"> </span>add<span style="color:#666"> </span>--all<span style="color:#666">
+</span><span style="color:#666">        </span>git<span style="color:#666"> </span>commit<span style="color:#666"> </span>-m<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Publishing to gh-pages branch&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span>cd<span style="color:#666"> </span>..<span style="color:#666">
+</span><span style="color:#666">        </span>git<span style="color:#666"> </span>push<span style="color:#666"> </span>origin<span style="color:#666"> </span>gh-pages</code></pre></div>
+
+
+<div class="notices note" ><p>Replace the origin&rsquo;s remote with your repository.</p>
+</div>
+
+
+<p>Finally commit and push the changes (which should trigger already the
+Action).</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git add .github/workflows/gh_pages.yml
+git commit -m <span style="color:#ed9d13">&#34;Adds GitHub&#39;s Action to build hugo site.&#34;</span>
+git push origin hugo</code></pre></div>
+<h2 id="step-5-verify-the-action">Step 5: Verify the Action</h2>
+
+<p>If everything went well you should already have your site updated and a
+new commit to the <code>gh-pages</code> branch.</p>
+
+<p>You can also see the output of the Action navigating to the <strong>Actions</strong>
+section of your repository.</p>
+
+<figure>
+    <img src="../../images/gh_action.png"/> 
+</figure>
+
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../howto/" title="How-to"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1570975356"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1570975356"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1570975356"></script>
+    <script src="../../js/jquery.sticky.js?1570975356"></script>
+    <script src="../../js/featherlight.min.js?1570975356"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1570975356"></script>
+    <script src="../../js/highlight.pack.js?1570975356"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1570975356"></script>
+    <script src="../../js/learn.js?1570975356"></script>
+    <script src="../../js/hugo-learn.js?1570975356"></script>
+
+    <link href="../../mermaid/mermaid.css?1570975356" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1570975356"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+<script src="../../js/asciinema-player.js"></script>
+
+
+  </body>
+</html>

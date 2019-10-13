@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/howto/gh-pages/</loc>
+    <lastmod>2019-10-13T15:42:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/</loc>
+    <lastmod>2019-10-13T15:42:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/howto/</loc>
+    <lastmod>2019-10-13T15:42:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/tags/</loc>
+  </url>
+  
+</urlset>
