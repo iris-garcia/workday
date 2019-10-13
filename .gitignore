@@ -18,4 +18,5 @@
 workday
 
 # Coverage reports
-coverage.html
+workday.coverprofile
+coverage-ginkgo.html
