@@ -60,7 +60,7 @@ weight = 10
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-tags'></i> Tags"
-url = "/tags"
+url = "https://github.com/iris-garcia/workday/tags"
 weight = 30
 
 [author]

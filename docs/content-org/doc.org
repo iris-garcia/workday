@@ -15,15 +15,143 @@
 <h1>Workday</h1>
 [[/images/workday.png]]
 
-{{% notice tip %}}
+{{% notice note %}}
 This site hosts the documentation of Workday.
 {{% /notice %}}
 
 * Sections
+** Description
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: description
+:EXPORT_HUGO_WEIGHT: 1
+:END:
+*** Description
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>1. </b>"
+:END:
+<h3> Chapter 1 </h3>
+<h1>Description</h1>
+
+Get a general idea of what is Workday and the motivation to start its
+development.
+
+*** What is Workday?
+:PROPERTIES:
+:EXPORT_FILE_NAME: description/what
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+Workday is a RESTful API project that allows the management of
+workers' day registration, for this purpose it makes use of a
+relational database where such data persists.
+
+It allows the creation of different types of users (roles), initially
+there are two main roles:
+1. ~employee~: The employee has permissions to:
+   - Register checks in and checks out.
+   - Update their own password.
+   - Update their own schedule.
+2. ~HR~: The Human Resources role is the one with almost full control,
+   it has the permissions of a regular employee plus:
+   - Retrieve every employee's schedule.
+   - Register employees.
+   - Remove employees.
+   - Reset employees' password.
+
+The final goal is to build clients consuming this API to improve the
+user experience, for example:
+
+An Android/iOS app which automatically registers the checks in when the
+GPS location is near the Office's location and the checks out when it
+gets away from the Office's location.
+
+*** Why?
+:PROPERTIES:
+:EXPORT_FILE_NAME: description/why
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+Since last May 12, 2019 every Spanish company is required to provide
+their employees a process to record their working hours.
+
+This process can be as simple as signing in a paper the checks in and
+checks out for every single workday; but any other process can be used
+and this is the reason for which I decided to develop this project.
+
+** Development
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: dev
+:EXPORT_HUGO_WEIGHT: 2
+:END:
+*** Development
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>2. </b>"
+:END:
+<h3> Chapter 2 </h3>
+<h1>Development</h1>
+
+This chapter shows which tools are used in the development of the
+project and how to set up a working dev environment.
+
+{{% notice info %}}
+Work in progress...
+{{% /notice %}}
+
+** Continuous Integration
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ci
+:EXPORT_HUGO_WEIGHT: 3
+:END:
+*** Continuous Integration
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>3. </b>"
+:END:
+<h3> Chapter 3 </h3>
+<h1>Continuous Integration</h1>
+
+This chapter describes the systems used to continuously integrate
+changes into the project.
+*** Travis CI
+:PROPERTIES:
+:EXPORT_FILE_NAME: ci/travis
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+**** Description
+Travis is a hosted continuous integration service used to build and
+test software projects hosted at GitHub.
+
+It provides a free plan for open source projects which is very
+convinient for our use case.
+
+The whole configuration is set up in a single file ~.travis.yml~ which
+must be placed in the root directory of the project.
+**** Configuration
+
+** Deployment
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: deployment
+:EXPORT_HUGO_WEIGHT: 4
+:END:
+*** Deployment
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>4. </b>"
+:END:
+<h3> Chapter 4 </h3>
+<h1>Deployment</h1>
+
+This chapter describes where and how is this project deployed.
+
+{{% notice info %}}
+Work in progress...
+{{% /notice %}}
+
+
 ** How-to
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: howto
-:EXPORT_HUGO_WEIGHT: 2
+:EXPORT_HUGO_WEIGHT: 5
 :END:
 *** How-to
 :PROPERTIES:

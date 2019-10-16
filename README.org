@@ -45,9 +45,9 @@ data, it is OpenSource and fulfills the requirements.
 I am not sure yet if the final version will use Filebeat for shipping
 the logs or a Go package to ship directly to Logstash.
 
-*** Test-driven development (TDD)
+*** Test-driven development (TDD & BDD)
 Go has support for testing built in to its toolchain which will be used to cover
-unit and integration tests.
+unit and integration tests with the help of [[https://github.com/stretchr/testify][testify]] for the assertions.
 
 The framework [[https://github.com/gavv/httpexpect][httpexpect]] will be used for end-to-end tests.
 
@@ -67,6 +67,9 @@ documentation.
 This project will follow the OpenAPI Specification to document its API
 endpoints, probably using swagger to parse the specifications and
 generate a static site.
+
+** Documentation
+The extended documentation is hosted [[https://iris-garcia.github.io/workday/][here]].
 
 * How to contribute
 ** Setup the environment

@@ -1,7 +1,7 @@
 +++
 title = "Homepage"
 author = ["Iris Garcia"]
-lastmod = 2019-10-13T13:27:47+02:00
+lastmod = 2019-10-13T16:15:02+02:00
 draft = false
 weight = 1
 nocomment = true
@@ -14,6 +14,6 @@ chapter = true
 <h1>Workday</h1>
 ![](/images/workday.png)
 
-{{% notice tip %}}
+{{% notice note %}}
 This site hosts the documentation of Workday.
 {{% /notice %}}
