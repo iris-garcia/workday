@@ -1,7 +1,7 @@
 +++
 title = "Travis CI"
 author = ["Iris Garcia"]
-lastmod = 2019-10-16T14:21:49+02:00
+lastmod = 2019-10-16T20:40:18+02:00
 draft = false
 weight = 3
 asciinema = true
@@ -20,3 +20,34 @@ must be placed in the root directory of the project.
 
 
 ## Configuration {#configuration}
+
+To avoid replicating exactly the same workflows in GitHub Actions and
+Travis, there are some little changes like testing two different Go
+versions: `v1.13.x` and `master` (which is the latest available at any
+given time).
+
+It also releases artifacts when a new **tag** is pushed to the
+repository.
+
+```yaml
+language: go
+
+go:
+- 1.13.x
+- master
+
+jobs:
+  include:
+    - stage: tests coverage
+      script: go test -cover -v
+      go: 1.13.x
+
+    - stage: Release artifact to GitHub
+      deploy:
+        provider: releases
+        api_key: $WORKDAY_RELEASE
+        file: "workday"
+        skip_cleanup: true
+        on:
+          tags: true
+```

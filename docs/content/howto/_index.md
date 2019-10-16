@@ -1,13 +1,15 @@
 +++
 title = "How-to"
 author = ["Iris Garcia"]
-lastmod = 2019-10-14T22:25:15+02:00
+lastmod = 2019-10-16T20:29:12+02:00
 draft = false
 weight = 5
 chapter = true
+pre = "<b>5. </b>"
 +++
 
-<h1>How to's Section</h1>
-Table of contents:
+<h3> Chapter 5 </h3>
+<h1>How to's</h1>
 
--   [GitHub Pages](/howto/gh-pages)
+This chapter hosts all the step by step guides which I find useful to
+share.
