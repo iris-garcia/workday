@@ -16,7 +16,7 @@ to.
 
 ** How is it going to be developed?
 - RESTful API design.
-- Test-driven development.
+- Test-driven development and Behavior-driven development.
 - Isolated development environment (probably using Docker containers).
 - Continuous Integration.
 - Gitflow workflow.
