@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Mon, 14 Oct 2019 22:25:15 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 16 Oct 2019 20:29:12 +0200</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/howto/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>GitHub Pages</title>
       <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-      <pubDate>Mon, 14 Oct 2019 22:25:08 +0200</pubDate>
+      <pubDate>Wed, 16 Oct 2019 20:42:39 +0200</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/gh-pages/</guid>
       <description>This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub&amp;rsquo;s Actions to automate the deployment process.
