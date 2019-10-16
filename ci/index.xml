@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Continuous Integration on Webhooks Handler</title>
+    <link>https://iris-garcia.github.io/workday/ci/</link>
+    <description>Recent content in Continuous Integration on Webhooks Handler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Mon, 14 Oct 2019 22:24:48 +0200</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/ci/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Travis CI</title>
+      <link>https://iris-garcia.github.io/workday/ci/travis/</link>
+      <pubDate>Wed, 16 Oct 2019 14:21:49 +0200</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
+      <description> Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
+It provides a free plan for open source projects which is very convinient for our use case.
+The whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.
+Configuration </description>
+    </item>
+    
+  </channel>
+</rss>

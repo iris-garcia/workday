@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GitHub Pages on Webhooks Handler</title>
-    <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-    <description>Recent content in GitHub Pages on Webhooks Handler</description>
+    <title>Deployment on Webhooks Handler</title>
+    <link>https://iris-garcia.github.io/workday/deployment/</link>
+    <description>Recent content in Deployment on Webhooks Handler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Mon, 14 Oct 2019 22:25:08 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2019 22:28:44 +0200</lastBuildDate>
     
-	<atom:link href="https://iris-garcia.github.io/workday/howto/gh-pages/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://iris-garcia.github.io/workday/deployment/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

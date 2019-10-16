@@ -7,11 +7,60 @@
 	"content": " This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub\u0026rsquo;s Actions to automate the deployment process.\nThere are different alternatives to setup GitHub pages, the one used in here is a project pages using gh-pages branch, the advantages are:\n It keeps your source and generated website in different branches and therefore maintains version control history for both. It uses the default Hugo\u0026rsquo;s public folder.  So basically this project\u0026rsquo;s repository has the following branches:\n master: Hosts the source code of the project. hugo: Hosts the source code of the documentation website. gh-pages: Hosts the static assets generates by hugo.  Step 1: Initializing branches # Hugo branch git checkout -b hugo echo \u0026#34;public\u0026#34; \u0026gt;\u0026gt; .gitignore git add .gitignore git commit -m \u0026#34;Adds .gitignore\u0026#34; hugo new site . git add . git commit -m \u0026#34;Adds initial hugo site\u0026#34; git push origin hugo # gh-pages branch git checkout --orphan gh-pages git reset --hard git commit --allow-empty -m \u0026#34;Initializing gh-pages branch\u0026#34; git push origin gh-pages Step 2: Generate a SSH key. ssh-keygen -t rsa -f hugo -q -N \u0026#34;\u0026#34; This will generate the files: hugo and hugo.pub which will be needed for the next steps.\n Step 3: Add a deployment key Navigate to your GitHub\u0026rsquo;s repository settings and under Deploy keys and add a new one using the content of the hugo SSH private key generated in the previous step.\n  Make sure the Allow write access is checked, otherwise the GitHub\u0026rsquo;s Action won\u0026rsquo;t be able to push changes.\n Step 4: Add the GitHub\u0026rsquo;s Action. Create the needed directory in the hugo branch:\ngit checkout hugo mkdir -p .github/workflows Add a new file in the path .github/workflows/gh_pages.yml with the following content:\nname:gh_pageson:push:branches:-hugojobs:build:runs-on:ubuntu-18.04steps:-uses:actions/checkout@v1-name:Installshugorun:| cd /tmpwgethttps://github.com/gohugoio/hugo/releases/download/v0.57.0/hugo_0.57.0_Linux-64bit.debsudodpkg-ihugo_0.57.0_Linux-64bit.debhugoversion-name:Buildhugositerun:| rm -rf publicgitworktreeadd-bgh-pagespublicorigin/gh-pageshugo-name:Configuregitanddeploymentkeyenv:GITHUB_DEPLOY_KEY:${{secrets.GITHUB_DEPLOY_KEY}}run:| mkdir /home/runner/.sshssh-keyscan-trsagithub.com\u0026gt;/home/runner/.ssh/known_hostsecho\u0026#34;${GITHUB_DEPLOY_KEY}\u0026#34;\u0026gt;/home/runner/.ssh/id_rsa\u0026amp;\u0026amp;\\chmod400/home/runner/.ssh/id_rsagitremoteset-urlorigingit@github.com:iris-garcia/webhooks-handler.gitgitconfig--globaluser.name\u0026#34;GitHub Action\u0026#34;gitconfig--globaluser.email\u0026#34;action@github.com\u0026#34;-name:Commitandpushchangestogh-pagesrun:| cd publicgitadd--allgitcommit-m\u0026#34;Publishing to gh-pages branch\u0026#34;cd..gitpushorigingh-pages Replace the origin\u0026rsquo;s remote with your repository.\n Finally commit and push the changes (which should trigger already the Action).\ngit add .github/workflows/gh_pages.yml git commit -m \u0026#34;Adds GitHub\u0026#39;s Action to build hugo site.\u0026#34; git push origin hugo Step 5: Verify the Action If everything went well you should already have your site updated and a new commit to the gh-pages branch.\nYou can also see the output of the Action navigating to the Actions section of your repository.\n  "
 },
 {
+	"uri": "https://iris-garcia.github.io/workday/description/",
+	"title": "Description",
+	"tags": [],
+	"description": "",
+	"content": " Chapter 1  Description\nGet a general idea of what is Workday and the motivation to start its development.\n"
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/description/what/",
+	"title": "What is Workday?",
+	"tags": [],
+	"description": "",
+	"content": "Workday is a RESTful API project that allows the management of workers\u0026rsquo; day registration, for this purpose it makes use of a relational database where such data persists.\nIt allows the creation of different types of users (roles), initially there are two main roles:\n employee: The employee has permissions to:  Register checks in and checks out. Update their own password. Update their own schedule.  HR: The Human Resources role is the one with almost full control, it has the permissions of a regular employee plus:  Retrieve every employee\u0026rsquo;s schedule. Register employees. Remove employees. Reset employees\u0026rsquo; password.   The final goal is to build clients consuming this API to improve the user experience, for example:\nAn Android/iOS app which automatically registers the checks in when the GPS location is near the Office\u0026rsquo;s location and the checks out when it gets away from the Office\u0026rsquo;s location.\n"
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/description/why/",
+	"title": "Why?",
+	"tags": [],
+	"description": "",
+	"content": "Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.\nThis process can be as simple as signing in a paper the checks in and checks out for every single workday; but any other process can be used and this is the reason for which I decided to develop this project.\n"
+},
+{
 	"uri": "https://iris-garcia.github.io/workday/",
 	"title": "Homepage",
 	"tags": [],
 	"description": "",
 	"content": "Workday This site hosts the documentation of Workday.\n "
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/dev/",
+	"title": "Development",
+	"tags": [],
+	"description": "",
+	"content": " Chapter 2  Development\nThis chapter shows which tools are used in the development of the project and how to set up a working dev environment.\nWork in progress\u0026hellip;\n "
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/ci/travis/",
+	"title": "Travis CI",
+	"tags": [],
+	"description": "",
+	"content": " Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.\nIt provides a free plan for open source projects which is very convinient for our use case.\nThe whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.\nConfiguration "
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/ci/",
+	"title": "Continuous Integration",
+	"tags": [],
+	"description": "",
+	"content": " Chapter 3  Continuous Integration\nThis chapter describes the systems used to continuously integrate changes into the project.\n"
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/deployment/",
+	"title": "Deployment",
+	"tags": [],
+	"description": "",
+	"content": " Chapter 4  Deployment\nThis chapter describes where and how is this project deployed.\nWork in progress\u0026hellip;\n "
 },
 {
 	"uri": "https://iris-garcia.github.io/workday/howto/",
