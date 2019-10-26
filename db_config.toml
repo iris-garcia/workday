@@ -1,4 +1,4 @@
 Host = "127.0.0.1"
 Database = "workday"
 User = "workday"
-Password = "changeme"
+Password = "workday"

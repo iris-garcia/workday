@@ -1,4 +1,4 @@
-package workday_test
+package api_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestWorkday(t *testing.T) {
+func TestApi(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Workday Suite")
+	RunSpecs(t, "Api Suite")
 }

@@ -1,4 +1,4 @@
-package workday_test
+package api_test
 
 import (
 	"database/sql"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/iris-garcia/workday"
+	. "github.com/iris-garcia/workday/api"
 )
 
 type MyCustomError struct {
@@ -37,7 +37,7 @@ var _ = Describe("Database", func() {
 
 		emp := Employee{Firstname: "Iris", Lastname: "Garcia", Role: 1, Password: "secret"}
 
-		id, rows, err := CreateEmployee(db, emp)
+		id, rows, err := CreateEmployee(db, &emp)
 		Ω(err).ShouldNot(HaveOccurred())
 		Ω(id).Should(Equal(uint(1)))
 		Ω(rows).Should(Equal(uint(1)))
@@ -55,7 +55,7 @@ var _ = Describe("Database", func() {
 			WillReturnError(MyCustomError{message: "Error running db.Exec"})
 
 		emp := Employee{Firstname: "Iris", Lastname: "Garcia", Role: 1, Password: "secret"}
-		_, _, err = CreateEmployee(db, emp)
+		_, _, err = CreateEmployee(db, &emp)
 
 		Ω(err).Should(HaveOccurred())
 
@@ -73,7 +73,7 @@ var _ = Describe("Database", func() {
 			WillReturnResult(sqlmock.NewErrorResult(MyCustomError{message: "Error inserting"}))
 
 		emp := Employee{Firstname: "Iris", Lastname: "Garcia", Role: 1, Password: "secret"}
-		id, rows, err := CreateEmployee(db, emp)
+		id, rows, err := CreateEmployee(db, &emp)
 
 		Ω(err).Should(HaveOccurred())
 		Ω(id).ShouldNot(Equal(uint(1)))

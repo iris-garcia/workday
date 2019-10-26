@@ -1,4 +1,4 @@
-package workday_test
+package api_test
 
 import (
 	"os"
@@ -6,17 +6,17 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/iris-garcia/workday"
+	. "github.com/iris-garcia/workday/api"
 )
 
 var _ = Describe("Config", func() {
 	It("Should read a config file correctly", func() {
-		cfg, err := LoadDBConfig("./db_config.toml")
+		cfg, err := LoadDBConfig("../db_config.toml")
 		expected := DBConfig{
 			Host:     "127.0.0.1",
 			Database: "workday",
 			User:     "workday",
-			Password: "changeme",
+			Password: "workday",
 		}
 
 		Expect(err).NotTo(HaveOccurred())

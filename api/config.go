@@ -1,4 +1,4 @@
-package workday
+package api
 
 import (
 	"os"

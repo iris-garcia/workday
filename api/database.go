@@ -1,4 +1,4 @@
-package workday
+package api
 
 import (
 	"database/sql"
@@ -18,7 +18,7 @@ func ConnectDB(config DBConfig) (*sql.DB, error) {
 	return db, nil
 }
 
-func insertNewEmployee(db *sql.DB, employee Employee) (id uint, rows uint, err error) {
+func insertNewEmployee(db *sql.DB, employee *Employee) (uint, uint, error) {
 	result, err := db.Exec(
 		"INSERT INTO employee(firstname, lastname, role, password) values('?', '?', ?, '?')",
 		employee.Firstname, employee.Lastname, employee.Role, employee.Password,
@@ -62,4 +62,30 @@ func findAllEmployees(db *sql.DB) ([]Employee, error) {
 	}
 
 	return employees, nil
+}
+
+func findEmployee(db *sql.DB, id uint) (Employee, error) {
+	var employee Employee
+	row := db.QueryRow("SELECT * FROM employee WHERE id=?", id)
+
+	err := row.Scan(&employee.ID, &employee.Firstname, &employee.Lastname, &employee.Role, &employee.Password)
+	if err != nil {
+		return Employee{}, err
+	}
+
+	return employee, nil
+}
+
+func removeEmployee(db *sql.DB, id uint) (uint, error) {
+	result, err := db.Exec("DELETE FROM employee WHERE id=?", id)
+	if err != nil {
+		return 0, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+
+	return uint(rowsAffected), nil
 }
