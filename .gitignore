@@ -19,4 +19,7 @@ workday
 
 # Coverage reports
 workday.coverprofile
-coverage-ginkgo.html
+coverage.html
+
+# Docker volume
+internal/db/data
