@@ -3,27 +3,29 @@ language: go
 go:
 - 1.13.x
 
-dist: xenial
+dist: bionic
 
 sudo: required
 
 addons:
-  mariadb: '10.4'
+  mariadb: '10.1'
 
 services:
   - mariadb
 
 before_install:
-  - mysql -u root -e 'CREATE DATABASE workday;'
-  - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
-  - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
+  - sudo apt-get -y install npm
+  - npm install pm2@latest -g
+  - sudo npm install pm2@latest -g
 
 install:
   - go get github.com/magefile/mage
   - mage build
 
 before_script:
-  - npm install -i pm2
+  - mysql -u root -e 'CREATE DATABASE workday;'
+  - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
+  - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
 
 script:
   - mage test
