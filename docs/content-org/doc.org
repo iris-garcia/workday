@@ -97,6 +97,57 @@ project and how to set up a working dev environment.
 Work in progress...
 {{% /notice %}}
 
+*** Toolchain
+:PROPERTIES:
+:EXPORT_FILE_NAME: dev/tools
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+**** [[https://golang.org/][Go]]
+The open source programming language Go will be used to develop the
+whole project, mainly because I want to try a new language and this
+one is becoming quite popular nowadays.
+
+**** [[https://github.com/gin-gonic/gin][Gin]]
+Gin is a HTTP web framework written in Go (Golang). It features a
+Martini-like API with much better performance -- up to 40 times
+faster.
+
+It is very well documented and provides many handy features like
+authentication, data validation and a configurable logger out of the
+box.
+
+**** [[https://magefile.org/][Mage]]
+Mage is a make/rake-like build tool using Go. You write plain-old go
+functions, and Mage automatically uses them as Makefile-like runnable
+targets.
+
+Mage has no dependencies outside the Go standard library; in this
+project it is going to be used to automate every possible process
+like:
+1. ~mage test~: run tests and its code coverage.
+2. ~mage build~: build a binary of the project.
+3. ~mage install~: installs the built binary under /usr/local/bin.
+4. ~mage start~: starts the API HTTP server.
+5. ~mage startdev~: bootstraps a dev environment.
+
+
+**** [[https://mariadb.com/][MariaDB]]
+The relational database engine MariaDB has been choosen to persist the
+data, it is OpenSource and fulfills the requirements.
+
+**** Test-driven development (TDD & BDD)
+Go has support for testing built in to its toolchain which will be used to cover
+unit and integration tests with the help of [[https://github.com/stretchr/testify][testify]] for the
+assertions.
+
+[[https://github.com/onsi/ginkgo][Ginkgo]] will be used as a BDD testing framework and [[https://github.com/onsi/gomega][Gomega]] as a
+matcher library.
+
+**** [[https://github.com/OAI/OpenAPI-Specification/][OpenAPI]]
+This project will follow the OpenAPI Specification to document its API
+endpoints, probably using swagger to parse the specifications and
+generate a static site.
+
 ** Continuous Integration
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ci
@@ -137,6 +188,46 @@ repository.
 
 #+INCLUDE: "../../.travis.yml" src yaml
 
+The following lines tell travis to run the tests against two different
+versions of Go (1.13.x and master)
+
+#+begin_src yaml
+  go:
+  - 1.13.x
+  - master
+#+end_src
+
+Travis is smart enough to setup all the required dependencies before
+it start running the tests, basically it runs:
+1. *go get* which fetches all the dependencies defined in the file ~go.mod~
+2. *go test* which runs the tests.
+
+The ~tests coverage~ stage is exactly the same as the above but adds
+the code coverage percentage which is useful to know if we are missing
+some code from beign tested.
+
+#+begin_src yaml
+  - stage: tests coverage
+    script: go test -cover -v
+    go: 1.13.x
+
+#+end_src
+
+And the last stage ~Release artifact to GitHub~ runs only when there
+is a tag push, it creates a compressed artifact with the source code
+and place it in GitHub's releases.
+
+#+begin_src yaml
+  - stage: Release artifact to GitHub
+    deploy:
+      provider: releases
+      api_key: $WORKDAY_RELEASE
+      file: "workday"
+      skip_cleanup: true
+      on:
+        tags: true
+
+#+end_src
 *** GitHub Actions
 :PROPERTIES:
 :EXPORT_FILE_NAME: ci/github

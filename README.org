@@ -24,50 +24,6 @@ to.
 - Logging services.
 - Authentication
 
-** Which tools will be used?
-*** [[https://golang.org/][Go]]
-The open source programming language Go will be used, mainly because I
-want to try a new language and this one is becoming quite popular
-nowadays.
-
-*** [[https://iris-go.com/][Iris]]
-Iris is an easy to use web framework which claims to be one of the
-[[https://github.com/kataras/iris/wiki/Benchmarks][fastest]] web frameworks ever crafted.
-
-This web framework will be used to build the HTTP server among all
-the API endpoints and some kind of authentication.
-
-*** [[https://mariadb.com/][MariaDB]]
-The relational database engine MariaDB has been choosen to persist the
-data, it is OpenSource and fulfills the requirements.
-
-*** [[https://www.elastic.co/products/beats/filebeat][Filebeat]] / [[https://www.elastic.co/products/logstash][Logstash]]
-I am not sure yet if the final version will use Filebeat for shipping
-the logs or a Go package to ship directly to Logstash.
-
-*** Test-driven development (TDD & BDD)
-Go has support for testing built in to its toolchain which will be used to cover
-unit and integration tests with the help of [[https://github.com/stretchr/testify][testify]] for the assertions.
-
-The framework [[https://github.com/gavv/httpexpect][httpexpect]] will be used for end-to-end tests.
-
-*** Continuous Integration
-**** [[https://travis-ci.org/][Travis CI]]
-Travis CI is an open source hosted continuous integration and
-deployment system which plays nicely with GitHub, for these reasons we
-will use it in this project.
-
-**** [[https://github.com/features/actions][Github Actions]]
-GitHub Actions is the new continuous integration and deployment system
-developed by GitHub, we will use it to run the same tests as Travis
-and probably some extra workflows to automate the generation of the
-documentation.
-
-*** [[https://github.com/OAI/OpenAPI-Specification/][OpenAPI]]
-This project will follow the OpenAPI Specification to document its API
-endpoints, probably using swagger to parse the specifications and
-generate a static site.
-
 ** Documentation
 The extended documentation is hosted [[https://iris-garcia.github.io/workday/][here]].
 
@@ -75,7 +31,20 @@ The extended documentation is hosted [[https://iris-garcia.github.io/workday/][h
 ** Setup the environment
 2. Fork the repository.
 3. Clone your forked repository.
-4. Run ~go get~.
+4. Run ~go get~ to install the dependencies.
+
+** (Optional) run MariaDB in a docker container
+1. Run the container persisting the data
+   #+begin_src bash
+     docker run --name mariadb -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_PASSWORD=workday \
+            -e MYSQL_USER=workday -e MYSQL_DATABASE=workday -v $(pwd)/internal/db/data:/var/lib/mysql \
+            -v $(pwd)/internal/db/sql:/sql -p 3306:3306 -d mariadb:10.4
+   #+end_src
+2. Import the ~initial.sql~ file.
+   #+begin_src bash
+     docker exec -it mariadb bash
+     mysql -u workday -pworkday workday < /sql/initial.sql
+   #+end_src
 
 ** Add your contribution
 1. Create a new branch:
