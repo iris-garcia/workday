@@ -13,5 +13,16 @@
 	<atom:link href="https://iris-garcia.github.io/workday/dev/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Toolchain</title>
+      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
+      <pubDate>Sun, 27 Oct 2019 12:42:32 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
+      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
+Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
+It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
   </channel>
 </rss>

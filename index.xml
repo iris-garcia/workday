@@ -35,6 +35,29 @@ This process can be as simple as signing in a paper the checks in and checks out
     </item>
     
     <item>
+      <title>Toolchain</title>
+      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
+      <pubDate>Sun, 27 Oct 2019 12:42:32 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
+      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
+Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
+It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Travis CI</title>
+      <link>https://iris-garcia.github.io/workday/ci/travis/</link>
+      <pubDate>Fri, 18 Oct 2019 00:54:18 +0200</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
+      <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
+It provides a free plan for open source projects which is very convinient for our use case.
+The whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.
+Configuration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.</description>
+    </item>
+    
+    <item>
       <title>GitHub Actions</title>
       <link>https://iris-garcia.github.io/workday/ci/github/</link>
       <pubDate>Wed, 16 Oct 2019 20:41:58 +0200</pubDate>
@@ -44,18 +67,6 @@ This process can be as simple as signing in a paper the checks in and checks out
 Configuration Currently there are two workflows configured:
 Test and coverage This workflow takes care of the Unit tests and shows the total coverage of the project.
 on:pushname:Unittestsjobs:checks:name:runruns-on:ubuntu-lateststeps:-uses:actions/checkout@master-name:runuses:cedrickring/golang-action@1.4.1env:GO111MODULE:&amp;#34;on&amp;#34;with:args:gobuild&amp;amp;&amp;amp;gotest-cover-v Hugo documentation site This workflow is not really a typical continuous integration one, but I think it makes sense to mention it here as it is taking care of automatically update the documentation site.</description>
-    </item>
-    
-    <item>
-      <title>Travis CI</title>
-      <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Wed, 16 Oct 2019 20:40:18 +0200</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
-      <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
-It provides a free plan for open source projects which is very convinient for our use case.
-The whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.
-Configuration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.</description>
     </item>
     
   </channel>

@@ -35,6 +35,13 @@
 	"content": "Workday This site hosts the documentation of Workday.\n "
 },
 {
+	"uri": "https://iris-garcia.github.io/workday/dev/tools/",
+	"title": "Toolchain",
+	"tags": [],
+	"description": "",
+	"content": " Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.\nGin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance \u0026ndash; up to 40 times faster.\nIt is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.\nMage Mage is a make/rake-like build tool using Go. You write plain-old go functions, and Mage automatically uses them as Makefile-like runnable targets.\nMage has no dependencies outside the Go standard library; in this project it is going to be used to automate every possible process like:\n mage test: run tests and its code coverage. mage build: build a binary of the project. mage install: installs the built binary under /usr/local/bin. mage start: starts the API HTTP server. mage startdev: bootstraps a dev environment.  MariaDB The relational database engine MariaDB has been choosen to persist the data, it is OpenSource and fulfills the requirements.\nTest-driven development (TDD \u0026amp; BDD) Go has support for testing built in to its toolchain which will be used to cover unit and integration tests with the help of testify for the assertions.\nGinkgo will be used as a BDD testing framework and Gomega as a matcher library.\nOpenAPI This project will follow the OpenAPI Specification to document its API endpoints, probably using swagger to parse the specifications and generate a static site.\n"
+},
+{
 	"uri": "https://iris-garcia.github.io/workday/dev/",
 	"title": "Development",
 	"tags": [],
@@ -42,18 +49,18 @@
 	"content": " Chapter 2  Development\nThis chapter shows which tools are used in the development of the project and how to set up a working dev environment.\nWork in progress\u0026hellip;\n "
 },
 {
+	"uri": "https://iris-garcia.github.io/workday/ci/travis/",
+	"title": "Travis CI",
+	"tags": [],
+	"description": "",
+	"content": " Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.\nIt provides a free plan for open source projects which is very convinient for our use case.\nThe whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.\nConfiguration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.13.x and master (which is the latest available at any given time).\nIt also releases artifacts when a new tag is pushed to the repository.\nlanguage:gogo:-1.13.x-masterjobs:include:-stage:testscoveragescript:gotest-cover-vgo:1.13.x-stage:ReleaseartifacttoGitHubdeploy:provider:releasesapi_key:$WORKDAY_RELEASEfile:\u0026#34;workday\u0026#34;skip_cleanup:trueon:tags:true The following lines tell travis to run the tests against two different versions of Go (1.13.x and master)\ngo:-1.13.x-master Travis is smart enough to setup all the required dependencies before it start running the tests, basically it runs:\n go get which fetches all the dependencies defined in the file go.mod go test which runs the tests.  The tests coverage stage is exactly the same as the above but adds the code coverage percentage which is useful to know if we are missing some code from beign tested.\n-stage:testscoveragescript:gotest-cover-vgo:1.13.x And the last stage Release artifact to GitHub runs only when there is a tag push, it creates a compressed artifact with the source code and place it in GitHub\u0026rsquo;s releases.\n-stage:ReleaseartifacttoGitHubdeploy:provider:releasesapi_key:$WORKDAY_RELEASEfile:\u0026#34;workday\u0026#34;skip_cleanup:trueon:tags:true"
+},
+{
 	"uri": "https://iris-garcia.github.io/workday/ci/github/",
 	"title": "GitHub Actions",
 	"tags": [],
 	"description": "",
 	"content": " Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.\nConfiguration Currently there are two workflows configured:\nTest and coverage This workflow takes care of the Unit tests and shows the total coverage of the project.\non:pushname:Unittestsjobs:checks:name:runruns-on:ubuntu-lateststeps:-uses:actions/checkout@master-name:runuses:cedrickring/golang-action@1.4.1env:GO111MODULE:\u0026#34;on\u0026#34;with:args:gobuild\u0026amp;\u0026amp;gotest-cover-v Hugo documentation site This workflow is not really a typical continuous integration one, but I think it makes sense to mention it here as it is taking care of automatically update the documentation site.\non:push:paths:-\u0026#39;docs/**\u0026#39;-\u0026#39;.github/workflows/hugo.yml\u0026#39;name:Hugojobs:build:runs-on:ubuntu-lateststeps:-uses:actions/checkout@v1-name:Installshugorun:| cd /tmpwgethttps://github.com/gohugoio/hugo/releases/download/v0.57.0/hugo_0.57.0_Linux-64bit.debsudodpkg-ihugo_0.57.0_Linux-64bit.debhugoversion-name:Buildhugositerun:| cd docsrm-rfpublicgitworktreeadd-bgh-pagespublicorigin/gh-pageshugo-name:Configuregitanddeploymentkeyenv:GITHUB_TOKEN:${{secrets.GITHUB_TOKEN}}GITHUB_DEPLOY_KEY:${{secrets.WORKDAY_GH}}run:| mkdir /home/runner/.sshssh-keyscan-trsagithub.com\u0026gt;/home/runner/.ssh/known_hostsecho\u0026#34;${GITHUB_DEPLOY_KEY}\u0026#34;\u0026gt;/home/runner/.ssh/id_rsa\u0026amp;\u0026amp;\\chmod400/home/runner/.ssh/id_rsagitremoteset-urlorigingit@github.com:iris-garcia/workday.gitgitconfig--globaluser.name\u0026#34;GitHub Action\u0026#34;gitconfig--globaluser.email\u0026#34;action@github.com\u0026#34;-name:Commitandpushchangestogh-pagesrun:| cd docs/publicgitadd.gitcommit-m\u0026#34;Publishing to gh-pages branch\u0026#34;gitpushorigingh-pages To get this one working there are some requisites explained in a howto document.\n"
-},
-{
-	"uri": "https://iris-garcia.github.io/workday/ci/travis/",
-	"title": "Travis CI",
-	"tags": [],
-	"description": "",
-	"content": " Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.\nIt provides a free plan for open source projects which is very convinient for our use case.\nThe whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.\nConfiguration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.13.x and master (which is the latest available at any given time).\nIt also releases artifacts when a new tag is pushed to the repository.\nlanguage:gogo:-1.13.x-masterjobs:include:-stage:testscoveragescript:gotest-cover-vgo:1.13.x-stage:ReleaseartifacttoGitHubdeploy:provider:releasesapi_key:$WORKDAY_RELEASEfile:\u0026#34;workday\u0026#34;skip_cleanup:trueon:tags:true"
 },
 {
 	"uri": "https://iris-garcia.github.io/workday/ci/",
