@@ -28,13 +28,23 @@
   </url>
   
   <url>
+    <loc>https://iris-garcia.github.io/workday/dev/requirements/</loc>
+    <lastmod>2019-10-27T19:35:39+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://iris-garcia.github.io/workday/dev/tools/</loc>
-    <lastmod>2019-10-27T12:47:17+01:00</lastmod>
+    <lastmod>2019-10-27T19:35:39+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/dev/</loc>
     <lastmod>2019-10-16T14:50:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/ci/</loc>
+    <lastmod>2019-10-27T19:35:39+01:00</lastmod>
   </url>
   
   <url>
@@ -45,11 +55,6 @@
   <url>
     <loc>https://iris-garcia.github.io/workday/ci/github/</loc>
     <lastmod>2019-10-16T20:44:37+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/ci/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
   </url>
   
   <url>

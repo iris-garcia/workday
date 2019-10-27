@@ -12,20 +12,20 @@
     <title>Toolchain :: Webhooks Handler</title>
 
     
-    <link href="../../css/nucleus.css?1572192115" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1572192115" rel="stylesheet">
-    <link href="../../css/hybrid.css?1572192115" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1572192115" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1572192115" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1572192115" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1572192115" rel="stylesheet">
-    <link href="../../css/theme.css?1572192115" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1572192115" rel="stylesheet">
+    <link href="../../css/nucleus.css?1572201391" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1572201391" rel="stylesheet">
+    <link href="../../css/hybrid.css?1572201391" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1572201391" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1572201391" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1572201391" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1572201391" rel="stylesheet">
+    <link href="../../css/theme.css?1572201391" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1572201391" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1572192115" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1572201391" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1572192115"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1572201391"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1572192115"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1572192115"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1572201391"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1572201391"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1572192115"></script>
+<script type="text/javascript" src="../../js/search.js?1572201391"></script>
 
     
   </div>
@@ -171,6 +171,25 @@
           
           
         
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/dev/requirements/" title="Requirements" class="dd-item ">
+        <a href="../../dev/requirements/">
+        Requirements
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
           
             
             
@@ -438,6 +457,7 @@
 <li><a href="#mariadb"><a href="https://mariadb.com/">MariaDB</a></a></li>
 <li><a href="#test-driven-development--tdd-and-bdd">Test-driven development (TDD &amp; BDD)</a></li>
 <li><a href="#openapi"><a href="https://github.com/OAI/OpenAPI-Specification/">OpenAPI</a></a></li>
+<li><a href="#pm2"><a href="https://pm2.keymetrics.io/">PM2</a></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -496,8 +516,9 @@ like:</p>
 <li><code>mage test</code>: run tests and its code coverage.</li>
 <li><code>mage build</code>: build a binary of the project.</li>
 <li><code>mage install</code>: installs the built binary under /usr/local/bin.</li>
-<li><code>mage start</code>: starts the API HTTP server.</li>
+<li><code>mage start</code>: Starts the HTTP Server using pm2 as process manager.</li>
 <li><code>mage startdev</code>: bootstraps a dev environment.</li>
+<li><code>mage stop</code>: Stops the HTTP Server.</li>
 </ol>
 
 <h2 id="mariadb"><a href="https://mariadb.com/">MariaDB</a></h2>
@@ -519,6 +540,16 @@ matcher library.</p>
 <p>This project will follow the OpenAPI Specification to document its API
 endpoints, probably using swagger to parse the specifications and
 generate a static site.</p>
+
+<h2 id="pm2"><a href="https://pm2.keymetrics.io/">PM2</a></h2>
+
+<p>As a process manager the tool <strong>PM2</strong> is currently used, because it
+allows the usage with any language as long as it has a way to
+build/run it.</p>
+
+<p>Ideally this tool will be replace in favor of a Go tool, some of them
+has been already tested but none of them provide the same features as
+<strong>PM2</strong>.</p>
 
 
 <footer class=" footline" >
@@ -622,6 +653,25 @@ generate a static site.</p>
             
                 
                     
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -747,7 +797,7 @@ generate a static site.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../dev/" title="Development"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../dev/requirements/" title="Requirements"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="../../ci/" title="Continuous Integration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -760,19 +810,19 @@ generate a static site.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1572192115"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1572192115"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1572192115"></script>
-    <script src="../../js/jquery.sticky.js?1572192115"></script>
-    <script src="../../js/featherlight.min.js?1572192115"></script>
-    <script src="../../js/highlight.pack.js?1572192115"></script>
+    <script src="../../js/clipboard.min.js?1572201391"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1572201391"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1572201391"></script>
+    <script src="../../js/jquery.sticky.js?1572201391"></script>
+    <script src="../../js/featherlight.min.js?1572201391"></script>
+    <script src="../../js/highlight.pack.js?1572201391"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1572192115"></script>
-    <script src="../../js/learn.js?1572192115"></script>
-    <script src="../../js/hugo-learn.js?1572192115"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1572201391"></script>
+    <script src="../../js/learn.js?1572201391"></script>
+    <script src="../../js/hugo-learn.js?1572201391"></script>
 
-    <link href="../../mermaid/mermaid.css?1572192115" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1572192115"></script>
+    <link href="../../mermaid/mermaid.css?1572201391" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1572201391"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

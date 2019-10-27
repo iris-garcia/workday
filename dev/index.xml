@@ -14,9 +14,20 @@
     
     
     <item>
+      <title>Requirements</title>
+      <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
+      <pubDate>Sun, 27 Oct 2019 18:54:25 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
+      <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
+wget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage Once go is installed, we can install mage as follows:
+go get github.com/magefile/mage MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:</description>
+    </item>
+    
+    <item>
       <title>Toolchain</title>
       <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Sun, 27 Oct 2019 12:42:32 +0100</pubDate>
+      <pubDate>Sun, 27 Oct 2019 18:40:10 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
       <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
