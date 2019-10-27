@@ -15,4 +15,7 @@ jobs:
       env:
         GO111MODULE: "on"
       with:
-        args: go build && go test -cover -v
+        args: |
+          go get github.com/magefile/mage && \
+          mage build && \
+          mage test
