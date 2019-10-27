@@ -4,17 +4,22 @@ go:
 - 1.13.x
 - master
 
-jobs:
-  include:
-    - stage: tests coverage
-      script: go test -cover -v
-      go: 1.13.x
+sudo: required
 
-    - stage: Release artifact to GitHub
-      deploy:
-        provider: releases
-        api_key: $WORKDAY_RELEASE
-        file: "workday"
-        skip_cleanup: true
-        on:
-          tags: true
+addons:
+  mariadb: '10.4'
+
+services:
+  - mariadb
+
+before_install:
+  - mysql -u root -e 'CREATE DATABASE workday;'
+  - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
+  - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
+
+install:
+  - go get github.com/magefile/mage
+  - mage build
+
+script:
+  - mage test
