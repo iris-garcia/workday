@@ -3,7 +3,7 @@ language: go
 go:
 - 1.13.x
 
-dist: precise
+dist: xenial
 
 sudo: required
 
@@ -22,6 +22,8 @@ install:
   - go get github.com/magefile/mage
   - mage build
 
+before_script:
+  - npm install -i pm2
+
 script:
-  - pm2 start ./api_server --name "api"
   - mage test
