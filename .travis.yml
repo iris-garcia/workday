@@ -27,6 +27,6 @@ before_script:
   - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
 
 script:
-  - pm2 start ./api_server --name "api"
+  - mage start
   - mage test
-  - pm2 stop api
+  - mage stop
