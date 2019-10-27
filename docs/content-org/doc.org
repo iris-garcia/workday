@@ -130,7 +130,6 @@ like:
 4. ~mage start~: starts the API HTTP server.
 5. ~mage startdev~: bootstraps a dev environment.
 
-
 **** [[https://mariadb.com/][MariaDB]]
 The relational database engine MariaDB has been choosen to persist the
 data, it is OpenSource and fulfills the requirements.
