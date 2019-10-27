@@ -32,7 +32,7 @@ func Install() error {
 // Install dependencies
 func InstallDeps() error {
 	fmt.Println("Installing Deps...")
-	cmd := exec.Command("go", "get", "./api/")
+	cmd := exec.Command("go", "get", "./...")
 	return cmd.Run()
 }
 
