@@ -19,9 +19,9 @@ before_install:
   - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
 
 install:
-  - sudo npm install pm2 -g
   - go get github.com/magefile/mage
   - mage build
 
 script:
+  - pm2 start ./api_server --name "api"
   - mage test
