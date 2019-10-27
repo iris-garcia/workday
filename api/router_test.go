@@ -11,8 +11,8 @@ import (
 	. "github.com/iris-garcia/workday/api"
 )
 
-// Test the GET /employees endpoint 200
-func TestShouldGetSlashEndpointStatusOK(t *testing.T) {
+// Test the GET /status endpoint 200
+func TestShouldGetStatusEndpointStatusOK(t *testing.T) {
 	assert := assert.New(t)
 	db, _, err := sqlmock.New()
 	defer db.Close()
@@ -23,7 +23,7 @@ func TestShouldGetSlashEndpointStatusOK(t *testing.T) {
 	router := GinRouter(db)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/", nil)
+	req, _ := http.NewRequest("GET", "/status", nil)
 	router.ServeHTTP(w, req)
 
 	assert.Equal(200, w.Code)
