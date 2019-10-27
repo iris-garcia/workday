@@ -1,7 +1,7 @@
 +++
 title = "Continuous Integration"
 author = ["Iris Garcia"]
-lastmod = 2019-10-14T22:24:48+02:00
+lastmod = 2019-10-27T18:56:28+01:00
 draft = false
 weight = 3
 chapter = true

@@ -25,25 +25,22 @@ to.
 - Authentication
 
 ** Documentation
-The extended documentation is hosted [[https://iris-garcia.github.io/workday/][here]].
+The extended documentation is hosted under
+[[https://iris-garcia.github.io/workday/]].
+- [[http://localhost:1313/workday/dev/tools/][Toolchain]]
+- [[http://localhost:1313/workday/ci/][Continuous Integration]]
+- [[http://localhost:1313/workday/deployment/][Deployment]]
 
 * How to contribute
 ** Setup the environment
-2. Fork the repository.
-3. Clone your forked repository.
-4. Run ~go get~ to install the dependencies.
-
-** (Optional) run MariaDB in a docker container
-1. Run the container persisting the data
+1. Fork the repository.
+2. Clone your forked repository.
+3. Run ~mage build~ to install the dependencies and build the binary.
+4. (optional) Run ~mage startdev~ to bootstrap a mariadb docker
+   container.
+5. Import the ~initial.sql~ SQL.
    #+begin_src bash
-     docker run --name mariadb -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_PASSWORD=workday \
-            -e MYSQL_USER=workday -e MYSQL_DATABASE=workday -v $(pwd)/internal/db/data:/var/lib/mysql \
-            -v $(pwd)/internal/db/sql:/sql -p 3306:3306 -d mariadb:10.4
-   #+end_src
-2. Import the ~initial.sql~ file.
-   #+begin_src bash
-     docker exec -it mariadb bash
-     mysql -u workday -pworkday workday < /sql/initial.sql
+   mysql -u workday -pworkday workday < /sql/initial.sql
    #+end_src
 
 ** Add your contribution
@@ -53,12 +50,7 @@ The extended documentation is hosted [[https://iris-garcia.github.io/workday/][h
 2. Write tests to cover your changes.
 3. Run the tests.
    #+begin_src bash
-     go test -cover -v
-   #+end_src
-4. Build and run the binary
-   #+begin_src bash
-     go build cmd/workday/workday.go
-     ./workday
+     mage test
    #+end_src
 5. Push the branch to your fork once you think everything works as
    expected.

@@ -97,6 +97,39 @@ project and how to set up a working dev environment.
 Work in progress...
 {{% /notice %}}
 
+*** Requirements
+:PROPERTIES:
+:EXPORT_FILE_NAME: dev/requirements
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+**** Go
+- *Version used*: 1.13.1
+- *Setup*: Most of the linux distributions provide a package to
+  install Go, but it is also possible to download its binary.
+  #+begin_src bash
+  wget https://dl.google.com/go/go1.13.3.src.tar.gz
+  tar -C /usr/local -xzf go1.13.3.src.tar.gz
+  export PATH=$PATH:/usr/local/go/bin
+  #+end_src
+**** Mage
+Once go is installed, we can install mage as follows:
+#+begin_src bash
+go get github.com/magefile/mage
+#+end_src
+**** MariaDB
+- *Version used*: 10.4
+- *Setup*: Most of the linux distrubutions provide a package to
+  install MariaDB, but if docker is installed the following command
+  will spawn a MariaDB container:
+  #+begin_src bash
+  mage startdev
+  #+end_src
+**** (Production) Nodejs
+- *Version used*: 12.11.1
+- Nodejs is only needed to install *PM2* and therefore it is not a
+  requirement, however the current state of the project uses it to run
+  the service in a production environment.
+
 *** Toolchain
 :PROPERTIES:
 :EXPORT_FILE_NAME: dev/tools
@@ -127,8 +160,9 @@ like:
 1. ~mage test~: run tests and its code coverage.
 2. ~mage build~: build a binary of the project.
 3. ~mage install~: installs the built binary under /usr/local/bin.
-4. ~mage start~: starts the API HTTP server.
+4. ~mage start~: Starts the HTTP Server using pm2 as process manager.
 5. ~mage startdev~: bootstraps a dev environment.
+6. ~mage stop~: Stops the HTTP Server.
 
 **** [[https://mariadb.com/][MariaDB]]
 The relational database engine MariaDB has been choosen to persist the
@@ -146,6 +180,15 @@ matcher library.
 This project will follow the OpenAPI Specification to document its API
 endpoints, probably using swagger to parse the specifications and
 generate a static site.
+
+**** [[https://pm2.keymetrics.io/][PM2]]
+As a process manager the tool *PM2* is currently used, because it
+allows the usage with any language as long as it has a way to
+build/run it.
+
+Ideally this tool will be replace in favor of a Go tool, some of them
+has been already tested but none of them provide the same features as
+*PM2*.
 
 ** Continuous Integration
 :PROPERTIES:

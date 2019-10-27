@@ -1,7 +1,7 @@
 +++
 title = "Toolchain"
 author = ["Iris Garcia"]
-lastmod = 2019-10-27T12:42:32+01:00
+lastmod = 2019-10-27T18:40:10+01:00
 draft = false
 weight = 2
 asciinema = true
@@ -38,8 +38,9 @@ like:
 1.  `mage test`: run tests and its code coverage.
 2.  `mage build`: build a binary of the project.
 3.  `mage install`: installs the built binary under /usr/local/bin.
-4.  `mage start`: starts the API HTTP server.
+4.  `mage start`: Starts the HTTP Server using pm2 as process manager.
 5.  `mage startdev`: bootstraps a dev environment.
+6.  `mage stop`: Stops the HTTP Server.
 
 
 ## [MariaDB](https://mariadb.com/) {#mariadb}
@@ -63,3 +64,14 @@ matcher library.
 This project will follow the OpenAPI Specification to document its API
 endpoints, probably using swagger to parse the specifications and
 generate a static site.
+
+
+## [PM2](https://pm2.keymetrics.io/) {#pm2}
+
+As a process manager the tool **PM2** is currently used, because it
+allows the usage with any language as long as it has a way to
+build/run it.
+
+Ideally this tool will be replace in favor of a Go tool, some of them
+has been already tested but none of them provide the same features as
+**PM2**.
