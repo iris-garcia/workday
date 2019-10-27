@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"fmt"
 	"strconv"
 
 	"net/http"
@@ -20,7 +21,7 @@ func GinRouter(db *sql.DB) *gin.Engine {
 	router.GET("/employees", func(c *gin.Context) {
 		emps, err := GetAllEmployees(db)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err})
+			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
 		c.JSON(http.StatusOK, emps)
@@ -39,6 +40,7 @@ func GinRouter(db *sql.DB) *gin.Engine {
 			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
+
 		c.JSON(http.StatusOK, emp)
 	})
 
@@ -63,23 +65,51 @@ func GinRouter(db *sql.DB) *gin.Engine {
 	router.PATCH("/employees/:id", func(c *gin.Context) {
 		var id uint
 		if err := c.ShouldBindUri(&id); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"message": err})
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": err.Error(),
+			})
 			return
 		}
 	})
 
 	// To update the whole resource
 	router.PUT("/employees/:id", func(c *gin.Context) {
-		var id uint
-		if err := c.ShouldBindUri(&id); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"message": err})
+		var form Employee
+		id := c.Param("id")
+		idInt, err := strconv.Atoi(id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
+		err = c.ShouldBindJSON(&form)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			return
+		}
+
+		_, err = GetEmployee(db, uint(idInt))
+		if err != nil {
+			fmt.Println("here")
+			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			return
+		}
+
+		form.ID = uint(idInt)
+		rows, err := EditEmployee(db, &form)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			return
+		}
+		if rows > 1 {
+			c.JSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("Expected only 1 row to be updated, got %d", rows)})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"status": "OK"})
 	})
 
 	router.POST("/employees", func(c *gin.Context) {
 		var form Employee
-		err := c.ShouldBind(&form)
+		err := c.Bind(&form)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"message": err})
 		}

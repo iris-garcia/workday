@@ -89,3 +89,18 @@ func removeEmployee(db *sql.DB, id uint) (uint, error) {
 
 	return uint(rowsAffected), nil
 }
+
+func updateEmployee(db *sql.DB, emp *Employee) (uint, error) {
+	result, err := db.Exec("UPDATE employee SET firstname=?, lastname=?, role=?, password=? WHERE id=?",
+		emp.Firstname, emp.Lastname, emp.Role, emp.Password, emp.ID)
+	if err != nil {
+		return 0, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+
+	return uint(rowsAffected), nil
+}
