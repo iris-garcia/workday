@@ -32,7 +32,7 @@ func Install() error {
 // Install dependencies
 func InstallDeps() error {
 	fmt.Println("Installing Deps...")
-	cmd := exec.Command("go", "get", "./api/")
+	cmd := exec.Command("go", "get", "./...")
 	return cmd.Run()
 }
 
@@ -44,7 +44,13 @@ func Clean() {
 // Start the api_server binary which is an HTTP server.
 func Start() error {
 	mg.Deps(InstallDeps, Build)
-	cmd := exec.Command("./api_server")
+	cmd := exec.Command("pm2", "start", "./api_server", "--name", "api")
+	return cmd.Run()
+}
+
+// Stop the api_server.
+func Stop() error {
+	cmd := exec.Command("pm2", "stop", "api")
 	return cmd.Run()
 }
 
