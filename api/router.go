@@ -21,7 +21,7 @@ func GinRouter(db *sql.DB) *gin.Engine {
 	router.GET("/employees", func(c *gin.Context) {
 		emps, err := GetAllEmployees(db)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		c.JSON(http.StatusOK, emps)
@@ -31,16 +31,20 @@ func GinRouter(db *sql.DB) *gin.Engine {
 		id := c.Param("id")
 		idInt, err := strconv.Atoi(id)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
 		emp, err := GetEmployee(db, uint(idInt))
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
+		if (Employee{}) == emp {
+			c.JSON(http.StatusNotFound, gin.H{})
+			return
+		}
 		c.JSON(http.StatusOK, emp)
 	})
 
@@ -48,28 +52,17 @@ func GinRouter(db *sql.DB) *gin.Engine {
 		id := c.Param("id")
 		idInt, err := strconv.Atoi(id)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
 		_, err = DeleteEmployee(db, uint(idInt))
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
 		c.JSON(http.StatusOK, gin.H{"message": "OK"})
-	})
-
-	// To update a single property
-	router.PATCH("/employees/:id", func(c *gin.Context) {
-		var id uint
-		if err := c.ShouldBindUri(&id); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-			return
-		}
 	})
 
 	// To update the whole resource
@@ -83,7 +76,7 @@ func GinRouter(db *sql.DB) *gin.Engine {
 		}
 		err = c.ShouldBindJSON(&form)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			c.JSON(http.StatusNoContent, gin.H{"message": err.Error()})
 			return
 		}
 
@@ -109,17 +102,19 @@ func GinRouter(db *sql.DB) *gin.Engine {
 
 	router.POST("/employees", func(c *gin.Context) {
 		var form Employee
-		err := c.Bind(&form)
+		err := c.ShouldBind(&form)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"message": err})
+			c.JSON(http.StatusNoContent, gin.H{"message": err.Error()})
+			return
 		}
 
 		id, _, err := CreateEmployee(db, &form)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err})
+			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
 		}
 
-		c.JSON(http.StatusOK, id)
+		c.JSON(http.StatusCreated, gin.H{"id": id})
 	})
 
 	return router
