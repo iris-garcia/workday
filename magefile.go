@@ -14,7 +14,7 @@ import (
 // If not set, running mage will list available targets
 // var Default = Build
 
-// Builds the binary
+// Build builds the binary
 func Build() error {
 	mg.Deps(InstallDeps)
 	fmt.Println("Building...")
@@ -22,39 +22,39 @@ func Build() error {
 	return cmd.Run()
 }
 
-// Install the binary in /usr/local/bin
+// Install installs the binary in /usr/local/bin
 func Install() error {
 	mg.Deps(Build)
 	fmt.Println("Installing...")
 	return os.Rename("./api_server", "/usr/bin/api_server")
 }
 
-// Install dependencies
+// InstallDeps installs all the needed dependencies
 func InstallDeps() error {
 	fmt.Println("Installing Deps...")
 	cmd := exec.Command("go", "get", "./...")
 	return cmd.Run()
 }
 
-// Clean up after yourself
+// Clean cleans up everything.
 func Clean() {
 	fmt.Println("Cleaning...")
 }
 
-// Start the api_server binary which is an HTTP server.
+// Start starts the API HTPP server. Currently using pm2 as process manager
 func Start() error {
 	mg.Deps(InstallDeps, Build)
 	cmd := exec.Command("pm2", "start", "./api_server", "--name", "api")
 	return cmd.Run()
 }
 
-// Stop the api_server.
+// Stop stops the API HTTP server.
 func Stop() error {
 	cmd := exec.Command("pm2", "stop", "api")
 	return cmd.Run()
 }
 
-// StartDev will bootstrap a working dev environment
+// StartDev startdev bootstraps a working dev environment.
 // TODO:
 //  - Use realize to automatically reload the api server on fiche changes
 //  - Check if the docker container for mariadb is already running
@@ -78,7 +78,7 @@ func StartDev() error {
 	return nil
 }
 
-// Run tests.
+// Test runs the tests suite.
 func Test() error {
 	fmt.Println("Running tests")
 	cmd := exec.Command("go", "test", "-v", "./...")
@@ -93,7 +93,7 @@ func Test() error {
 	return nil
 }
 
-// Run tests and generate the code coverage.
+// TestAndCoverage runs tests and generate the code coverage.
 func TestAndCoverage() error {
 	fmt.Println("Running tests and generating code coverage")
 	cmd := exec.Command("go", "test", "-v", "-cover", "-coverprofile=workday.coverprofile", "./...")
