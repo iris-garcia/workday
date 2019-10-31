@@ -30,6 +30,12 @@ The extended documentation is hosted under
 - [[http://localhost:1313/workday/dev/tools/][Toolchain]]
 - [[http://localhost:1313/workday/ci/][Continuous Integration]]
 - [[http://localhost:1313/workday/deployment/][Deployment]]
+- [[http://localhost:1313/workday/dev/api/][API tests]]
+
+** Build Tool
+#+begin_src bash
+buildtool: magefile.go
+#+end_src
 
 * How to contribute
 ** Setup the environment

@@ -124,7 +124,7 @@ go get github.com/magefile/mage
   #+begin_src bash
   mage startdev
   #+end_src
-**** (Production) Nodejs
+**** Nodejs (Production)
 - *Version used*: 12.11.1
 - Nodejs is only needed to install *PM2* and therefore it is not a
   requirement, however the current state of the project uses it to run
@@ -190,6 +190,35 @@ Ideally this tool will be replace in favor of a Go tool, some of them
 has been already tested but none of them provide the same features as
 *PM2*.
 
+*** API Test Class
+:PROPERTIES:
+:EXPORT_FILE_NAME: dev/api
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+**** Description
+Currently the API allows the following actions:
+
+| Method | Endpoint        |
+|--------+-----------------|
+| GET    | /status         |
+| GET    | /employees      |
+| POST   | /employees      |
+| GET    | /employees/{id} |
+| DELETE | /employees/{id} |
+| PUT    | /employees/{id} |
+
+BDD has been used to test every possible use case to reach a 100%
+[[/coverage.html][code coverage]] it is worth to mention that the database has been mocked so
+the current tests are *Unit tests*, leaving the *Integration tests*
+for a later iteration.
+
+
+**** Test code
+The code which covers the current class can be found [[https://github.com/iris-garcia/workday/blob/master/api/router_test.go][here]].
+
+**** Demo
+{{< asciinema key="coverage" rows="50" preload="1"
+idle-time-limit="1" >}}
 ** Continuous Integration
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ci
@@ -239,37 +268,33 @@ versions of Go (1.13.x and master)
   - master
 #+end_src
 
-Travis is smart enough to setup all the required dependencies before
-it start running the tests, basically it runs:
-1. *go get* which fetches all the dependencies defined in the file ~go.mod~
-2. *go test* which runs the tests.
-
-The ~tests coverage~ stage is exactly the same as the above but adds
-the code coverage percentage which is useful to know if we are missing
-some code from beign tested.
+And the following excerpt defines *bionic* as the Ubuntu version to be
+used also tells the requirement of *sudo* needed to install ~npm~ and
+~pm2~.
 
 #+begin_src yaml
-  - stage: tests coverage
-    script: go test -cover -v
-    go: 1.13.x
+  dist: bionic
 
+  sudo: required
+
+  addons:
+    mariadb: '10.1'
+
+  services:
+    - mariadb
 #+end_src
 
-And the last stage ~Release artifact to GitHub~ runs only when there
-is a tag push, it creates a compressed artifact with the source code
-and place it in GitHub's releases.
+The *addons* and *services* sections are in place to boot a *mariadb*
+service which will be used for the integration tests against a test
+database.
 
-#+begin_src yaml
-  - stage: Release artifact to GitHub
-    deploy:
-      provider: releases
-      api_key: $WORKDAY_RELEASE
-      file: "workday"
-      skip_cleanup: true
-      on:
-        tags: true
+The *before_install* and *install* configurations will fetch and setup
+all the prerequisites in order to run our *build tool* which is
+*mage*.
 
-#+end_src
+Finally the *script* will use ~mage~ to start the environment, run the
+tests and stop it once it finishes.
+
 *** GitHub Actions
 :PROPERTIES:
 :EXPORT_FILE_NAME: ci/github
@@ -288,7 +313,6 @@ coverage of the project.
 
 #+INCLUDE: "../../.github/workflows/unittests.yaml" src yaml
 
-
 ***** Hugo documentation site
 This workflow is not really a typical continuous integration one, but
 I think it makes sense to mention it here as it is taking care of
@@ -298,7 +322,6 @@ automatically update the documentation site.
 
 To get this one working there are some requisites explained in a howto
 [[/howto/gh-pages][document]].
-
 
 ** Deployment
 :PROPERTIES:
@@ -318,7 +341,6 @@ This chapter describes where and how is this project deployed.
 {{% notice info %}}
 Work in progress...
 {{% /notice %}}
-
 
 ** How-to
 :PROPERTIES:

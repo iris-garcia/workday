@@ -180,7 +180,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     bottom: 0;
     left: 0;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 17px;
 }
 #sidebar a {
     color: #ccc;
@@ -414,6 +414,12 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 }
 #body-inner {
     margin-bottom: 5rem;
+    background-color: #fff;
+    margin: auto;
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
 }
 #chapter {
     display: flex;
@@ -442,7 +448,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
 #footer {
     padding: 3rem 1rem;
     color: #b3b3b3;
-    font-size: 13px;
+    font-size: 15px;
 }
 #footer p {
     margin: 0;
@@ -451,7 +457,7 @@ body {
     font-family: "Work Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
     font-weight: 300;
     line-height: 1.6;
-    font-size: 18px !important;
+    font-size: 20px !important;
 }
 h2, h3, h4, h5, h6 {
     font-family: "Work Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
@@ -625,7 +631,7 @@ section.attachments.grey .attachments-files {
 
 code, kbd, pre, samp {
     font-family: "Consolas", menlo, monospace;
-    font-size: 92%;
+    font-size: 98%;
 }
 code {
     border-radius: 2px;
@@ -658,7 +664,7 @@ pre code {
     border: 0;
     padding: 0;
     margin: 0;
-    font-size: 15px;
+    font-size: 17px;
 }
 hr {
     border-bottom: 4px solid #F0F2F4;
@@ -681,7 +687,7 @@ hr {
     background: #1d1f21;
 }
 #body-inner .tabs-wrapper.ui-theme-badges .tabs-nav li {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
 }
 #body-inner .tabs-wrapper.ui-theme-badges .tabs-nav li a {
@@ -1110,7 +1116,7 @@ pre .copy-to-clipboard:hover {
 #sidebar ul li .read-icon {
     display: none;
     float: right;
-    font-size: 13px;
+    font-size: 15px;
     min-width: 16px;
     margin: 4px 0 0 0;
     text-align: right;

@@ -1,7 +1,7 @@
 +++
 title = "Requirements"
 author = ["Iris Garcia"]
-lastmod = 2019-10-27T18:54:25+01:00
+lastmod = 2019-10-31T09:09:33+01:00
 draft = false
 weight = 2
 asciinema = true
@@ -41,7 +41,7 @@ go get github.com/magefile/mage
     ```
 
 
-## (Production) Nodejs {#production--nodejs}
+## Nodejs (Production) {#nodejs--production}
 
 -   **Version used**: 12.11.1
 -   Nodejs is only needed to install **PM2** and therefore it is not a

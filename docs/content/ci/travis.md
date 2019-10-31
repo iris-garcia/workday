@@ -1,7 +1,7 @@
 +++
 title = "Travis CI"
 author = ["Iris Garcia"]
-lastmod = 2019-10-18T00:54:18+02:00
+lastmod = 2019-10-31T09:08:46+01:00
 draft = false
 weight = 3
 asciinema = true
@@ -36,20 +36,33 @@ go:
 - 1.13.x
 - master
 
-jobs:
-  include:
-    - stage: tests coverage
-      script: go test -cover -v
-      go: 1.13.x
+dist: bionic
 
-    - stage: Release artifact to GitHub
-      deploy:
-        provider: releases
-        api_key: $WORKDAY_RELEASE
-        file: "workday"
-        skip_cleanup: true
-        on:
-          tags: true
+sudo: required
+
+addons:
+  mariadb: '10.1'
+
+services:
+  - mariadb
+
+before_install:
+  - sudo apt-get -y install npm
+  - npm install pm2@latest -g
+
+install:
+  - go get github.com/magefile/mage
+  - mage build
+
+before_script:
+  - mysql -u root -e 'CREATE DATABASE workday;'
+  - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
+  - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
+
+script:
+  - mage start
+  - mage test
+  - mage stop
 ```
 
 The following lines tell travis to run the tests against two different
@@ -61,33 +74,29 @@ go:
 - master
 ```
 
-Travis is smart enough to setup all the required dependencies before
-it start running the tests, basically it runs:
-
-1.  **go get** which fetches all the dependencies defined in the file `go.mod`
-2.  **go test** which runs the tests.
-
-The `tests coverage` stage is exactly the same as the above but adds
-the code coverage percentage which is useful to know if we are missing
-some code from beign tested.
+And the following excerpt defines **bionic** as the Ubuntu version to be
+used also tells the requirement of **sudo** needed to install `npm` and
+`pm2`.
 
 ```yaml
-- stage: tests coverage
-  script: go test -cover -v
-  go: 1.13.x
+dist: bionic
+
+sudo: required
+
+addons:
+  mariadb: '10.1'
+
+services:
+  - mariadb
 ```
 
-And the last stage `Release artifact to GitHub` runs only when there
-is a tag push, it creates a compressed artifact with the source code
-and place it in GitHub's releases.
+The **addons** and **services** sections are in place to boot a **mariadb**
+service which will be used for the integration tests against a test
+database.
 
-```yaml
-- stage: Release artifact to GitHub
-  deploy:
-    provider: releases
-    api_key: $WORKDAY_RELEASE
-    file: "workday"
-    skip_cleanup: true
-    on:
-      tags: true
-```
+The **before\_install** and **install** configurations will fetch and setup
+all the prerequisites in order to run our **build tool** which is
+**mage**.
+
+Finally the **script** will use `mage` to start the environment, run the
+tests and stop it once it finishes.
