@@ -35,6 +35,16 @@ This process can be as simple as signing in a paper the checks in and checks out
     </item>
     
     <item>
+      <title>API Test Class</title>
+      <link>https://iris-garcia.github.io/workday/dev/api/</link>
+      <pubDate>Thu, 31 Oct 2019 09:41:22 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
+      <description>Description Currently the API allows the following actions:
+   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
+    </item>
+    
+    <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
       <pubDate>Thu, 31 Oct 2019 09:09:33 +0100</pubDate>

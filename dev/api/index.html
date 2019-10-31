@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>Travis CI :: Webhooks Handler</title>
+    <title>API Test Class :: Webhooks Handler</title>
 
     
     <link href="../../css/nucleus.css?1572511795" rel="stylesheet">
@@ -40,7 +40,7 @@
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/ci/travis/">
+  <body class="" data-url="/dev/api/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -153,7 +153,7 @@
   
     
     <li data-nav-id="/dev/" title="Development" class="dd-item 
-        
+        parent
         
         
         ">
@@ -179,7 +179,7 @@
  
   
     
-      <li data-nav-id="/dev/api/" title="API Test Class" class="dd-item ">
+      <li data-nav-id="/dev/api/" title="API Test Class" class="dd-item active">
         <a href="../../dev/api/">
         API Test Class
         <i class="fas fa-check read-icon"></i>
@@ -244,7 +244,7 @@
   
     
     <li data-nav-id="/ci/" title="Continuous Integration" class="dd-item 
-        parent
+        
         
         
         ">
@@ -270,7 +270,7 @@
  
   
     
-      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item active">
+      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item ">
         <a href="../../ci/travis/">
         Travis CI
         <i class="fas fa-check read-icon"></i>
@@ -459,7 +459,7 @@
                   <span class="links">
                  
                  
-                   Travis CI 
+                   API Test Class 
                  
                   </span>
                 </div>
@@ -471,7 +471,8 @@
 <li>
 <ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#configuration">Configuration</a></li>
+<li><a href="#test-code">Test code</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -490,7 +491,7 @@
           
             <h1>
               
-              Travis CI
+              API Test Class
             </h1>
           
 
@@ -502,84 +503,81 @@
 
 <h2 id="description">Description</h2>
 
-<p>Travis is a hosted continuous integration service used to build and
-test software projects hosted at GitHub.</p>
+<p>Currently the API allows the following actions:</p>
 
-<p>It provides a free plan for open source projects which is very
-convinient for our use case.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+</tr>
+</thead>
 
-<p>The whole configuration is set up in a single file <code>.travis.yml</code> which
-must be placed in the root directory of the project.</p>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/status</td>
+</tr>
 
-<h2 id="configuration">Configuration</h2>
+<tr>
+<td>GET</td>
+<td>/employees</td>
+</tr>
 
-<p>To avoid replicating exactly the same workflows in GitHub Actions and
-Travis, there are some little changes like testing two different Go
-versions: <code>v1.13.x</code> and <code>master</code> (which is the latest available at any
-given time).</p>
+<tr>
+<td>POST</td>
+<td>/employees</td>
+</tr>
 
-<p>It also releases artifacts when a new <strong>tag</strong> is pushed to the
-repository.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language:<span style="color:#666"> </span>go<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>go:<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span>master<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>addons:<span style="color:#666">
-</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>services:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>before_install:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>sudo<span style="color:#666"> </span>apt-get<span style="color:#666"> </span>-y<span style="color:#666"> </span>install<span style="color:#666"> </span>npm<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>npm<span style="color:#666"> </span>install<span style="color:#666"> </span>pm2@latest<span style="color:#666"> </span>-g<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>install:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/magefile/mage<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>build<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>before_script:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#39;CREATE DATABASE workday;&#39;</span><span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;CREATE USER &#39;workday&#39;@&#39;%&#39; IDENTIFIED BY &#39;workday&#39;;&#34;</span><span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GRANT ALL ON workday.* TO &#39;workday&#39;@&#39;%&#39;; FLUSH PRIVILEGES;&#34;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>script:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>start<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>stop</code></pre></div>
-<p>The following lines tell travis to run the tests against two different
-versions of Go (1.13.x and master)</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">go:<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span>master</code></pre></div>
-<p>And the following excerpt defines <strong>bionic</strong> as the Ubuntu version to be
-used also tells the requirement of <strong>sudo</strong> needed to install <code>npm</code> and
-<code>pm2</code>.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>addons:<span style="color:#666">
-</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>services:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb</code></pre></div>
-<p>The <strong>addons</strong> and <strong>services</strong> sections are in place to boot a <strong>mariadb</strong>
-service which will be used for the integration tests against a test
-database.</p>
+<tr>
+<td>GET</td>
+<td>/employees/{id}</td>
+</tr>
 
-<p>The <strong>before_install</strong> and <strong>install</strong> configurations will fetch and setup
-all the prerequisites in order to run our <strong>build tool</strong> which is
-<strong>mage</strong>.</p>
+<tr>
+<td>DELETE</td>
+<td>/employees/{id}</td>
+</tr>
 
-<p>Finally the <strong>script</strong> will use <code>mage</code> to start the environment, run the
-tests and stop it once it finishes.</p>
+<tr>
+<td>PUT</td>
+<td>/employees/{id}</td>
+</tr>
+</tbody>
+</table>
+
+<p>BDD has been used to test every possible use case to reach a 100%
+<a href="../../coverage.html">code coverage</a> it is worth to mention that the database has been mocked so
+the current tests are <strong>Unit tests</strong>, leaving the <strong>Integration tests</strong>
+for a later iteration.</p>
+
+<h2 id="test-code">Test code</h2>
+
+<p>The code which covers the current class can be found <a href="https://github.com/iris-garcia/workday/blob/master/api/router%5Ftest.go">here</a>.</p>
+
+<h2 id="demo">Demo</h2>
+
+<p>
+    <asciinema-player
+        src="../../casts/coverage.cast"
+        cols="640"
+        rows="50"
+        
+        preload="1"
+        
+        start-at="0"
+        speed="1"
+        idle-time-limit="1"
+        
+        
+        
+        
+        
+        
+        
+    ></asciinema-player>
+</p>
+
 
 
 <footer class=" footline" >
@@ -669,70 +667,6 @@ tests and stop it once it finishes.</p>
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -766,6 +700,70 @@ tests and stop it once it finishes.</p>
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -840,10 +838,10 @@ tests and stop it once it finishes.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ci/" title="Continuous Integration"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../dev/" title="Development"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ci/github/" title="GitHub Actions" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../dev/requirements/" title="Requirements" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
