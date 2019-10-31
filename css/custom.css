@@ -20,3 +20,8 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+#body {
+    font-size: 18px !important;
+    background-color: #FEFEFE;
+}

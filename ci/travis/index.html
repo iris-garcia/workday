@@ -12,20 +12,20 @@
     <title>Travis CI :: Webhooks Handler</title>
 
     
-    <link href="../../css/nucleus.css?1572201391" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1572201391" rel="stylesheet">
-    <link href="../../css/hybrid.css?1572201391" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1572201391" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1572201391" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1572201391" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1572201391" rel="stylesheet">
-    <link href="../../css/theme.css?1572201391" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1572201391" rel="stylesheet">
+    <link href="../../css/nucleus.css?1572511672" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1572511672" rel="stylesheet">
+    <link href="../../css/hybrid.css?1572511672" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1572511672" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1572511672" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1572511672" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1572511672" rel="stylesheet">
+    <link href="../../css/theme.css?1572511672" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1572511672" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1572201391" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1572511672" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1572201391"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1572511672"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1572201391"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1572201391"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1572511672"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1572511672"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1572201391"></script>
+<script type="text/javascript" src="../../js/search.js?1572511672"></script>
 
     
   </div>
@@ -507,50 +507,61 @@ repository.</p>
 </span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
 </span><span style="color:#666"></span>-<span style="color:#666"> </span>master<span style="color:#666">
 </span><span style="color:#666">
-</span><span style="color:#666"></span>jobs:<span style="color:#666">
-</span><span style="color:#666">  </span>include:<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>tests<span style="color:#666"> </span>coverage<span style="color:#666">
-</span><span style="color:#666">      </span>script:<span style="color:#666"> </span>go<span style="color:#666"> </span>test<span style="color:#666"> </span>-cover<span style="color:#666"> </span>-v<span style="color:#666">
-</span><span style="color:#666">      </span>go:<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
+</span><span style="color:#666"></span>dist:<span style="color:#666"> </span>bionic<span style="color:#666">
 </span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>Release<span style="color:#666"> </span>artifact<span style="color:#666"> </span>to<span style="color:#666"> </span>GitHub<span style="color:#666">
-</span><span style="color:#666">      </span>deploy:<span style="color:#666">
-</span><span style="color:#666">        </span>provider:<span style="color:#666"> </span>releases<span style="color:#666">
-</span><span style="color:#666">        </span>api_key:<span style="color:#666"> </span>$WORKDAY_RELEASE<span style="color:#666">
-</span><span style="color:#666">        </span>file:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
-</span><span style="color:#666">        </span>skip_cleanup:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
-</span><span style="color:#666">        </span>on:<span style="color:#666">
-</span><span style="color:#666">          </span>tags:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span></code></pre></div>
+</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>addons:<span style="color:#666">
+</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>services:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>before_install:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>sudo<span style="color:#666"> </span>apt-get<span style="color:#666"> </span>-y<span style="color:#666"> </span>install<span style="color:#666"> </span>npm<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>npm<span style="color:#666"> </span>install<span style="color:#666"> </span>pm2@latest<span style="color:#666"> </span>-g<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>install:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/magefile/mage<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>build<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>before_script:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#39;CREATE DATABASE workday;&#39;</span><span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;CREATE USER &#39;workday&#39;@&#39;%&#39; IDENTIFIED BY &#39;workday&#39;;&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GRANT ALL ON workday.* TO &#39;workday&#39;@&#39;%&#39;; FLUSH PRIVILEGES;&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>script:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>start<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>test<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>stop</code></pre></div>
 <p>The following lines tell travis to run the tests against two different
 versions of Go (1.13.x and master)</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">go:<span style="color:#666">
 </span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
 </span><span style="color:#666"></span>-<span style="color:#666"> </span>master</code></pre></div>
-<p>Travis is smart enough to setup all the required dependencies before
-it start running the tests, basically it runs:</p>
+<p>And the following excerpt defines <strong>bionic</strong> as the Ubuntu version to be
+used also tells the requirement of <strong>sudo</strong> needed to install <code>npm</code> and
+<code>pm2</code>.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">dist:<span style="color:#666"> </span>bionic<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>addons:<span style="color:#666">
+</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>services:<span style="color:#666">
+</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb</code></pre></div>
+<p>The <strong>addons</strong> and <strong>services</strong> sections are in place to boot a <strong>mariadb</strong>
+service which will be used for the integration tests against a test
+database.</p>
 
-<ol>
-<li><strong>go get</strong> which fetches all the dependencies defined in the file <code>go.mod</code></li>
-<li><strong>go test</strong> which runs the tests.</li>
-</ol>
+<p>The <strong>before_install</strong> and <strong>install</strong> configurations will fetch and setup
+all the prerequisites in order to run our <strong>build tool</strong> which is
+<strong>mage</strong>.</p>
 
-<p>The <code>tests coverage</code> stage is exactly the same as the above but adds
-the code coverage percentage which is useful to know if we are missing
-some code from beign tested.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>tests<span style="color:#666"> </span>coverage<span style="color:#666">
-</span><span style="color:#666">  </span>script:<span style="color:#666"> </span>go<span style="color:#666"> </span>test<span style="color:#666"> </span>-cover<span style="color:#666"> </span>-v<span style="color:#666">
-</span><span style="color:#666">  </span>go:<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x</code></pre></div>
-<p>And the last stage <code>Release artifact to GitHub</code> runs only when there
-is a tag push, it creates a compressed artifact with the source code
-and place it in GitHub&rsquo;s releases.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>Release<span style="color:#666"> </span>artifact<span style="color:#666"> </span>to<span style="color:#666"> </span>GitHub<span style="color:#666">
-</span><span style="color:#666">  </span>deploy:<span style="color:#666">
-</span><span style="color:#666">    </span>provider:<span style="color:#666"> </span>releases<span style="color:#666">
-</span><span style="color:#666">    </span>api_key:<span style="color:#666"> </span>$WORKDAY_RELEASE<span style="color:#666">
-</span><span style="color:#666">    </span>file:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
-</span><span style="color:#666">    </span>skip_cleanup:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
-</span><span style="color:#666">    </span>on:<span style="color:#666">
-</span><span style="color:#666">      </span>tags:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span></code></pre></div>
+<p>Finally the <strong>script</strong> will use <code>mage</code> to start the environment, run the
+tests and stop it once it finishes.</p>
+
 
 <footer class=" footline" >
 	
@@ -807,19 +818,19 @@ and place it in GitHub&rsquo;s releases.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1572201391"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1572201391"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1572201391"></script>
-    <script src="../../js/jquery.sticky.js?1572201391"></script>
-    <script src="../../js/featherlight.min.js?1572201391"></script>
-    <script src="../../js/highlight.pack.js?1572201391"></script>
+    <script src="../../js/clipboard.min.js?1572511672"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1572511672"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1572511672"></script>
+    <script src="../../js/jquery.sticky.js?1572511672"></script>
+    <script src="../../js/featherlight.min.js?1572511672"></script>
+    <script src="../../js/highlight.pack.js?1572511672"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1572201391"></script>
-    <script src="../../js/learn.js?1572201391"></script>
-    <script src="../../js/hugo-learn.js?1572201391"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1572511672"></script>
+    <script src="../../js/learn.js?1572511672"></script>
+    <script src="../../js/hugo-learn.js?1572511672"></script>
 
-    <link href="../../mermaid/mermaid.css?1572201391" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1572201391"></script>
+    <link href="../../mermaid/mermaid.css?1572511672" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1572511672"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

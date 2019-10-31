@@ -39,7 +39,7 @@
 	"title": "Requirements",
 	"tags": [],
 	"description": "",
-	"content": " Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.\nwget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage Once go is installed, we can install mage as follows:\ngo get github.com/magefile/mage MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:\nmage startdev  (Production) Nodejs  Version used: 12.11.1 Nodejs is only needed to install PM2 and therefore it is not a requirement, however the current state of the project uses it to run the service in a production environment.  "
+	"content": " Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.\nwget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage Once go is installed, we can install mage as follows:\ngo get github.com/magefile/mage MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:\nmage startdev  Nodejs (Production)  Version used: 12.11.1 Nodejs is only needed to install PM2 and therefore it is not a requirement, however the current state of the project uses it to run the service in a production environment.  "
 },
 {
 	"uri": "https://iris-garcia.github.io/workday/dev/tools/",
@@ -56,18 +56,18 @@
 	"content": " Chapter 2  Development\nThis chapter shows which tools are used in the development of the project and how to set up a working dev environment.\nWork in progress\u0026hellip;\n "
 },
 {
+	"uri": "https://iris-garcia.github.io/workday/ci/travis/",
+	"title": "Travis CI",
+	"tags": [],
+	"description": "",
+	"content": " Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.\nIt provides a free plan for open source projects which is very convinient for our use case.\nThe whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.\nConfiguration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.13.x and master (which is the latest available at any given time).\nIt also releases artifacts when a new tag is pushed to the repository.\nlanguage:gogo:-1.13.x-masterdist:bionicsudo:requiredaddons:mariadb:\u0026#39;10.1\u0026#39;services:-mariadbbefore_install:-sudoapt-get-yinstallnpm-npminstallpm2@latest-ginstall:-gogetgithub.com/magefile/mage-magebuildbefore_script:-mysql-uroot-e\u0026#39;CREATE DATABASE workday;\u0026#39;-mysql-uroot-e\u0026#34;CREATE USER \u0026#39;workday\u0026#39;@\u0026#39;%\u0026#39; IDENTIFIED BY \u0026#39;workday\u0026#39;;\u0026#34;-mysql-uroot-e\u0026#34;GRANT ALL ON workday.* TO \u0026#39;workday\u0026#39;@\u0026#39;%\u0026#39;; FLUSH PRIVILEGES;\u0026#34;script:-magestart-magetest-magestop The following lines tell travis to run the tests against two different versions of Go (1.13.x and master)\ngo:-1.13.x-master And the following excerpt defines bionic as the Ubuntu version to be used also tells the requirement of sudo needed to install npm and pm2.\ndist:bionicsudo:requiredaddons:mariadb:\u0026#39;10.1\u0026#39;services:-mariadb The addons and services sections are in place to boot a mariadb service which will be used for the integration tests against a test database.\nThe before_install and install configurations will fetch and setup all the prerequisites in order to run our build tool which is mage.\nFinally the script will use mage to start the environment, run the tests and stop it once it finishes.\n"
+},
+{
 	"uri": "https://iris-garcia.github.io/workday/ci/",
 	"title": "Continuous Integration",
 	"tags": [],
 	"description": "",
 	"content": " Chapter 3  Continuous Integration\nThis chapter describes the systems used to continuously integrate changes into the project.\n"
-},
-{
-	"uri": "https://iris-garcia.github.io/workday/ci/travis/",
-	"title": "Travis CI",
-	"tags": [],
-	"description": "",
-	"content": " Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.\nIt provides a free plan for open source projects which is very convinient for our use case.\nThe whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.\nConfiguration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.13.x and master (which is the latest available at any given time).\nIt also releases artifacts when a new tag is pushed to the repository.\nlanguage:gogo:-1.13.x-masterjobs:include:-stage:testscoveragescript:gotest-cover-vgo:1.13.x-stage:ReleaseartifacttoGitHubdeploy:provider:releasesapi_key:$WORKDAY_RELEASEfile:\u0026#34;workday\u0026#34;skip_cleanup:trueon:tags:true The following lines tell travis to run the tests against two different versions of Go (1.13.x and master)\ngo:-1.13.x-master Travis is smart enough to setup all the required dependencies before it start running the tests, basically it runs:\n go get which fetches all the dependencies defined in the file go.mod go test which runs the tests.  The tests coverage stage is exactly the same as the above but adds the code coverage percentage which is useful to know if we are missing some code from beign tested.\n-stage:testscoveragescript:gotest-cover-vgo:1.13.x And the last stage Release artifact to GitHub runs only when there is a tag push, it creates a compressed artifact with the source code and place it in GitHub\u0026rsquo;s releases.\n-stage:ReleaseartifacttoGitHubdeploy:provider:releasesapi_key:$WORKDAY_RELEASEfile:\u0026#34;workday\u0026#34;skip_cleanup:trueon:tags:true"
 },
 {
 	"uri": "https://iris-garcia.github.io/workday/ci/github/",
