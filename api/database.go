@@ -20,7 +20,7 @@ func ConnectDB(config DBConfig) (*sql.DB, error) {
 
 func insertNewEmployee(db *sql.DB, employee *Employee) (uint, uint, error) {
 	result, err := db.Exec(
-		"INSERT INTO employee(firstname, lastname, role, password) values('?', '?', ?, '?')",
+		"INSERT INTO employee(firstname, lastname, role, password) values(?, ?, ?, ?)",
 		employee.Firstname, employee.Lastname, employee.Role, employee.Password,
 	)
 	if err != nil {
@@ -70,6 +70,9 @@ func findEmployee(db *sql.DB, id uint) (Employee, error) {
 
 	err := row.Scan(&employee.ID, &employee.Firstname, &employee.Lastname, &employee.Role, &employee.Password)
 	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			return Employee{}, nil
+		}
 		return Employee{}, err
 	}
 

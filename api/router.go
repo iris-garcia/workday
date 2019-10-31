@@ -65,36 +65,35 @@ func GinRouter(db *sql.DB) *gin.Engine {
 		c.JSON(http.StatusOK, gin.H{"message": "OK"})
 	})
 
-	// To update the whole resource
+	// To update the whole resource a!
 	router.PUT("/employees/:id", func(c *gin.Context) {
 		var form Employee
 		id := c.Param("id")
 		idInt, err := strconv.Atoi(id)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		err = c.ShouldBindJSON(&form)
 		if err != nil {
-			c.JSON(http.StatusNoContent, gin.H{"message": err.Error()})
+			c.JSON(http.StatusNoContent, gin.H{"error": err.Error()})
 			return
 		}
 
 		_, err = GetEmployee(db, uint(idInt))
 		if err != nil {
-			fmt.Println("here")
-			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 			return
 		}
 
 		form.ID = uint(idInt)
 		rows, err := EditEmployee(db, &form)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		if rows > 1 {
-			c.JSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("Expected only 1 row to be updated, got %d", rows)})
+			c.JSON(http.StatusOK, gin.H{"error": fmt.Sprintf("%d rows updated", rows)})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"status": "OK"})
