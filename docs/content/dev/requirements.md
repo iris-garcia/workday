@@ -1,7 +1,7 @@
 +++
 title = "Requirements"
 author = ["Iris Garcia"]
-lastmod = 2019-10-31T09:09:33+01:00
+lastmod = 2019-11-01T19:47:27+01:00
 draft = false
 weight = 2
 asciinema = true
@@ -22,11 +22,11 @@ asciinema = true
 
 ## Mage {#mage}
 
-Once go is installed, we can install mage as follows:
+-   **Setup**: Once go is installed, we can install mage as follows
 
-```bash
-go get github.com/magefile/mage
-```
+    ```bash
+    go get github.com/magefile/mage
+    ```
 
 
 ## MariaDB {#mariadb}

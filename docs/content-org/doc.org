@@ -93,14 +93,11 @@ and this is the reason for which I decided to develop this project.
 This chapter shows which tools are used in the development of the
 project and how to set up a working dev environment.
 
-{{% notice info %}}
-Work in progress...
-{{% /notice %}}
-
 *** Requirements
 :PROPERTIES:
 :EXPORT_FILE_NAME: dev/requirements
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 2
 :END:
 **** Go
 - *Version used*: 1.13.1
@@ -112,10 +109,10 @@ Work in progress...
   export PATH=$PATH:/usr/local/go/bin
   #+end_src
 **** Mage
-Once go is installed, we can install mage as follows:
-#+begin_src bash
-go get github.com/magefile/mage
-#+end_src
+- *Setup*: Once go is installed, we can install mage as follows
+  #+begin_src bash
+  go get github.com/magefile/mage
+  #+end_src
 **** MariaDB
 - *Version used*: 10.4
 - *Setup*: Most of the linux distrubutions provide a package to
@@ -134,6 +131,7 @@ go get github.com/magefile/mage
 :PROPERTIES:
 :EXPORT_FILE_NAME: dev/tools
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 1
 :END:
 **** [[https://golang.org/][Go]]
 The open source programming language Go will be used to develop the
@@ -190,10 +188,11 @@ Ideally this tool will be replace in favor of a Go tool, some of them
 has been already tested but none of them provide the same features as
 *PM2*.
 
-*** API Test Class
+*** API Test Class                                               :bdd:test:
 :PROPERTIES:
 :EXPORT_FILE_NAME: dev/api
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 3
 :END:
 **** Description
 Currently the API allows the following actions:
@@ -234,10 +233,11 @@ idle-time-limit="1" >}}
 
 This chapter describes the systems used to continuously integrate
 changes into the project.
-*** Travis CI
+*** Travis CI                                                          :ci:
 :PROPERTIES:
 :EXPORT_FILE_NAME: ci/travis
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 1
 :END:
 **** Description
 Travis is a hosted continuous integration service used to build and
@@ -295,10 +295,11 @@ all the prerequisites in order to run our *build tool* which is
 Finally the *script* will use ~mage~ to start the environment, run the
 tests and stop it once it finishes.
 
-*** GitHub Actions
+*** GitHub Actions                                                     :ci:
 :PROPERTIES:
 :EXPORT_FILE_NAME: ci/github
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 2
 :END:
 **** Description
 GitHub Actions is the new continuous integration and deployment system
@@ -306,12 +307,29 @@ built and maintained by the community.
 
 **** Configuration
 Currently there are two workflows configured:
+***** Test with verbosity enabled
+To make it a bit different that the pipeline configured in Travis CI,
+this one will run the tests with verbosity enabled, this way it
+outputs every spec and API call done for each test case.
 
-***** Test and coverage
-This workflow takes care of the Unit tests and shows the total
-coverage of the project.
-
+An example of one run can be seen [[https://github.com/iris-garcia/workday/runs/285177520][here]].
 #+INCLUDE: "../../.github/workflows/unittests.yaml" src yaml
+
+There is just one job configured in this *Action* with the name
+~checks~ and as stated in the line 8 of the configuration it uses
+*Ubuntu* in it latest available version.
+
+There are two steps in this /job/:
+
+The first one Checks out the project repository in its ~master~ branch.
+
+The second one uses an action to automatically setup a Go workspace
+and run arbitrary commands, the documentation can be seen [[https://github.com/cedrickring/golang-action][here]].
+If no args are specified and a ~Makefile~ is detected, this action will
+run ~make~. Otherwise ~go test~ and ~go build~ will be run.
+
+In this case it is overwritten in order to install ~mage~ and ~ginkgo~
+CLIs to allow the build and run of the tests.
 
 ***** Hugo documentation site
 This workflow is not really a typical continuous integration one, but

@@ -1,9 +1,10 @@
 +++
 title = "Travis CI"
 author = ["Iris Garcia"]
-lastmod = 2019-10-31T09:08:46+01:00
+lastmod = 2019-11-01T19:47:28+01:00
+tags = ["ci"]
 draft = false
-weight = 3
+weight = 1
 asciinema = true
 +++
 

@@ -1,9 +1,10 @@
 +++
 title = "GitHub Actions"
 author = ["Iris Garcia"]
-lastmod = 2019-10-16T20:41:58+02:00
+lastmod = 2019-11-01T19:47:28+01:00
+tags = ["ci"]
 draft = false
-weight = 3
+weight = 2
 asciinema = true
 +++
 
@@ -18,10 +19,13 @@ built and maintained by the community.
 Currently there are two workflows configured:
 
 
-### Test and coverage {#test-and-coverage}
+### Test with verbosity enabled {#test-with-verbosity-enabled}
 
-This workflow takes care of the Unit tests and shows the total
-coverage of the project.
+To make it a bit different that the pipeline configured in Travis CI,
+this one will run the tests with verbosity enabled, this way it
+outputs every spec and API call done for each test case.
+
+An example of one run can be seen [here](https://github.com/iris-garcia/workday/runs/285177520).
 
 ```yaml
 on: push
@@ -41,8 +45,28 @@ jobs:
       env:
         GO111MODULE: "on"
       with:
-        args: go build && go test -cover -v
+        args: |
+          go get github.com/magefile/mage && \
+          go get github.com/onsi/ginkgo/ginkgo && \
+          mage build && \
+          mage testverbose
 ```
+
+There is just one job configured in this **Action** with the name
+`checks` and as stated in the line 8 of the configuration it uses
+**Ubuntu** in it latest available version.
+
+There are two steps in this _job_:
+
+The first one Checks out the project repository in its `master` branch.
+
+The second one uses an action to automatically setup a Go workspace
+and run arbitrary commands, the documentation can be seen [here](https://github.com/cedrickring/golang-action).
+If no args are specified and a `Makefile` is detected, this action will
+run `make`. Otherwise `go test` and `go build` will be run.
+
+In this case it is overwritten in order to install `mage` and `ginkgo`
+CLIs to allow the build and run of the tests.
 
 
 ### Hugo documentation site {#hugo-documentation-site}

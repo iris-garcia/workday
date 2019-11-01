@@ -41,10 +41,14 @@ buildtool: magefile.go
 ** Setup the environment
 1. Fork the repository.
 2. Clone your forked repository.
-3. Run ~mage build~ to install the dependencies and build the binary.
-4. (optional) Run ~mage startdev~ to bootstrap a mariadb docker
+3. Install the build tool ~mage~
+   #+begin_src bash
+     go get github.com/magefile/mage
+   #+end_src
+4. Run ~mage build~ to install the dependencies and build the binary.
+5. (optional) Run ~mage startdev~ to bootstrap a mariadb docker
    container.
-5. Import the ~initial.sql~ SQL.
+6. Import the ~initial.sql~ SQL.
    #+begin_src bash
    mysql -u workday -pworkday workday < /sql/initial.sql
    #+end_src

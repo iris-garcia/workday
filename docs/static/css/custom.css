@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'RobotoNerd';
-  src: url('/fonts/Roboto_Mono_Nerd_Font_Complete.ttf')  format('truetype')
+  src: url('../fonts/Roboto_Mono_Nerd_Font_Complete.ttf')  format('truetype')
 }
 
 .asciinema-terminal {
@@ -22,6 +22,6 @@
 }
 
 #body {
-    font-size: 18px !important;
+    font-size: 20px !important;
     background-color: #FEFEFE;
 }

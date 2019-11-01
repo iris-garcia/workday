@@ -1,7 +1,7 @@
 +++
 title = "How-to"
 author = ["Iris Garcia"]
-lastmod = 2019-10-16T20:29:12+02:00
+lastmod = 2019-11-01T19:47:28+01:00
 draft = false
 weight = 5
 chapter = true
