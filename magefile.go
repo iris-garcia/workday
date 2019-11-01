@@ -81,7 +81,24 @@ func StartDev() error {
 // Test runs the tests suite.
 func Test() error {
 	fmt.Println("Running tests")
+	os.Setenv("GIN_MODE", "test")
 	cmd := exec.Command("go", "test", "-v", "./...")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
+	return nil
+}
+
+// Test runs the tests suite.
+func TestVerbose() error {
+	fmt.Println("Running tests")
+	os.Setenv("GIN_MODE", "test")
+	cmd := exec.Command("ginkgo", "-v", "test", "./...")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
@@ -96,6 +113,7 @@ func Test() error {
 // TestAndCoverage runs tests and generate the code coverage.
 func TestAndCoverage() error {
 	fmt.Println("Running tests and generating code coverage")
+	os.Setenv("GIN_MODE", "test")
 	cmd := exec.Command("go", "test", "-v", "-cover", "-coverprofile=workday.coverprofile", "./...")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -105,6 +123,6 @@ func TestAndCoverage() error {
 		os.Exit(1)
 	}
 
-	cmd = exec.Command("go", "tool", "cover", "-html=workday.coverprofile", "-o", "coverage.html")
+	cmd = exec.Command("go", "tool", "cover", "-html=workday.coverprofile", "-o", "docs/static/coverage.html")
 	return cmd.Run()
 }

@@ -17,5 +17,6 @@ jobs:
       with:
         args: |
           go get github.com/magefile/mage && \
+          go get github.com/onsi/ginkgo/ginkgo && \
           mage build && \
-          mage test
+          mage testverbose
