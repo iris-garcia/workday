@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/iris-garcia/workday/api/config.go (100.0%)</option>
+				
+				<option value="file1">github.com/iris-garcia/workday/api/database.go (88.2%)</option>
+				
+				<option value="file2">github.com/iris-garcia/workday/api/employee.go (100.0%)</option>
+				
+				<option value="file3">github.com/iris-garcia/workday/api/router.go (100.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package api
+
+import (
+        "os"
+
+        "github.com/BurntSushi/toml"
+)
+
+var ENV_VARS = []string{"WORKDAY_DB_HOST", "WORKDAY_DB_NAME", "WORKDAY_DB_USER", "WORKDAY_DB_PASSWORD"}
+
+// Represents database parameters
+type DBConfig struct {
+        Host     string
+        Database string
+        User     string
+        Password string
+}
+
+func envVars(vars []string) bool <span class="cov8" title="1">{
+        for _, v := range vars </span><span class="cov8" title="1">{
+                if _, ok := os.LookupEnv(v); !ok </span><span class="cov8" title="1">{
+                        return false
+                }</span>
+        }
+
+        <span class="cov8" title="1">return true</span>
+}
+
+// Read and parse DB configuration; environment variables have precedence over config file.
+func LoadDBConfig(filepath string) (DBConfig, error) <span class="cov8" title="1">{
+        var c DBConfig
+
+        if envVars(ENV_VARS) </span><span class="cov8" title="1">{
+                host, _ := os.LookupEnv("WORKDAY_DB_HOST")
+                name, _ := os.LookupEnv("WORKDAY_DB_NAME")
+                user, _ := os.LookupEnv("WORKDAY_DB_USER")
+                password, _ := os.LookupEnv("WORKDAY_DB_PASSWORD")
+
+                c = DBConfig{host, name, user, password}
+        }</span> else<span class="cov8" title="1"> {
+                if _, err := toml.DecodeFile(filepath, &amp;c); err != nil </span><span class="cov8" title="1">{
+                        return DBConfig{}, err
+                }</span>
+        }
+
+        <span class="cov8" title="1">return c, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package api
+
+import (
+        "database/sql"
+        "fmt"
+
+        _ "github.com/go-sql-driver/mysql"
+)
+
+// ConnectDB returns a sql.DB connection using a given DBConfig.
+func ConnectDB(config DBConfig) (*sql.DB, error) <span class="cov8" title="1">{
+        ds := fmt.Sprintf("%v:%v@tcp(%v)/%v", config.User, config.Password, config.Host, config.Database)
+        db, err := sql.Open("mysql", ds)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return db, nil</span>
+}
+
+func insertNewEmployee(db *sql.DB, employee *Employee) (uint, uint, error) <span class="cov8" title="1">{
+        result, err := db.Exec(
+                "INSERT INTO employee(firstname, lastname, role, password) values(?, ?, ?, ?)",
+                employee.Firstname, employee.Lastname, employee.Role, employee.Password,
+        )
+        if err != nil </span><span class="cov8" title="1">{
+                return 0, 0, err
+        }</span>
+
+        <span class="cov8" title="1">lastID, err := result.LastInsertId()
+        if err != nil </span><span class="cov8" title="1">{
+                return 0, 0, err
+        }</span>
+
+        <span class="cov8" title="1">rowsAffected, err := result.RowsAffected()
+        if err != nil </span><span class="cov0" title="0">{
+                return 0, 0, err
+        }</span>
+
+        <span class="cov8" title="1">return uint(lastID), uint(rowsAffected), nil</span>
+}
+
+func findAllEmployees(db *sql.DB) ([]Employee, error) <span class="cov8" title="1">{
+        employees := make([]Employee, 0)
+        rows, err := db.Query("SELECT * FROM employee")
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer rows.Close()
+
+        for rows.Next() </span><span class="cov8" title="1">{
+                var employee Employee
+                err := rows.Scan(&amp;employee.ID, &amp;employee.Firstname, &amp;employee.Lastname, &amp;employee.Role, &amp;employee.Password)
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+
+                <span class="cov8" title="1">employees = append(employees, employee)</span>
+        }
+        <span class="cov8" title="1">if err := rows.Err(); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return employees, nil</span>
+}
+
+func findEmployee(db *sql.DB, id uint) (Employee, error) <span class="cov8" title="1">{
+        var employee Employee
+        row := db.QueryRow("SELECT * FROM employee WHERE id=?", id)
+
+        err := row.Scan(&amp;employee.ID, &amp;employee.Firstname, &amp;employee.Lastname, &amp;employee.Role, &amp;employee.Password)
+        if err != nil </span><span class="cov8" title="1">{
+                if err.Error() == "sql: no rows in result set" </span><span class="cov8" title="1">{
+                        return Employee{}, nil
+                }</span>
+                <span class="cov8" title="1">return Employee{}, err</span>
+        }
+
+        <span class="cov8" title="1">return employee, nil</span>
+}
+
+func removeEmployee(db *sql.DB, id uint) (uint, error) <span class="cov8" title="1">{
+        result, err := db.Exec("DELETE FROM employee WHERE id=?", id)
+        if err != nil </span><span class="cov8" title="1">{
+                return 0, err
+        }</span>
+
+        <span class="cov8" title="1">rowsAffected, err := result.RowsAffected()
+        if err != nil </span><span class="cov0" title="0">{
+                return 0, err
+        }</span>
+
+        <span class="cov8" title="1">return uint(rowsAffected), nil</span>
+}
+
+func updateEmployee(db *sql.DB, emp *Employee) (uint, error) <span class="cov8" title="1">{
+        result, err := db.Exec("UPDATE employee SET firstname=?, lastname=?, role=?, password=? WHERE id=?",
+                emp.Firstname, emp.Lastname, emp.Role, emp.Password, emp.ID)
+        if err != nil </span><span class="cov8" title="1">{
+                return 0, err
+        }</span>
+
+        <span class="cov8" title="1">rowsAffected, err := result.RowsAffected()
+        if err != nil </span><span class="cov0" title="0">{
+                return 0, err
+        }</span>
+
+        <span class="cov8" title="1">return uint(rowsAffected), nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package api
+
+import (
+        "database/sql"
+)
+
+// Represents an employee
+type Employee struct {
+        ID        uint   `json:"id"`
+        Firstname string `binding:"required" json:"firstname"`
+        Lastname  string `binding:"required" json:"lastname"`
+        Role      uint   `binding:"required" json:role`
+        Password  string `binding:"required" json:password`
+}
+
+// CreateEmployee saves a new employee in DB.
+func CreateEmployee(db *sql.DB, emp *Employee) (uint, uint, error) <span class="cov8" title="1">{
+        return insertNewEmployee(db, emp)
+}</span>
+
+// GetAllEmployees retrieves all employees from DB.
+func GetAllEmployees(db *sql.DB) ([]Employee, error) <span class="cov8" title="1">{
+        return findAllEmployees(db)
+}</span>
+
+// GetEmployee retrieves an employee from DB.
+func GetEmployee(db *sql.DB, id uint) (Employee, error) <span class="cov8" title="1">{
+        return findEmployee(db, id)
+}</span>
+
+// DeleteEmployee removes an employee from DB.
+func DeleteEmployee(db *sql.DB, id uint) (uint, error) <span class="cov8" title="1">{
+        return removeEmployee(db, id)
+}</span>
+
+// EditEmployee updates an employee from DB.
+func EditEmployee(db *sql.DB, emp *Employee) (uint, error) <span class="cov8" title="1">{
+        return updateEmployee(db, emp)
+}</span>
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package api
+
+import (
+        "database/sql"
+        "fmt"
+        "strconv"
+
+        "net/http"
+
+        "github.com/gin-gonic/gin"
+)
+
+// Creates and returns a Gin Router
+func GinRouter(db *sql.DB) *gin.Engine <span class="cov8" title="1">{
+        router := gin.Default()
+
+        router.GET("/status", func(c *gin.Context) </span><span class="cov8" title="1">{
+                c.JSON(http.StatusOK, gin.H{"status": "OK"})
+        }</span>)
+
+        <span class="cov8" title="1">router.GET("/employees", func(c *gin.Context) </span><span class="cov8" title="1">{
+                emps, err := GetAllEmployees(db)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+                <span class="cov8" title="1">c.JSON(http.StatusOK, emps)</span>
+        })
+
+        <span class="cov8" title="1">router.GET("/employees/:id", func(c *gin.Context) </span><span class="cov8" title="1">{
+                id := c.Param("id")
+                idInt, err := strconv.Atoi(id)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">emp, err := GetEmployee(db, uint(idInt))
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">if (Employee{}) == emp </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusNotFound, gin.H{})
+                        return
+                }</span>
+                <span class="cov8" title="1">c.JSON(http.StatusOK, emp)</span>
+        })
+
+        <span class="cov8" title="1">router.DELETE("/employees/:id", func(c *gin.Context) </span><span class="cov8" title="1">{
+                id := c.Param("id")
+                idInt, err := strconv.Atoi(id)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">_, err = DeleteEmployee(db, uint(idInt))
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">c.JSON(http.StatusOK, gin.H{"message": "OK"})</span>
+        })
+
+        // To update the whole resource a!
+        <span class="cov8" title="1">router.PUT("/employees/:id", func(c *gin.Context) </span><span class="cov8" title="1">{
+                var form Employee
+                id := c.Param("id")
+                idInt, err := strconv.Atoi(id)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+                <span class="cov8" title="1">err = c.ShouldBindJSON(&amp;form)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusNoContent, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">_, err = GetEmployee(db, uint(idInt))
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">form.ID = uint(idInt)
+                rows, err := EditEmployee(db, &amp;form)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+                        return
+                }</span>
+                <span class="cov8" title="1">if rows &gt; 1 </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusOK, gin.H{"error": fmt.Sprintf("%d rows updated", rows)})
+                        return
+                }</span>
+                <span class="cov8" title="1">c.JSON(http.StatusOK, gin.H{"status": "OK"})</span>
+        })
+
+        <span class="cov8" title="1">router.POST("/employees", func(c *gin.Context) </span><span class="cov8" title="1">{
+                var form Employee
+                err := c.ShouldBind(&amp;form)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusNoContent, gin.H{"message": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">id, _, err := CreateEmployee(db, &amp;form)
+                if err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+                        return
+                }</span>
+
+                <span class="cov8" title="1">c.JSON(http.StatusCreated, gin.H{"id": id})</span>
+        })
+
+        <span class="cov8" title="1">return router</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
