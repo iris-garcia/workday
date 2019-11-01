@@ -8,41 +8,41 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Mon, 14 Oct 2019 22:28:34 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 19:47:27 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/dev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>API Test Class</title>
-      <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Thu, 31 Oct 2019 09:41:22 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
-      <description>Description Currently the API allows the following actions:
-   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
-    </item>
-    
-    <item>
-      <title>Requirements</title>
-      <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Thu, 31 Oct 2019 09:09:33 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
-      <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
-wget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage Once go is installed, we can install mage as follows:
-go get github.com/magefile/mage MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:</description>
-    </item>
-    
-    <item>
       <title>Toolchain</title>
       <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Mon, 28 Oct 2019 14:47:53 +0100</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
       <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
 Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
 It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
+    <item>
+      <title>Requirements</title>
+      <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
+      <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
+wget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage  Setup: Once go is installed, we can install mage as follows
+go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:</description>
+    </item>
+    
+    <item>
+      <title>API Test Class</title>
+      <link>https://iris-garcia.github.io/workday/dev/api/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
+      <description>Description Currently the API allows the following actions:
+   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
     </item>
     
   </channel>

@@ -12,20 +12,20 @@
     <title>GitHub Actions :: Webhooks Handler</title>
 
     
-    <link href="../../css/nucleus.css?1572511795" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1572511795" rel="stylesheet">
-    <link href="../../css/hybrid.css?1572511795" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1572511795" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1572511795" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1572511795" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1572511795" rel="stylesheet">
-    <link href="../../css/theme.css?1572511795" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1572511795" rel="stylesheet">
+    <link href="../../css/nucleus.css?1572634134" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1572634134" rel="stylesheet">
+    <link href="../../css/hybrid.css?1572634134" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1572634134" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1572634134" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1572634134" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1572634134" rel="stylesheet">
+    <link href="../../css/theme.css?1572634134" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1572634134" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1572511795" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1572634134" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1572511795"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1572634134"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1572511795"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1572511795"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1572634134"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1572634134"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1572511795"></script>
+<script type="text/javascript" src="../../js/search.js?1572634134"></script>
 
     
   </div>
@@ -179,9 +179,9 @@
  
   
     
-      <li data-nav-id="/dev/api/" title="API Test Class" class="dd-item ">
-        <a href="../../dev/api/">
-        API Test Class
+      <li data-nav-id="/dev/tools/" title="Toolchain" class="dd-item ">
+        <a href="../../dev/tools/">
+        Toolchain
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -217,9 +217,9 @@
  
   
     
-      <li data-nav-id="/dev/tools/" title="Toolchain" class="dd-item ">
-        <a href="../../dev/tools/">
-        Toolchain
+      <li data-nav-id="/dev/api/" title="API Test Class" class="dd-item ">
+        <a href="../../dev/api/">
+        API Test Class
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -473,7 +473,7 @@
 <li><a href="#description">Description</a></li>
 <li><a href="#configuration">Configuration</a>
 <ul>
-<li><a href="#test-and-coverage">Test and coverage</a></li>
+<li><a href="#test-with-verbosity-enabled">Test with verbosity enabled</a></li>
 <li><a href="#hugo-documentation-site">Hugo documentation site</a></li>
 </ul></li>
 </ul></li>
@@ -488,6 +488,12 @@
             
         <div id="head-tags">
         
+<div class="tags">
+
+  <a class="tag-link" href="../../tags/ci">ci</a>
+
+</div>
+
         </div>
         
         <div id="body-inner">
@@ -513,10 +519,13 @@ built and maintained by the community.</p>
 
 <p>Currently there are two workflows configured:</p>
 
-<h3 id="test-and-coverage">Test and coverage</h3>
+<h3 id="test-with-verbosity-enabled">Test with verbosity enabled</h3>
 
-<p>This workflow takes care of the Unit tests and shows the total
-coverage of the project.</p>
+<p>To make it a bit different that the pipeline configured in Travis CI,
+this one will run the tests with verbosity enabled, this way it
+outputs every spec and API call done for each test case.</p>
+
+<p>An example of one run can be seen <a href="https://github.com/iris-garcia/workday/runs/285177520">here</a>.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">on:<span style="color:#666"> </span>push<span style="color:#666">
 </span><span style="color:#666">
 </span><span style="color:#666"></span>name:<span style="color:#666"> </span>Unit<span style="color:#666"> </span>tests<span style="color:#666">
@@ -534,7 +543,27 @@ coverage of the project.</p>
 </span><span style="color:#666">      </span>env:<span style="color:#666">
 </span><span style="color:#666">        </span>GO111MODULE:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;on&#34;</span><span style="color:#666">
 </span><span style="color:#666">      </span>with:<span style="color:#666">
-</span><span style="color:#666">        </span>args:<span style="color:#666"> </span>go<span style="color:#666"> </span>build<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>go<span style="color:#666"> </span>test<span style="color:#666"> </span>-cover<span style="color:#666"> </span>-v</code></pre></div>
+</span><span style="color:#666">        </span>args:<span style="color:#666"> </span><span style="color:#ed9d13">|
+</span><span style="color:#ed9d13">          go get github.com/magefile/mage &amp;&amp; \</span><span style="color:#666">
+</span><span style="color:#666">          </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/onsi/ginkgo/ginkgo<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
+</span><span style="color:#666">          </span>mage<span style="color:#666"> </span>build<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
+</span><span style="color:#666">          </span>mage<span style="color:#666"> </span>testverbose</code></pre></div>
+<p>There is just one job configured in this <strong>Action</strong> with the name
+<code>checks</code> and as stated in the line 8 of the configuration it uses
+<strong>Ubuntu</strong> in it latest available version.</p>
+
+<p>There are two steps in this <em>job</em>:</p>
+
+<p>The first one Checks out the project repository in its <code>master</code> branch.</p>
+
+<p>The second one uses an action to automatically setup a Go workspace
+and run arbitrary commands, the documentation can be seen <a href="https://github.com/cedrickring/golang-action">here</a>.
+If no args are specified and a <code>Makefile</code> is detected, this action will
+run <code>make</code>. Otherwise <code>go test</code> and <code>go build</code> will be run.</p>
+
+<p>In this case it is overwritten in order to install <code>mage</code> and <code>ginkgo</code>
+CLIs to allow the build and run of the tests.</p>
+
 <h3 id="hugo-documentation-site">Hugo documentation site</h3>
 
 <p>This workflow is not really a typical continuous integration one, but
@@ -865,19 +894,19 @@ automatically update the documentation site.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1572511795"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1572511795"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1572511795"></script>
-    <script src="../../js/jquery.sticky.js?1572511795"></script>
-    <script src="../../js/featherlight.min.js?1572511795"></script>
-    <script src="../../js/highlight.pack.js?1572511795"></script>
+    <script src="../../js/clipboard.min.js?1572634134"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1572634134"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1572634134"></script>
+    <script src="../../js/jquery.sticky.js?1572634134"></script>
+    <script src="../../js/featherlight.min.js?1572634134"></script>
+    <script src="../../js/highlight.pack.js?1572634134"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1572511795"></script>
-    <script src="../../js/learn.js?1572511795"></script>
-    <script src="../../js/hugo-learn.js?1572511795"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1572634134"></script>
+    <script src="../../js/learn.js?1572634134"></script>
+    <script src="../../js/hugo-learn.js?1572634134"></script>
 
-    <link href="../../mermaid/mermaid.css?1572511795" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1572511795"></script>
+    <link href="../../mermaid/mermaid.css?1572634134" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1572634134"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

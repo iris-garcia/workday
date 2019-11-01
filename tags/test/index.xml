@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on Webhooks Handler</title>
+    <link>https://iris-garcia.github.io/workday/tags/test/</link>
+    <description>Recent content in test on Webhooks Handler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Fri, 01 Nov 2019 19:47:27 +0100</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>API Test Class</title>
+      <link>https://iris-garcia.github.io/workday/dev/api/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
+      <description>Description Currently the API allows the following actions:
+   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
+    </item>
+    
+  </channel>
+</rss>

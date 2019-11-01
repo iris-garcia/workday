@@ -4,80 +4,96 @@
   
   <url>
     <loc>https://iris-garcia.github.io/workday/howto/gh-pages/</loc>
-    <lastmod>2019-10-16T20:44:37+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/description/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/description/what/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/description/why/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/dev/api/</loc>
-    <lastmod>2019-10-31T09:47:51+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/dev/requirements/</loc>
-    <lastmod>2019-10-31T09:46:51+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/dev/tools/</loc>
-    <lastmod>2019-10-31T09:46:51+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://iris-garcia.github.io/workday/dev/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/ci/travis/</loc>
-    <lastmod>2019-10-31T09:46:51+01:00</lastmod>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://iris-garcia.github.io/workday/ci/</loc>
-    <lastmod>2019-10-27T19:35:39+01:00</lastmod>
+    <loc>https://iris-garcia.github.io/workday/dev/tools/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/description/what/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/description/why/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/description/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/ci/github/</loc>
-    <lastmod>2019-10-16T20:44:37+02:00</lastmod>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/dev/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/dev/requirements/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/dev/api/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/ci/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/deployment/</loc>
-    <lastmod>2019-10-16T14:50:03+02:00</lastmod>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/howto/</loc>
-    <lastmod>2019-10-16T20:44:37+02:00</lastmod>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://iris-garcia.github.io/workday/categories/</loc>
+    <loc>https://iris-garcia.github.io/workday/tags/ci/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://iris-garcia.github.io/workday/tags/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/tags/bdd/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/tags/test/</loc>
+    <lastmod>2019-11-01T19:48:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iris-garcia.github.io/workday/categories/</loc>
   </url>
   
 </urlset>

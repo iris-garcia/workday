@@ -8,15 +8,38 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Sun, 13 Oct 2019 16:15:02 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 19:47:26 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Travis CI</title>
+      <link>https://iris-garcia.github.io/workday/ci/travis/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
+      <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
+It provides a free plan for open source projects which is very convinient for our use case.
+The whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.
+Configuration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.</description>
+    </item>
+    
+    <item>
+      <title>Toolchain</title>
+      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
+      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
+Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
+It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
+    <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Mon, 14 Oct 2019 22:06:16 +0200</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
@@ -27,7 +50,7 @@ It allows the creation of different types of users (roles), initially there are 
     <item>
       <title>Why?</title>
       <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Mon, 14 Oct 2019 22:06:12 +0200</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/why/</guid>
       <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
@@ -35,59 +58,36 @@ This process can be as simple as signing in a paper the checks in and checks out
     </item>
     
     <item>
-      <title>API Test Class</title>
-      <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Thu, 31 Oct 2019 09:41:22 +0100</pubDate>
+      <title>GitHub Actions</title>
+      <link>https://iris-garcia.github.io/workday/ci/github/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
-      <description>Description Currently the API allows the following actions:
-   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
+      <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
+      <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
+Configuration Currently there are two workflows configured:
+Test with verbosity enabled To make it a bit different that the pipeline configured in Travis CI, this one will run the tests with verbosity enabled, this way it outputs every spec and API call done for each test case.
+An example of one run can be seen here.</description>
     </item>
     
     <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Thu, 31 Oct 2019 09:09:33 +0100</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
       <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
-wget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage Once go is installed, we can install mage as follows:
-go get github.com/magefile/mage MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:</description>
+wget https://dl.google.com/go/go1.13.3.src.tar.gz tar -C /usr/local -xzf go1.13.3.src.tar.gz export PATH=$PATH:/usr/local/go/bin  Mage  Setup: Once go is installed, we can install mage as follows
+go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the linux distrubutions provide a package to install MariaDB, but if docker is installed the following command will spawn a MariaDB container:</description>
     </item>
     
     <item>
-      <title>Toolchain</title>
-      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Mon, 28 Oct 2019 14:47:53 +0100</pubDate>
+      <title>API Test Class</title>
+      <link>https://iris-garcia.github.io/workday/dev/api/</link>
+      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
-      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
-Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
-It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
-    </item>
-    
-    <item>
-      <title>Travis CI</title>
-      <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Thu, 31 Oct 2019 09:08:46 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
-      <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
-It provides a free plan for open source projects which is very convinient for our use case.
-The whole configuration is set up in a single file .travis.yml which must be placed in the root directory of the project.
-Configuration To avoid replicating exactly the same workflows in GitHub Actions and Travis, there are some little changes like testing two different Go versions: v1.</description>
-    </item>
-    
-    <item>
-      <title>GitHub Actions</title>
-      <link>https://iris-garcia.github.io/workday/ci/github/</link>
-      <pubDate>Wed, 16 Oct 2019 20:41:58 +0200</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
-      <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
-Configuration Currently there are two workflows configured:
-Test and coverage This workflow takes care of the Unit tests and shows the total coverage of the project.
-on:pushname:Unittestsjobs:checks:name:runruns-on:ubuntu-lateststeps:-uses:actions/checkout@master-name:runuses:cedrickring/golang-action@1.4.1env:GO111MODULE:&amp;#34;on&amp;#34;with:args:gobuild&amp;amp;&amp;amp;gotest-cover-v Hugo documentation site This workflow is not really a typical continuous integration one, but I think it makes sense to mention it here as it is taking care of automatically update the documentation site.</description>
+      <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
+      <description>Description Currently the API allows the following actions:
+   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
     </item>
     
   </channel>
