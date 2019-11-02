@@ -27,10 +27,11 @@ to.
 ** Documentation
 The extended documentation is hosted under
 [[https://iris-garcia.github.io/workday/]].
-- [[http://localhost:1313/workday/dev/tools/][Toolchain]]
-- [[http://localhost:1313/workday/ci/][Continuous Integration]]
-- [[http://localhost:1313/workday/deployment/][Deployment]]
-- [[http://localhost:1313/workday/dev/api/][API tests]]
+- [[https://iris-garcia.github.io/workday/dev/tools/][Toolchain]]
+- [[https://iris-garcia.github.io/workday/ci/][Continuous Integration]]
+- [[https://iris-garcia.github.io/workday/deployment/][Deployment]]
+- [[https://iris-garcia.github.io/workday/dev/api/][API tests]]
+- [[https://iris-garcia.github.io/workday/coverage.html#file3][Code coverage]]
 
 ** Build Tool
 #+begin_src bash
@@ -48,10 +49,6 @@ buildtool: magefile.go
 4. Run ~mage build~ to install the dependencies and build the binary.
 5. (optional) Run ~mage startdev~ to bootstrap a mariadb docker
    container.
-6. Import the ~initial.sql~ SQL.
-   #+begin_src bash
-   mysql -u workday -pworkday workday < /sql/initial.sql
-   #+end_src
 
 ** Add your contribution
 1. Create a new branch:
