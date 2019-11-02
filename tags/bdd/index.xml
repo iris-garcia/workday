@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>bdd on Webhooks Handler</title>
+    <title>bdd on Workday</title>
     <link>https://iris-garcia.github.io/workday/tags/bdd/</link>
-    <description>Recent content in bdd on Webhooks Handler</description>
+    <description>Recent content in bdd on Workday</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
