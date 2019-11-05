@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Tue, 05 Nov 2019 17:06:27 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 19:47:28 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/tags/ci/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>Travis CI</title>
       <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
       <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
@@ -28,7 +28,7 @@ Configuration To avoid replicating exactly the same workflows in GitHub Actions 
     <item>
       <title>GitHub Actions</title>
       <link>https://iris-garcia.github.io/workday/ci/github/</link>
-      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
+      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
       <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
