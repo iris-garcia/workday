@@ -214,7 +214,6 @@ As an admin employee, I want to be able to:
 | PUT    | /employees/{id} |
 | DELETE | /employees/{id} |
 
-
 - *GET /status*: Returns a 200 and ~{"status": "OK"}~ in the body.
 - *GET /employees*: Returns a 200 and the list of employees stored in the database.
 - *POST /employees*: Adds a new employee into the database if the body
