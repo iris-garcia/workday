@@ -1,7 +1,7 @@
 +++
 title = "API Test Class"
 author = ["Iris Garcia"]
-lastmod = 2019-11-05T17:18:48+01:00
+lastmod = 2019-11-05T17:26:05+01:00
 tags = ["bdd", "test"]
 draft = false
 weight = 3
@@ -56,5 +56,5 @@ The code which covers the current class can be found [here](https://github.com/i
 
 ## Demo {#demo}
 
-{{< asciinema key="employees\_test" rows="50" preload="1"
+{{< asciinema key="employees-test" rows="50" preload="1"
 idle-time-limit="1" >}}

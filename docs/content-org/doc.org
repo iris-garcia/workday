@@ -236,7 +236,7 @@ for a later iteration.
 The code which covers the current class can be found [[https://github.com/iris-garcia/workday/blob/master/api/router_test.go][here]].
 
 **** Demo
-{{< asciinema key="employees_test" rows="50" preload="1"
+{{< asciinema key="employees-test" rows="50" preload="1"
 idle-time-limit="1" >}}
 
 ** Continuous Integration
