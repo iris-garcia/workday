@@ -227,6 +227,7 @@ As an admin employee, I want to be able to:
   employee with *{id}* is found, if it is not found a 404 and if any
   other error happens a 500 with the error message.
 
+
 BDD has been used to test every possible use case to reach a 100%
 [[/coverage.html][code coverage]] it is worth to mention that the database has been mocked so
 the current tests are *Unit tests*, leaving the *Integration tests*
