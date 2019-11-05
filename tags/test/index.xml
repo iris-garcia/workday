@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 01 Nov 2019 19:47:27 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 05 Nov 2019 17:18:48 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/tags/test/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,11 +16,11 @@
     <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:18:48 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
-      <description>Description Currently the API allows the following actions:
-   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
+      <description>User story As an admin employee, I want to be able to:
+ Add new employees to the system. Edit already existing employees&amp;rsquo; details. List all the employees existing in the system. Retrieve the details of any employee given its ID. Delete an employee from the system given its ID.  Endpoints    Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   PUT /employees/{id}   DELETE /employees/{id}     GET /status: Returns a 200 and {&amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;} in the body.</description>
     </item>
     
   </channel>

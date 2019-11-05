@@ -8,15 +8,26 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 01 Nov 2019 19:47:26 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 05 Nov 2019 17:06:26 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Toolchain</title>
+      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
+      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
+      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
+Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
+It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
+    <item>
       <title>Travis CI</title>
       <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
       <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
@@ -26,20 +37,9 @@ Configuration To avoid replicating exactly the same workflows in GitHub Actions 
     </item>
     
     <item>
-      <title>Toolchain</title>
-      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
-      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
-Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
-It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
-    </item>
-    
-    <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:06:26 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
@@ -50,7 +50,7 @@ It allows the creation of different types of users (roles), initially there are 
     <item>
       <title>Why?</title>
       <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:06:26 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/why/</guid>
       <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
@@ -60,7 +60,7 @@ This process can be as simple as signing in a paper the checks in and checks out
     <item>
       <title>GitHub Actions</title>
       <link>https://iris-garcia.github.io/workday/ci/github/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:28 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
       <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
@@ -72,7 +72,7 @@ An example of one run can be seen here.</description>
     <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:06:26 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
       <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
@@ -83,11 +83,11 @@ go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the 
     <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Fri, 01 Nov 2019 19:47:27 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:18:48 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
-      <description>Description Currently the API allows the following actions:
-   Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   DELETE /employees/{id}   PUT /employees/{id}    BDD has been used to test every possible use case to reach a 100% code coverage it is worth to mention that the database has been mocked so the current tests are Unit tests, leaving the Integration tests for a later iteration.</description>
+      <description>User story As an admin employee, I want to be able to:
+ Add new employees to the system. Edit already existing employees&amp;rsquo; details. List all the employees existing in the system. Retrieve the details of any employee given its ID. Delete an employee from the system given its ID.  Endpoints    Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   PUT /employees/{id}   DELETE /employees/{id}     GET /status: Returns a 200 and {&amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;} in the body.</description>
     </item>
     
   </channel>

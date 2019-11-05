@@ -12,20 +12,20 @@
     <title>API Test Class :: Workday</title>
 
     
-    <link href="../../css/nucleus.css?1572731697" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1572731697" rel="stylesheet">
-    <link href="../../css/hybrid.css?1572731697" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1572731697" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1572731697" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1572731697" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1572731697" rel="stylesheet">
-    <link href="../../css/theme.css?1572731697" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1572731697" rel="stylesheet">
+    <link href="../../css/nucleus.css?1572970908" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1572970908" rel="stylesheet">
+    <link href="../../css/hybrid.css?1572970908" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1572970908" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1572970908" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1572970908" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1572970908" rel="stylesheet">
+    <link href="../../css/theme.css?1572970908" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1572970908" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1572731697" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1572970908" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1572731697"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1572970908"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1572731697"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1572731697"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1572970908"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1572970908"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1572731697"></script>
+<script type="text/javascript" src="../../js/search.js?1572970908"></script>
 
     
   </div>
@@ -470,8 +470,9 @@
 <ul>
 <li>
 <ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#test-code">Test code</a></li>
+<li><a href="#user-story">User story</a></li>
+<li><a href="#endpoints">Endpoints</a></li>
+<li><a href="#source-code">Source code</a></li>
 <li><a href="#demo">Demo</a></li>
 </ul></li>
 </ul>
@@ -509,9 +510,19 @@
 
 
 
-<h2 id="description">Description</h2>
+<h2 id="user-story">User story</h2>
 
-<p>Currently the API allows the following actions:</p>
+<p>As an admin employee, I want to be able to:</p>
+
+<ol>
+<li>Add new employees to the system.</li>
+<li>Edit already existing employees&rsquo; details.</li>
+<li>List all the employees existing in the system.</li>
+<li>Retrieve the details of any employee given its ID.</li>
+<li>Delete an employee from the system given its ID.</li>
+</ol>
+
+<h2 id="endpoints">Endpoints</h2>
 
 <table>
 <thead>
@@ -543,23 +554,38 @@
 </tr>
 
 <tr>
-<td>DELETE</td>
+<td>PUT</td>
 <td>/employees/{id}</td>
 </tr>
 
 <tr>
-<td>PUT</td>
+<td>DELETE</td>
 <td>/employees/{id}</td>
 </tr>
 </tbody>
 </table>
+
+<ul>
+<li><strong>GET /status</strong>: Returns a 200 and <code>{&quot;status&quot;: &quot;OK&quot;}</code> in the body.</li>
+<li><strong>GET /employees</strong>: Returns a 200 and the list of employees stored in the database.</li>
+<li><strong>POST /employees</strong>: Adds a new employee into the database if the body
+fulfills the requirements (firstname, lastname, role, password),
+otherwise it returns a 204 reponse.</li>
+<li><strong>GET /employees/{id}</strong>: Returns a 200 and the details of an employee
+if the id is found otherwise a 404.</li>
+<li><strong>DELETE /employees/{id}</strong>: Returns a 200 and an OK message if the
+employee with <strong>{id}</strong> is found otherwise a 500 and the error.</li>
+<li><strong>PUT /employees/{id}</strong>: Returns a 200 and an OK message if the
+employee with <strong>{id}</strong> is found, if it is not found a 404 and if any
+other error happens a 500 with the error message.</li>
+</ul>
 
 <p>BDD has been used to test every possible use case to reach a 100%
 <a href="../../coverage.html">code coverage</a> it is worth to mention that the database has been mocked so
 the current tests are <strong>Unit tests</strong>, leaving the <strong>Integration tests</strong>
 for a later iteration.</p>
 
-<h2 id="test-code">Test code</h2>
+<h2 id="source-code">Source code</h2>
 
 <p>The code which covers the current class can be found <a href="https://github.com/iris-garcia/workday/blob/master/api/router%5Ftest.go">here</a>.</p>
 
@@ -567,7 +593,7 @@ for a later iteration.</p>
 
 <p>
     <asciinema-player
-        src="../../casts/coverage.cast"
+        src="../../casts/employees%5c_test.cast"
         cols="640"
         rows="50"
         
@@ -862,19 +888,19 @@ for a later iteration.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1572731697"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1572731697"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1572731697"></script>
-    <script src="../../js/jquery.sticky.js?1572731697"></script>
-    <script src="../../js/featherlight.min.js?1572731697"></script>
-    <script src="../../js/highlight.pack.js?1572731697"></script>
+    <script src="../../js/clipboard.min.js?1572970908"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1572970908"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1572970908"></script>
+    <script src="../../js/jquery.sticky.js?1572970908"></script>
+    <script src="../../js/featherlight.min.js?1572970908"></script>
+    <script src="../../js/highlight.pack.js?1572970908"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1572731697"></script>
-    <script src="../../js/learn.js?1572731697"></script>
-    <script src="../../js/hugo-learn.js?1572731697"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1572970908"></script>
+    <script src="../../js/learn.js?1572970908"></script>
+    <script src="../../js/hugo-learn.js?1572970908"></script>
 
-    <link href="../../mermaid/mermaid.css?1572731697" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1572731697"></script>
+    <link href="../../mermaid/mermaid.css?1572970908" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1572970908"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
