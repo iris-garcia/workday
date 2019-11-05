@@ -105,13 +105,6 @@
 	"content": ""
 },
 {
-	"uri": "https://iris-garcia.github.io/workday/tags/ci/",
-	"title": "ci",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
 	"uri": "https://iris-garcia.github.io/workday/tags/",
 	"title": "Tags",
 	"tags": [],
@@ -121,6 +114,13 @@
 {
 	"uri": "https://iris-garcia.github.io/workday/tags/test/",
 	"title": "test",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://iris-garcia.github.io/workday/tags/ci/",
+	"title": "ci",
 	"tags": [],
 	"description": "",
 	"content": ""
