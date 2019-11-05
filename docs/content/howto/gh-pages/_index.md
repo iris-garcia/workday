@@ -1,7 +1,7 @@
 +++
 title = "GitHub Pages"
 author = ["Iris Garcia"]
-lastmod = 2019-11-01T19:47:28+01:00
+lastmod = 2019-11-05T17:06:27+01:00
 tags = ["ci", "hugo", "doc"]
 draft = false
 weight = 1

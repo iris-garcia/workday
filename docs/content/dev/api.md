@@ -1,7 +1,7 @@
 +++
 title = "API Test Class"
 author = ["Iris Garcia"]
-lastmod = 2019-11-05T16:55:36+01:00
+lastmod = 2019-11-05T17:06:27+01:00
 tags = ["bdd", "test"]
 draft = false
 weight = 3

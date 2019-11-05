@@ -34,6 +34,9 @@ The extended documentation is hosted under
 - [[https://iris-garcia.github.io/workday/coverage.html#file3][Code coverage]]
 
 ** Build Tool
+[[https://magefile.org/][Mage]] is the build tool used in this project, for further details
+check out the [[https://iris-garcia.github.io/workday/dev/tools/#mage][documentation]].
+
 #+begin_src bash
 buildtool: magefile.go
 #+end_src
