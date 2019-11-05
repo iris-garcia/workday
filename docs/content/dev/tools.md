@@ -1,7 +1,7 @@
 +++
 title = "Toolchain"
 author = ["Iris Garcia"]
-lastmod = 2019-11-01T19:47:27+01:00
+lastmod = 2019-11-05T13:21:18+01:00
 draft = false
 weight = 1
 asciinema = true
@@ -35,12 +35,14 @@ Mage has no dependencies outside the Go standard library; in this
 project it is going to be used to automate every possible process
 like:
 
-1.  `mage test`: run tests and its code coverage.
-2.  `mage build`: build a binary of the project.
-3.  `mage install`: installs the built binary under /usr/local/bin.
-4.  `mage start`: Starts the HTTP Server using pm2 as process manager.
-5.  `mage startdev`: bootstraps a dev environment.
-6.  `mage stop`: Stops the HTTP Server.
+1.  `mage test`: runs the test suite.
+2.  `mage testverbose`: runs the test suite with verbosity.
+3.  `mage testandcoverage`: runs the test suite generating its code coverage.
+4.  `mage build`: builds a binary of the project.
+5.  `mage install`: installs the built binary under /usr/local/bin.
+6.  `mage start`: Starts the HTTP Server using pm2 as process manager.
+7.  `mage startdev`: Starts a dev environment, [WIP].
+8.  `mage stop`: Stops the HTTP Server using pm2 as process manager.
 
 
 ## [MariaDB](https://mariadb.com/) {#mariadb}

@@ -49,6 +49,7 @@ buildtool: magefile.go
 4. Run ~mage build~ to install the dependencies and build the binary.
 5. (optional) Run ~mage startdev~ to bootstrap a mariadb docker
    container.
+6. To run the API HTTP Server issue the command: ~go run api_server~.
 
 ** Add your contribution
 1. Create a new branch:

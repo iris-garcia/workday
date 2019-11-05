@@ -94,7 +94,7 @@ func Test() error {
 	return nil
 }
 
-// Test runs the tests suite.
+// TestVerbose runs the tests suite with verbosity
 func TestVerbose() error {
 	fmt.Println("Running tests")
 	os.Setenv("GIN_MODE", "test")

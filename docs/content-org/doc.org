@@ -155,12 +155,14 @@ targets.
 Mage has no dependencies outside the Go standard library; in this
 project it is going to be used to automate every possible process
 like:
-1. ~mage test~: run tests and its code coverage.
-2. ~mage build~: build a binary of the project.
-3. ~mage install~: installs the built binary under /usr/local/bin.
-4. ~mage start~: Starts the HTTP Server using pm2 as process manager.
-5. ~mage startdev~: bootstraps a dev environment.
-6. ~mage stop~: Stops the HTTP Server.
+1. ~mage test~: runs the test suite.
+2. ~mage testverbose~: runs the test suite with verbosity.
+3. ~mage testandcoverage~: runs the test suite generating its code coverage.
+4. ~mage build~: builds a binary of the project.
+5. ~mage install~: installs the built binary under /usr/local/bin.
+6. ~mage start~: Starts the HTTP Server using pm2 as process manager.
+7. ~mage startdev~: Starts a dev environment, [WIP].
+8. ~mage stop~: Stops the HTTP Server using pm2 as process manager.
 
 **** [[https://mariadb.com/][MariaDB]]
 The relational database engine MariaDB has been choosen to persist the
@@ -178,7 +180,6 @@ matcher library.
 This project will follow the OpenAPI Specification to document its API
 endpoints, probably using swagger to parse the specifications and
 generate a static site.
-
 **** [[https://pm2.keymetrics.io/][PM2]]
 As a process manager the tool *PM2* is currently used, because it
 allows the usage with any language as long as it has a way to
@@ -194,30 +195,51 @@ has been already tested but none of them provide the same features as
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
 :EXPORT_HUGO_WEIGHT: 3
 :END:
-**** Description
-Currently the API allows the following actions:
+**** User story
+As an admin employee, I want to be able to:
 
+1. Add new employees to the system.
+2. Edit already existing employees' details.
+3. List all the employees existing in the system.
+4. Retrieve the details of any employee given its ID.
+5. Delete an employee from the system given its ID.
+
+**** Endpoints
 | Method | Endpoint        |
 |--------+-----------------|
 | GET    | /status         |
 | GET    | /employees      |
 | POST   | /employees      |
 | GET    | /employees/{id} |
-| DELETE | /employees/{id} |
 | PUT    | /employees/{id} |
+| DELETE | /employees/{id} |
+
+
+- *GET /status*: Returns a 200 and ~{"status": "OK"}~ in the body.
+- *GET /employees*: Returns a 200 and the list of employees stored in the database.
+- *POST /employees*: Adds a new employee into the database if the body
+  fulfills the requirements (firstname, lastname, role, password),
+  otherwise it returns a 204 reponse.
+- *GET /employees/{id}*: Returns a 200 and the details of an employee
+  if the id is found otherwise a 404.
+- *DELETE /employees/{id}*: Returns a 200 and an OK message if the
+  employee with *{id}* is found otherwise a 500 and the error.
+- *PUT /employees/{id}*: Returns a 200 and an OK message if the
+  employee with *{id}* is found, if it is not found a 404 and if any
+  other error happens a 500 with the error message.
 
 BDD has been used to test every possible use case to reach a 100%
 [[/coverage.html][code coverage]] it is worth to mention that the database has been mocked so
 the current tests are *Unit tests*, leaving the *Integration tests*
 for a later iteration.
 
-
-**** Test code
+**** Source code
 The code which covers the current class can be found [[https://github.com/iris-garcia/workday/blob/master/api/router_test.go][here]].
 
 **** Demo
-{{< asciinema key="coverage" rows="50" preload="1"
+{{< asciinema key="employees_test" rows="50" preload="1"
 idle-time-limit="1" >}}
+
 ** Continuous Integration
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ci
