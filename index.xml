@@ -83,7 +83,7 @@ go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the 
     <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Tue, 05 Nov 2019 17:18:48 +0100</pubDate>
+      <pubDate>Tue, 05 Nov 2019 17:31:45 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
       <description>User story As an admin employee, I want to be able to:
