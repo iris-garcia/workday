@@ -7,6 +7,6 @@ COPY . /go/src/github.com/iris-garcia/workday
 RUN go get github.com/magefile/mage
 RUN mage build
 
-USER nobody
+EXPOSE 8080
 
 CMD ["./api_server"]
