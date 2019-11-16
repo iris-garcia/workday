@@ -1,8 +1,4 @@
 language: go
-go:
-  - 1.13.x
-  - master
-
 dist: bionic
 sudo: required
 # addons:
@@ -11,30 +7,30 @@ sudo: required
 # services:
 # - mariadb
 
-before_install:
-- sudo apt-get -y install npm
-- npm install pm2@latest -g
-
-install:
-- go get github.com/magefile/mage
-- mage build
-
 # before_script:
 # - mysql -u root -e 'CREATE DATABASE workday;'
 # - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
 # - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
 
-script:
-- mage start
-- mage test
-- mage stop
-
 jobs:
   include:
+    - stage: test
+      go: 1.13.x
+      before_install:
+        - sudo apt-get -y install npm
+        - npm install pm2@latest -g
+      install:
+        - go get github.com/magefile/mage
+        - mage build
+      script:
+        - mage start
+        - mage test
+        - mage stop
+
     - stage: deploy
-      before_install: skip
-      install: skip
-      before_script: skip
+      # before_install: skip
+      # install: skip
+      # before_script: skip
       provider: openshift
       server: https://api.us-east-2.starter.openshift-online.com:6443
       project: workday
