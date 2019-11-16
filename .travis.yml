@@ -26,7 +26,7 @@ deploy:
   provider: openshift
   server: https://api.us-east-2.starter.openshift-online.com:6443
   project: workday
-  app: workday
+  app: api
   edge: true # opt in to dpl v2
   on:
     branch: master
