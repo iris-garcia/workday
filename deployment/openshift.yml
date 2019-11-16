@@ -1,0 +1,116 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: api
+  annotations:
+    description: "Workday Api app"
+    tags: "workday,api,golang"
+    iconClass: "icon-go-gopher"
+  labels:
+    template: "api"
+    app: "api"
+objects:
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: api
+    annotations:
+      description: "Exposes and load balances the application pods"
+  spec:
+    ports:
+    - name: web
+      port: 8080
+      targetPort: 8080
+    selector:
+      name: api
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: api
+  spec:
+    to:
+      kind: Service
+      name: api
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    name: api
+    annotations:
+      description: "Keeps track of changes in the application image"
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    name: api
+    annotations:
+      description: "Defines how to build the application"
+  spec:
+    source:
+      type: Git
+      git:
+        uri: "${SOURCE_REPOSITORY_URL}"
+        ref: "${SOURCE_REPOSITORY_REF}"
+      contextDir: "${CONTEXT_DIR}"
+    strategy:
+      type: Docker
+      dockerStrategy: {}
+    output:
+      to:
+        kind: ImageStreamTag
+        name: api:latest
+    postCommit:
+      script: "GIN_MODE=release go test -v ./..."
+    resources:
+      limits:
+        cpu: 100m
+        memory: 1Gi
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: api
+    annotations:
+      description: "Defines how to deploy the application server"
+  spec:
+    strategy:
+      type: Recreate
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - api
+        from:
+          kind: ImageStreamTag
+          name: "api:latest"
+    - type: ConfigChange
+    replicas: 1
+    selector:
+      name: api
+    template:
+      metadata:
+        name: api
+        labels:
+          name: api
+      spec:
+        containers:
+        - name: api
+          image: api
+          ports:
+          - containerPort: 8080
+          env:
+          - name: GIN_MODE
+            value: "release"
+          - name: WORKDAY_DB_NAME
+            value: "workday"
+          - name: WORKDAY_DB_USER
+            value: "workday"
+          - name: WORKDAY_DB_PASSWORD
+            value: "workday"
+
+parameters:
+- name: SOURCE_REPOSITORY_URL
+  description: "The URL of the repository with your application source code"
+  value: "https://github.com/iris-garcia/workday.git"
+- name: SOURCE_REPOSITORY_REF
+  description: "Set this to a branch name, tag or other ref of your repository if you are not using the default branch"
+- name: CONTEXT_DIR
+  description: "Set this to the relative path to your project if it is not in the root of your repository"

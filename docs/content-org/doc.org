@@ -377,11 +377,125 @@ To get this one working there are some requisites explained in a howto
 <h1>Deployment</h1>
 
 This chapter describes where and how is this project deployed.
+*** OpenShift                                                          :cd:
+:PROPERTIES:
+:EXPORT_FILE_NAME: deployment/openshit
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 1
+:END:
+**** Requirements
+***** Create account in RedHat
+1. Create a new account using the [[https://developers.redhat.com/auth/realms/rhd/login-actions/registration?client_id=oso&tab_id=ZoheL3ZSJ4g][Sign up]] form.
+2. Sign in into [[https://manage.openshift.com/accounts/auth/keycloak][OpenShift]].
+***** Install the OpenShift client
+#+begin_src bash
+  wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz
+  tar xvzf oc.tar.gz
+  sudo cp oc /usr/local/bin/
+#+end_src
 
-{{% notice info %}}
-Work in progress...
+{{% notice tip %}}
+*The binary can be copied to any place as long as it is included in the $PATH.*
+{{% /notice %}}
+***** Get the Login command
+[[/images/oc_login.png]]
+***** Create a Dockerfile
+OpenShift can create a docker image given a source git repository, but
+it needs a Dockerfile definition which is shown below:
+#+CAPTION: Dockerfile
+#+INCLUDE: "../../Dockerfile" src dockerfile
+
+The Dockerfile is quite simple and this is expected thanks to the
+configuration of the build tool.
+
+**** QuickStart
+This is a summary of the needed commands to get the project working:
+#+begin_src bash
+# Login
+oc login --token={REDACTED} --server=https://api.us-east-2.starter.openshift-online.com:6443
+# New project
+oc new-project workday
+# Not needed: mariadb service
+oc new-app \
+        -e MYSQL_USER=workday \
+        -e MYSQL_PASSWORD=workday \
+        -e MYSQL_DATABASE=workday \
+        mariadb
+# Our API service
+oc new-app deployment/openshift.yml
+# Manually trigger a new build
+oc start-build api
+#+end_src
+
+
+{{% notice tip %}}
+*For further explanation keep reading the step by step guide.*
 {{% /notice %}}
 
+**** Step 1: Login using the CLI
+Use the login command from the previous step:
+#+begin_src bash
+  oc login --token={REDACTED} --server=https://api.us-east-2.starter.openshift-online.com:6443
+#+end_src
+
+**** Step 2: Create a new project
+#+begin_src bash
+  oc new-project workday
+#+end_src
+
+**** Step 3: Create a new MariaDB app
+#+begin_src bash
+  oc new-app \
+        -e MYSQL_USER=workday \
+        -e MYSQL_PASSWORD=workday \
+        -e MYSQL_DATABASE=workday \
+        mariadb
+#+end_src
+
+{{% notice warning %}}
+*This step is not needed yet, but it will be in a near future to get the service fully working.*
+{{% /notice %}}
+
+**** Step 4: Create a template for our service
+#+CAPTION: openshift.yml
+#+INCLUDE: "../../deployment/openshift.yml" src yaml
+
+The template defines 5 main resources to be created in OpenShift:
+1. *Service*: exposes connectivity to the API container in a port.
+2. *Route*: Creates and endpoint which points to the Service resource.
+3. *ImageStream*: Keeps track of of changes in the application image.
+4. *BuildConfig*: This resource as it is configured basically fetches
+   the source code from the git repository then builds and tags a
+   docker image and finally runs the tests to make sure it is a
+   working image.
+5. *DeploymentConfig*: This resource is the one spawning a new
+   container/s with the built image, it has many parameters such as
+   the ability to recreate the container automatically when the
+   specified image has been changed or the number of replicas, it also
+   allows to setup environment variables to the container/s.
+
+**** Step 5: Create a new app using the above template
+#+begin_src bash
+oc new-app deployment/openshift.yml
+#+end_src
+
+**** Step 6: Trigger the build
+The build can be triggered manually with the following command:
+#+begin_src bash
+  oc start-build api
+#+end_src
+
+But we don't want to be triggering a new build everytime we integrate
+a new change in our service, therefore we have also set up a continuous
+delivery process which tests the new changes whenever there is a new
+push in the repository and deploys the new version if the tests
+passes.
+
+The documentation with a how-to guide can be found [[/howto/openshift/][here]].
+
+**** Demo
+{{< asciinema key="openshift" rows="50" preload="1"
+idle-time-limit="1" >}}
 ** How-to
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: howto
@@ -500,6 +614,102 @@ You can also see the output of the Action navigating to the *Actions*
 section of your repository.
 
 [[/images/gh_action.png]]
+
+*** Continuous Delivery                                  :doc:cd:openshift:
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: howto/openshift
+:EXPORT_HUGO_WEIGHT: 2
+:END:
+**** Continuous Delivery
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+Travis offers a deployment configuration which fortunately supports
+OpenShift, the following steps shows how to get it working.
+***** Prerequisites
+****** Travis-CI command line client
+The command line client has been used to secure our OpenShift token.
+First of all we need to install the CLI following its [[https://github.com/travis-ci/travis.rb#installation][documentation]],
+but basically if we already have ~ruby~ installed in our system we
+just need to install the following gem:
+#+begin_src bash
+  gem install travis
+#+end_src
+****** GitHub and Travis integration
+Travis must be integrated in GitHub which can be done in a few steps:
+1. Go to https://travis-ci.org/ and sign in with your GitHub account.
+2. In the upper right corner click on your name (or choose Accounts)
+   to open your Travis-ci profile. You'll be presented with the list
+   of your GitHub projects (only the ones where you have
+   administrative authority)
+3. Toggle the switch on one of your projects and then click on little
+   wrench icon to open the project's Integrations & services page on GitHub. To
+   get to the same place from your GitHub project, go to Settings >
+   Integrations & services.
+
+***** Step 1: Get the OpenShift token
+[[/images/oc_login.png]]
+Save the token given by the Login command.
+
+***** Step 2: Get the travis API token
+In the upper right corner click on your name then Settings and again
+the Settings tab as shown in the screenshot, then finally click in
+~Copy token~.
+[[/images/travis_token.png]]
+
+***** Step 3: Login using the Tavis CLI
+#+begin_src bash
+  travis login --github-token {{TOKEN}} --com
+#+end_src
+
+{{% notice note %}}
+Replace ~{{TOKEN}}~ with the real token copied in the step 2.
+{{% /notice %}}
+
+***** Step 4: Add and Secure the OpenShift token
+First add an environment variable in Travis:
+#+begin_src bash
+travis env set OPENSHIFT_TOKEN {{TOKEN}} --com
+#+end_src
+Then add the encrypted value in our ~.travis.yml~ file:
+#+begin_src bash
+  travis encrypt --add deploy.token {{TOKEN}}
+#+end_src
+
+{{% notice note %}}
+Replace ~{{TOKEN}}~ with the real token copied in the step 1.
+{{% /notice %}}
+
+***** Step 5: Add deploy stage in ~.travis.yml~
+The following excerpt shows only the *deploy* stage, the full
+configuration file can be found [[https://github.com/iris-garcia/workday/blob/master/.travis.yml][here]].
+#+begin_src yaml
+  - stage: deploy
+      name: Deploy to OpenShift
+      script: skip
+      deploy:
+        provider: openshift
+        server: https://api.us-east-2.starter.openshift-online.com:6443
+        project: workday
+        app: api
+        edge: true
+        on:
+          branch: master
+        token:
+          secure: dQ/DwmYDyJ2JkhUh++II/1QgnIU/TAlobn//zki+G/Id9+Z4XU0DwGHb+WQuxS+RBqASS79imBkzd0b8uZsSgzf8mEFCEbzikZy3rYGJW/CVFVKygbOBRsM7ms+clAEAr9cet6QqKBeRt6WH3AiPfetcNw0GpjKYr0WGdzzq+sf347NRFrhr/rSiOeugBq2EYqtuXeE6tAzm0ivGLl9C4hDYBdkYiQfJ16hk+/hJrwFRZpVv+7yR9J+WphMVqbCrB0XY3qSnwUlgfMw5QdCFvZAqoZbbiIF0OqEDZ+kwSVSPKPZ/zybpyrE+ty83GGuQ3MymMLM35Upr51HB6VNAcwtpwW8Cf3Bzj2odFKzk26etvUDhaPpXMV8Ow9VgYgweEti9KebdM0esN5emr/7vCmLVe3ppNDhH+tfGGmaVM8dkB+L4d2A4kXoxfHyS59HZPGBVFPLmNrxgwxbVaO7EiqUPlBX7SOMMNKn83HUF96edCOXwqVdznfLaG9Uh1/pvfTj4N1NOO1zTdTuuda4WeXSAyWEpgc15RwNQcYp6smtgXk3zFYKA0ZB9C9jyO01Fvoy96H8llY+wrEVuiUmyzSu3KAk6+86SLPJQUHWsvhSTES7qb6c5oSmoBao7X97b4/3EOGHq86wJLE/6vjrqWlrq3BtXpXqiOcbB5el1a9M=
+#+end_src
+
+- The ~server~ parameter must be set accordingly with your OpenShift
+  endpoint.
+- The ~project~ and ~app~ parameters must match the ones provided in
+  the deployment commands.
+- The ~edge~ parameter tells Travis to use the deployment version 2
+  which is currently in /beta/ (but still recommended by Travis [[https://docs.travis-ci.com/user/deployment/openshift/][here]]).
+- The ~script: skip~ parameter tells Travis to don't run any build
+  command (we don't have to waste time here).
+- Finally the ~on: branch~ parameter tells Travis to only deploy when
+  there are changes in the *master* branch.
 
 
 * Footnotes
