@@ -33,7 +33,6 @@ jobs:
   include:
     - stage: deploy
       script: echo "Deploying to OpenShift"
-      services: skip
       before_install: skip
       install: skip
       before_script: skip
