@@ -16,20 +16,20 @@ jobs:
       install:
         - go get github.com/magefile/mage
         - mage build
-      # addons:
-        # mariadb: '10.1'
-      # services:
-      # - mariadb
-      # before_script:
-      # - mysql -u root -e 'CREATE DATABASE workday;'
-      # - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
-      # - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
+      addons:
+        mariadb: '10.1'
+      services:
+      - mariadb
+      before_script:
+      - mysql -u root -e 'CREATE DATABASE workday;'
+      - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
+      - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
       script:
         - mage start
         - mage test
         - mage stop
 
-    - stage: deploy-openshift
+    - stage: deploy
       name: "Deploy to OpenShift"
       script: skip
       deploy:
