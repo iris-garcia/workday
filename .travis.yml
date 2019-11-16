@@ -1,4 +1,8 @@
 language: go
+go:
+  - 1.13.x
+  - master
+
 dist: bionic
 sudo: required
 addons:
@@ -27,10 +31,6 @@ script:
 
 jobs:
   include:
-    - stage: Unit tests 1.13.x
-      go: 1.13.x
-    - stage: Unit tests master
-      go: master
     - stage: Deploy to OpenShift
       script: skip
       provider: openshift
