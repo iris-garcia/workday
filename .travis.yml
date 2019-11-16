@@ -31,8 +31,12 @@ script:
 
 jobs:
   include:
-    - stage: Deploy to OpenShift
-      script: skip
+    - stage: deploy
+      script: "Deploying to OpenShift"
+      services: skip
+      before_install: skip
+      install: skip
+      before_script: skip
       provider: openshift
       server: https://api.us-east-2.starter.openshift-online.com:6443
       project: workday
