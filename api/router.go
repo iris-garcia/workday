@@ -14,6 +14,10 @@ import (
 func GinRouter(db *sql.DB) *gin.Engine {
 	router := gin.Default()
 
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "OK"})
+	})
+
 	router.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "OK"})
 	})

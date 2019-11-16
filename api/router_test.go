@@ -18,6 +18,22 @@ import (
 
 // API Router
 var _ = Describe("API Router", func() {
+	Describe("When requesting the endpoint GET /", func() {
+		db, _, _ := sqlmock.New()
+		router := GinRouter(db)
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("GET", "/", nil)
+		router.ServeHTTP(w, req)
+
+		It("Should return a 200", func() {
+			Expect(w.Code).To(Equal(http.StatusOK))
+		})
+
+		It("Should return the expected JSON", func() {
+			Expect(w.Body.String()).To(Equal(`{"status":"OK"}`))
+		})
+	})
+
 	Describe("When requesting the endpoint GET /status", func() {
 		db, _, _ := sqlmock.New()
 		router := GinRouter(db)
