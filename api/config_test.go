@@ -24,7 +24,7 @@ var _ = Describe("Config", func() {
 	})
 
 	It("Should get a DBConfig reading environment variables", func() {
-		os.Setenv("WORKDAY_DB_HOST", "1.1.1.1")
+		os.Setenv("MARIADB_SERVICE_HOST", "1.1.1.1")
 		os.Setenv("WORKDAY_DB_NAME", "name")
 		os.Setenv("WORKDAY_DB_USER", "user")
 		os.Setenv("WORKDAY_DB_PASSWORD", "pass")
@@ -40,7 +40,7 @@ var _ = Describe("Config", func() {
 		Expect(cfg).To(Equal(expected))
 
 		// Clean up environment vars
-		os.Unsetenv("WORKDAY_DB_HOST")
+		os.Unsetenv("MARIADB_SERVICE_HOST")
 		os.Unsetenv("WORKDAY_DB_NAME")
 		os.Unsetenv("WORKDAY_DB_USER")
 		os.Unsetenv("WORKDAY_DB_PASSWORD")

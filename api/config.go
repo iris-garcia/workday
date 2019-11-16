@@ -6,7 +6,7 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-var ENV_VARS = []string{"WORKDAY_DB_HOST", "WORKDAY_DB_NAME", "WORKDAY_DB_USER", "WORKDAY_DB_PASSWORD"}
+var ENV_VARS = []string{"MARIADB_SERVICE_HOST", "WORKDAY_DB_NAME", "WORKDAY_DB_USER", "WORKDAY_DB_PASSWORD"}
 
 // Represents database parameters
 type DBConfig struct {
@@ -31,7 +31,7 @@ func LoadDBConfig(filepath string) (DBConfig, error) {
 	var c DBConfig
 
 	if envVars(ENV_VARS) {
-		host, _ := os.LookupEnv("WORKDAY_DB_HOST")
+		host, _ := os.LookupEnv("MARIADB_SERVICE_HOST")
 		name, _ := os.LookupEnv("WORKDAY_DB_NAME")
 		user, _ := os.LookupEnv("WORKDAY_DB_USER")
 		password, _ := os.LookupEnv("WORKDAY_DB_PASSWORD")
