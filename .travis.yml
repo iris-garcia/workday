@@ -12,6 +12,10 @@ sudo: required
 # - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
 # - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
 
+stages:
+  - test
+  - deploy
+
 jobs:
   include:
     - stage: test
@@ -28,6 +32,7 @@ jobs:
         - mage stop
 
     - stage: deploy
+      name: "Deploy to OpenShift"
       # before_install: skip
       # install: skip
       # before_script: skip
