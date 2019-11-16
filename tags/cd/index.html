@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>Travis CI :: Workday</title>
+    <title>cd :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1573947786" rel="stylesheet">
@@ -34,13 +34,11 @@
       
     </style>
     
-<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
-
 
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/ci/travis/">
+  <body class="" data-url="/tags/cd/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -244,7 +242,7 @@
   
     
     <li data-nav-id="/ci/" title="Continuous Integration" class="dd-item 
-        parent
+        
         
         
         ">
@@ -270,7 +268,7 @@
  
   
     
-      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item active">
+      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item ">
         <a href="../../ci/travis/">
         Travis CI
         <i class="fas fa-check read-icon"></i>
@@ -514,22 +512,14 @@
                   <span class="links">
                  
                  
-                   Travis CI 
+                   cd 
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#configuration">Configuration</a></li>
-</ul></li>
-</ul>
-</nav>
+
     </div>
 </div>
 
@@ -539,19 +529,15 @@
             
         <div id="head-tags">
         
-<div class="tags">
-
-  <a class="tag-link" href="../../tags/ci">ci</a>
-
-</div>
-
         </div>
         
         <div id="body-inner">
           
             <h1>
               
-              Travis CI
+                taxonomy ::
+              
+              cd
             </h1>
           
 
@@ -561,103 +547,17 @@
 
 
 
-<h2 id="description">Description</h2>
 
-<p>Travis is a hosted continuous integration service used to build and
-test software projects hosted at GitHub.</p>
-
-<p>It provides a free plan for open source projects which is very
-convinient for our use case.</p>
-
-<p>The whole configuration is set up in a single file <code>.travis.yml</code> which
-must be placed in the root directory of the project.</p>
-
-<h2 id="configuration">Configuration</h2>
-
-<p>To avoid replicating exactly the same workflows in GitHub Actions and
-Travis, there are some little changes like testing two different Go
-versions: <code>v1.13.x</code> and <code>master</code> (which is the latest available at any
-given time).</p>
-
-<p>It also releases artifacts when a new <strong>tag</strong> is pushed to the
-repository.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language:<span style="color:#666"> </span>go<span style="color:#666">
-</span><span style="color:#666"></span>dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>stages:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>deploy<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>jobs:<span style="color:#666">
-</span><span style="color:#666">  </span>include:<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">      </span>go:<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666">      </span>before_install:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>sudo<span style="color:#666"> </span>apt-get<span style="color:#666"> </span>-y<span style="color:#666"> </span>install<span style="color:#666"> </span>npm<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>npm<span style="color:#666"> </span>install<span style="color:#666"> </span>pm2@latest<span style="color:#666"> </span>-g<span style="color:#666">
-</span><span style="color:#666">      </span>install:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/magefile/mage<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>build<span style="color:#666">
-</span><span style="color:#666">      </span>addons:<span style="color:#666">
-</span><span style="color:#666">        </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">      </span>services:<span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mariadb<span style="color:#666">
-</span><span style="color:#666">      </span>before_script:<span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#39;CREATE DATABASE workday;&#39;</span><span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;CREATE USER &#39;workday&#39;@&#39;%&#39; IDENTIFIED BY &#39;workday&#39;;&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GRANT ALL ON workday.* TO &#39;workday&#39;@&#39;%&#39;; FLUSH PRIVILEGES;&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>script:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>start<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>stop<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>deploy<span style="color:#666">
-</span><span style="color:#666">      </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Deploy to OpenShift&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>script:<span style="color:#666"> </span>skip<span style="color:#666">
-</span><span style="color:#666">      </span>deploy:<span style="color:#666">
-</span><span style="color:#666">        </span>provider:<span style="color:#666"> </span>openshift<span style="color:#666">
-</span><span style="color:#666">        </span>server:<span style="color:#666"> </span>https://api.us-east<span style="color:#3677a9">-2.</span>starter.openshift-online.com:<span style="color:#3677a9">6443</span><span style="color:#666">
-</span><span style="color:#666">        </span>project:<span style="color:#666"> </span>workday<span style="color:#666">
-</span><span style="color:#666">        </span>app:<span style="color:#666"> </span>api<span style="color:#666">
-</span><span style="color:#666">        </span>edge:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666"> </span><span style="color:#999;font-style:italic"># opt in to dpl v2</span><span style="color:#666">
-</span><span style="color:#666">        </span>on:<span style="color:#666">
-</span><span style="color:#666">          </span>branch:<span style="color:#666"> </span>master<span style="color:#666">
-</span><span style="color:#666">        </span>token:<span style="color:#666">
-</span><span style="color:#666">          </span>secure:<span style="color:#666"> </span>dQ/DwmYDyJ2JkhUh++II/1QgnIU/TAlobn//zki+G/Id9+Z4XU0DwGHb+WQuxS+RBqASS79imBkzd0b8uZsSgzf8mEFCEbzikZy3rYGJW/CVFVKygbOBRsM7ms+clAEAr9cet6QqKBeRt6WH3AiPfetcNw0GpjKYr0WGdzzq+sf347NRFrhr/rSiOeugBq2EYqtuXeE6tAzm0ivGLl9C4hDYBdkYiQfJ16hk+/hJrwFRZpVv+7yR9J+WphMVqbCrB0XY3qSnwUlgfMw5QdCFvZAqoZbbiIF0OqEDZ+kwSVSPKPZ/zybpyrE+ty83GGuQ3MymMLM35Upr51HB6VNAcwtpwW8Cf3Bzj2odFKzk26etvUDhaPpXMV8Ow9VgYgweEti9KebdM0esN5emr/7vCmLVe3ppNDhH+tfGGmaVM8dkB+L4d2A4kXoxfHyS59HZPGBVFPLmNrxgwxbVaO7EiqUPlBX7SOMMNKn83HUF96edCOXwqVdznfLaG9Uh1/pvfTj4N1NOO1zTdTuuda4WeXSAyWEpgc15RwNQcYp6smtgXk3zFYKA0ZB9C9jyO01Fvoy96H8llY+wrEVuiUmyzSu3KAk6+86SLPJQUHWsvhSTES7qb6c5oSmoBao7X97b4/3EOGHq86wJLE/6vjrqWlrq3BtXpXqiOcbB5el1a9M=</code></pre></div>
-<p>The following lines tell travis to run the tests against two different
-versions of Go (1.13.x and master)</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">go:<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span>master</code></pre></div>
-<p>And the following excerpt defines <strong>bionic</strong> as the Ubuntu version to be
-used also tells the requirement of <strong>sudo</strong> needed to install <code>npm</code> and
-<code>pm2</code>.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>addons:<span style="color:#666">
-</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>services:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb</code></pre></div>
-<p>The <strong>addons</strong> and <strong>services</strong> sections are in place to boot a <strong>mariadb</strong>
-service which will be used for the integration tests against a test
-database.</p>
-
-<p>The <strong>before_install</strong> and <strong>install</strong> configurations will fetch and setup
-all the prerequisites in order to run our <strong>build tool</strong> which is
-<strong>mage</strong>.</p>
-
-<p>Finally the <strong>script</strong> will use <code>mage</code> to start the environment, run the
-tests and stop it once it finishes.</p>
+<ul>
+	
+		<li><a href="../../deployment/openshit/">OpenShift</a></li>
+	
+</ul>
 
 
 <footer class=" footline" >
 	
 </footer>
-
 
         
         </div> 
@@ -805,7 +705,6 @@ tests and stop it once it finishes.</p>
             
                 
                     
-                    
                 
                 
 
@@ -818,7 +717,6 @@ tests and stop it once it finishes.</p>
             
             
                 
-                    
                     
                 
                 
@@ -835,9 +733,6 @@ tests and stop it once it finishes.</p>
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -944,10 +839,8 @@ tests and stop it once it finishes.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ci/" title="Continuous Integration"> <i class="fa fa-chevron-left"></i></a>
 		
-		
-			<a class="nav nav-next" href="../../ci/github/" title="GitHub Actions" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../description/" title="Description" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -974,9 +867,6 @@ tests and stop it once it finishes.</p>
         mermaid.initialize({ startOnLoad: true });
     </script>
     
-<script src="../../js/asciinema-player.js"></script>
-
 
   </body>
 </html>
-

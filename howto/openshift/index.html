@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>Travis CI :: Workday</title>
+    <title>Continuous Delivery :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1573947786" rel="stylesheet">
@@ -40,7 +40,7 @@
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/ci/travis/">
+  <body class="" data-url="/howto/openshift/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -244,7 +244,7 @@
   
     
     <li data-nav-id="/ci/" title="Continuous Integration" class="dd-item 
-        parent
+        
         
         
         ">
@@ -270,7 +270,7 @@
  
   
     
-      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item active">
+      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item ">
         <a href="../../ci/travis/">
         Travis CI
         <i class="fas fa-check read-icon"></i>
@@ -369,7 +369,7 @@
   
     
     <li data-nav-id="/howto/" title="How-to" class="dd-item 
-        
+        parent
         
         
         ">
@@ -424,8 +424,8 @@
   
     
     <li data-nav-id="/howto/openshift/" title="Continuous Delivery" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="../../howto/openshift/">
@@ -514,7 +514,7 @@
                   <span class="links">
                  
                  
-                   Travis CI 
+                   Continuous Delivery 
                  
                   </span>
                 </div>
@@ -525,8 +525,16 @@
 <ul>
 <li>
 <ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#configuration">Configuration</a></li>
+<li><a href="#prerequisites">Prerequisites</a>
+<ul>
+<li><a href="#travis-ci-command-line-client">Travis-CI command line client</a></li>
+<li><a href="#github-and-travis-integration">GitHub and Travis integration</a></li>
+</ul></li>
+<li><a href="#step-1-get-the-openshift-token">Step 1: Get the OpenShift token</a></li>
+<li><a href="#step-2-get-the-travis-api-token">Step 2: Get the travis API token</a></li>
+<li><a href="#step-3-login-using-the-tavis-cli">Step 3: Login using the Tavis CLI</a></li>
+<li><a href="#step-4-add-and-secure-the-openshift-token">Step 4: Add and Secure the OpenShift token</a></li>
+<li><a href="#step-5-add-deploy-stage-in-dot-travis-dot-yml">Step 5: Add deploy stage in <code>.travis.yml</code></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -541,7 +549,11 @@
         
 <div class="tags">
 
-  <a class="tag-link" href="../../tags/ci">ci</a>
+  <a class="tag-link" href="../../tags/doc">doc</a>
+
+  <a class="tag-link" href="../../tags/cd">cd</a>
+
+  <a class="tag-link" href="../../tags/openshift">openshift</a>
 
 </div>
 
@@ -551,7 +563,7 @@
           
             <h1>
               
-              Travis CI
+              Continuous Delivery
             </h1>
           
 
@@ -560,104 +572,103 @@
 
 
 
+	
 
-<h2 id="description">Description</h2>
+<p>Travis offers a deployment configuration which fortunately supports
+OpenShift, the following steps shows how to get it working.</p>
 
-<p>Travis is a hosted continuous integration service used to build and
-test software projects hosted at GitHub.</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<p>It provides a free plan for open source projects which is very
-convinient for our use case.</p>
+<h3 id="travis-ci-command-line-client">Travis-CI command line client</h3>
 
-<p>The whole configuration is set up in a single file <code>.travis.yml</code> which
-must be placed in the root directory of the project.</p>
+<p>The command line client has been used to secure our OpenShift token.
+First of all we need to install the CLI following its <a href="https://github.com/travis-ci/travis.rb#installation">documentation</a>,
+but basically if we already have <code>ruby</code> installed in our system we
+just need to install the following gem:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gem install travis</code></pre></div>
+<h3 id="github-and-travis-integration">GitHub and Travis integration</h3>
 
-<h2 id="configuration">Configuration</h2>
+<p>Travis must be integrated in GitHub which can be done in a few steps:</p>
 
-<p>To avoid replicating exactly the same workflows in GitHub Actions and
-Travis, there are some little changes like testing two different Go
-versions: <code>v1.13.x</code> and <code>master</code> (which is the latest available at any
-given time).</p>
+<ol>
+<li>Go to <a href="https://travis-ci.org/">https://travis-ci.org/</a> and sign in with your GitHub account.</li>
+<li>In the upper right corner click on your name (or choose Accounts)
+to open your Travis-ci profile. You&rsquo;ll be presented with the list
+of your GitHub projects (only the ones where you have
+administrative authority)</li>
+<li>Toggle the switch on one of your projects and then click on little
+wrench icon to open the project&rsquo;s Integrations &amp; services page on GitHub. To
+get to the same place from your GitHub project, go to Settings &gt;
+Integrations &amp; services.</li>
+</ol>
 
-<p>It also releases artifacts when a new <strong>tag</strong> is pushed to the
-repository.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language:<span style="color:#666"> </span>go<span style="color:#666">
-</span><span style="color:#666"></span>dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>stages:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>deploy<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>jobs:<span style="color:#666">
-</span><span style="color:#666">  </span>include:<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">      </span>go:<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666">      </span>before_install:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>sudo<span style="color:#666"> </span>apt-get<span style="color:#666"> </span>-y<span style="color:#666"> </span>install<span style="color:#666"> </span>npm<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>npm<span style="color:#666"> </span>install<span style="color:#666"> </span>pm2@latest<span style="color:#666"> </span>-g<span style="color:#666">
-</span><span style="color:#666">      </span>install:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/magefile/mage<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>build<span style="color:#666">
-</span><span style="color:#666">      </span>addons:<span style="color:#666">
-</span><span style="color:#666">        </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">      </span>services:<span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mariadb<span style="color:#666">
-</span><span style="color:#666">      </span>before_script:<span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#39;CREATE DATABASE workday;&#39;</span><span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;CREATE USER &#39;workday&#39;@&#39;%&#39; IDENTIFIED BY &#39;workday&#39;;&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span>mysql<span style="color:#666"> </span>-u<span style="color:#666"> </span>root<span style="color:#666"> </span>-e<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GRANT ALL ON workday.* TO &#39;workday&#39;@&#39;%&#39;; FLUSH PRIVILEGES;&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>script:<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>start<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>test<span style="color:#666">
-</span><span style="color:#666">        </span>-<span style="color:#666"> </span>mage<span style="color:#666"> </span>stop<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>deploy<span style="color:#666">
-</span><span style="color:#666">      </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Deploy to OpenShift&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>script:<span style="color:#666"> </span>skip<span style="color:#666">
-</span><span style="color:#666">      </span>deploy:<span style="color:#666">
-</span><span style="color:#666">        </span>provider:<span style="color:#666"> </span>openshift<span style="color:#666">
-</span><span style="color:#666">        </span>server:<span style="color:#666"> </span>https://api.us-east<span style="color:#3677a9">-2.</span>starter.openshift-online.com:<span style="color:#3677a9">6443</span><span style="color:#666">
-</span><span style="color:#666">        </span>project:<span style="color:#666"> </span>workday<span style="color:#666">
-</span><span style="color:#666">        </span>app:<span style="color:#666"> </span>api<span style="color:#666">
-</span><span style="color:#666">        </span>edge:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666"> </span><span style="color:#999;font-style:italic"># opt in to dpl v2</span><span style="color:#666">
-</span><span style="color:#666">        </span>on:<span style="color:#666">
-</span><span style="color:#666">          </span>branch:<span style="color:#666"> </span>master<span style="color:#666">
-</span><span style="color:#666">        </span>token:<span style="color:#666">
-</span><span style="color:#666">          </span>secure:<span style="color:#666"> </span>dQ/DwmYDyJ2JkhUh++II/1QgnIU/TAlobn//zki+G/Id9+Z4XU0DwGHb+WQuxS+RBqASS79imBkzd0b8uZsSgzf8mEFCEbzikZy3rYGJW/CVFVKygbOBRsM7ms+clAEAr9cet6QqKBeRt6WH3AiPfetcNw0GpjKYr0WGdzzq+sf347NRFrhr/rSiOeugBq2EYqtuXeE6tAzm0ivGLl9C4hDYBdkYiQfJ16hk+/hJrwFRZpVv+7yR9J+WphMVqbCrB0XY3qSnwUlgfMw5QdCFvZAqoZbbiIF0OqEDZ+kwSVSPKPZ/zybpyrE+ty83GGuQ3MymMLM35Upr51HB6VNAcwtpwW8Cf3Bzj2odFKzk26etvUDhaPpXMV8Ow9VgYgweEti9KebdM0esN5emr/7vCmLVe3ppNDhH+tfGGmaVM8dkB+L4d2A4kXoxfHyS59HZPGBVFPLmNrxgwxbVaO7EiqUPlBX7SOMMNKn83HUF96edCOXwqVdznfLaG9Uh1/pvfTj4N1NOO1zTdTuuda4WeXSAyWEpgc15RwNQcYp6smtgXk3zFYKA0ZB9C9jyO01Fvoy96H8llY+wrEVuiUmyzSu3KAk6+86SLPJQUHWsvhSTES7qb6c5oSmoBao7X97b4/3EOGHq86wJLE/6vjrqWlrq3BtXpXqiOcbB5el1a9M=</code></pre></div>
-<p>The following lines tell travis to run the tests against two different
-versions of Go (1.13.x and master)</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">go:<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span><span style="color:#3677a9">1.13</span>.x<span style="color:#666">
-</span><span style="color:#666"></span>-<span style="color:#666"> </span>master</code></pre></div>
-<p>And the following excerpt defines <strong>bionic</strong> as the Ubuntu version to be
-used also tells the requirement of <strong>sudo</strong> needed to install <code>npm</code> and
-<code>pm2</code>.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">dist:<span style="color:#666"> </span>bionic<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>sudo:<span style="color:#666"> </span>required<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>addons:<span style="color:#666">
-</span><span style="color:#666">  </span>mariadb:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;10.1&#39;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>services:<span style="color:#666">
-</span><span style="color:#666">  </span>-<span style="color:#666"> </span>mariadb</code></pre></div>
-<p>The <strong>addons</strong> and <strong>services</strong> sections are in place to boot a <strong>mariadb</strong>
-service which will be used for the integration tests against a test
-database.</p>
+<h2 id="step-1-get-the-openshift-token">Step 1: Get the OpenShift token</h2>
 
-<p>The <strong>before_install</strong> and <strong>install</strong> configurations will fetch and setup
-all the prerequisites in order to run our <strong>build tool</strong> which is
-<strong>mage</strong>.</p>
+<p><img src="../../images/oc_login.png" alt="" />
+Save the token given by the Login command.</p>
 
-<p>Finally the <strong>script</strong> will use <code>mage</code> to start the environment, run the
-tests and stop it once it finishes.</p>
+<h2 id="step-2-get-the-travis-api-token">Step 2: Get the travis API token</h2>
+
+<p>In the upper right corner click on your name then Settings and again
+the Settings tab as shown in the screenshot, then finally click in
+<code>Copy token</code>.
+<img src="../../images/travis_token.png" alt="" /></p>
+
+<h2 id="step-3-login-using-the-tavis-cli">Step 3: Login using the Tavis CLI</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">travis login --github-token {{TOKEN}} --com</code></pre></div>
+
+<div class="notices note" ><p>Replace <code>{{TOKEN}}</code> with the real token copied in the step 2.</p>
+</div>
+
+
+<h2 id="step-4-add-and-secure-the-openshift-token">Step 4: Add and Secure the OpenShift token</h2>
+
+<p>First add an environment variable in Travis:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">travis env <span style="color:#24909d">set</span> OPENSHIFT_TOKEN {{TOKEN}} --com</code></pre></div>
+<p>Then add the encrypted value in our <code>.travis.yml</code> file:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">travis encrypt --add deploy.token {{TOKEN}}</code></pre></div>
+
+<div class="notices note" ><p>Replace <code>{{TOKEN}}</code> with the real token copied in the step 1.</p>
+</div>
+
+
+<h2 id="step-5-add-deploy-stage-in-dot-travis-dot-yml">Step 5: Add deploy stage in <code>.travis.yml</code></h2>
+
+<p>The following excerpt shows only the <strong>deploy</strong> stage, the full
+configuration file can be found <a href="https://github.com/iris-garcia/workday/blob/master/.travis.yml">here</a>.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>stage:<span style="color:#666"> </span>deploy<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>Deploy<span style="color:#666"> </span>to<span style="color:#666"> </span>OpenShift<span style="color:#666">
+</span><span style="color:#666">    </span>script:<span style="color:#666"> </span>skip<span style="color:#666">
+</span><span style="color:#666">    </span>deploy:<span style="color:#666">
+</span><span style="color:#666">      </span>provider:<span style="color:#666"> </span>openshift<span style="color:#666">
+</span><span style="color:#666">      </span>server:<span style="color:#666"> </span>https://api.us-east<span style="color:#3677a9">-2.</span>starter.openshift-online.com:<span style="color:#3677a9">6443</span><span style="color:#666">
+</span><span style="color:#666">      </span>project:<span style="color:#666"> </span>workday<span style="color:#666">
+</span><span style="color:#666">      </span>app:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">      </span>edge:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
+</span><span style="color:#666">      </span>on:<span style="color:#666">
+</span><span style="color:#666">        </span>branch:<span style="color:#666"> </span>master<span style="color:#666">
+</span><span style="color:#666">      </span>token:<span style="color:#666">
+</span><span style="color:#666">        </span>secure:<span style="color:#666"> </span>dQ/DwmYDyJ2JkhUh++II/1QgnIU/TAlobn//zki+G/Id9+Z4XU0DwGHb+WQuxS+RBqASS79imBkzd0b8uZsSgzf8mEFCEbzikZy3rYGJW/CVFVKygbOBRsM7ms+clAEAr9cet6QqKBeRt6WH3AiPfetcNw0GpjKYr0WGdzzq+sf347NRFrhr/rSiOeugBq2EYqtuXeE6tAzm0ivGLl9C4hDYBdkYiQfJ16hk+/hJrwFRZpVv+7yR9J+WphMVqbCrB0XY3qSnwUlgfMw5QdCFvZAqoZbbiIF0OqEDZ+kwSVSPKPZ/zybpyrE+ty83GGuQ3MymMLM35Upr51HB6VNAcwtpwW8Cf3Bzj2odFKzk26etvUDhaPpXMV8Ow9VgYgweEti9KebdM0esN5emr/7vCmLVe3ppNDhH+tfGGmaVM8dkB+L4d2A4kXoxfHyS59HZPGBVFPLmNrxgwxbVaO7EiqUPlBX7SOMMNKn83HUF96edCOXwqVdznfLaG9Uh1/pvfTj4N1NOO1zTdTuuda4WeXSAyWEpgc15RwNQcYp6smtgXk3zFYKA0ZB9C9jyO01Fvoy96H8llY+wrEVuiUmyzSu3KAk6+86SLPJQUHWsvhSTES7qb6c5oSmoBao7X97b4/3EOGHq86wJLE/6vjrqWlrq3BtXpXqiOcbB5el1a9M=</code></pre></div>
+<ul>
+<li>The <code>server</code> parameter must be set accordingly with your OpenShift
+endpoint.</li>
+<li>The <code>project</code> and <code>app</code> parameters must match the ones provided in
+the deployment commands.</li>
+<li>The <code>edge</code> parameter tells Travis to use the deployment version 2
+which is currently in <em>beta</em> (but still recommended by Travis <a href="https://docs.travis-ci.com/user/deployment/openshift/">here</a>).</li>
+<li>The <code>script: skip</code> parameter tells Travis to don&rsquo;t run any build
+command (we don&rsquo;t have to waste time here).</li>
+<li>Finally the <code>on: branch</code> parameter tells Travis to only deploy when
+there are changes in the <strong>master</strong> branch.</li>
+</ul>
+
+
+
 
 
 <footer class=" footline" >
 	
 </footer>
-
 
         
         </div> 
@@ -805,7 +816,6 @@ tests and stop it once it finishes.</p>
             
                 
                     
-                    
                 
                 
 
@@ -818,7 +828,6 @@ tests and stop it once it finishes.</p>
             
             
                 
-                    
                     
                 
                 
@@ -835,9 +844,6 @@ tests and stop it once it finishes.</p>
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -890,6 +896,7 @@ tests and stop it once it finishes.</p>
             
                 
                     
+                    
                 
                 
 
@@ -904,6 +911,9 @@ tests and stop it once it finishes.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -920,6 +930,7 @@ tests and stop it once it finishes.</p>
             
             
                 
+                    
                     
                 
                 
@@ -944,10 +955,10 @@ tests and stop it once it finishes.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ci/" title="Continuous Integration"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../howto/gh-pages/" title="GitHub Pages"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ci/github/" title="GitHub Actions" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../howto/gh-pages/" title="GitHub Pages" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -979,4 +990,3 @@ tests and stop it once it finishes.</p>
 
   </body>
 </html>
-

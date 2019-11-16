@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Tue, 05 Nov 2019 17:06:27 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 19:58:27 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/howto/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,12 +16,23 @@
     <item>
       <title>GitHub Pages</title>
       <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-      <pubDate>Tue, 05 Nov 2019 17:06:27 +0100</pubDate>
+      <pubDate>Sat, 16 Nov 2019 19:58:27 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/gh-pages/</guid>
       <description>This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub&amp;rsquo;s Actions to automate the deployment process.
 There are different alternatives to setup GitHub pages, the one used in here is a project pages using gh-pages branch, the advantages are:
  It keeps your source and generated website in different branches and therefore maintains version control history for both. It uses the default Hugo&amp;rsquo;s public folder.</description>
+    </item>
+    
+    <item>
+      <title>Continuous Delivery</title>
+      <link>https://iris-garcia.github.io/workday/howto/openshift/</link>
+      <pubDate>Sat, 16 Nov 2019 21:42:17 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/howto/openshift/</guid>
+      <description>Travis offers a deployment configuration which fortunately supports OpenShift, the following steps shows how to get it working.
+Prerequisites Travis-CI command line client The command line client has been used to secure our OpenShift token. First of all we need to install the CLI following its documentation, but basically if we already have ruby installed in our system we just need to install the following gem:
+gem install travis GitHub and Travis integration Travis must be integrated in GitHub which can be done in a few steps:</description>
     </item>
     
   </channel>

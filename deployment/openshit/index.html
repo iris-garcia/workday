@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="description" content="Workday">
+<meta name="author" content="Iris Garcia">
+
+    <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
+
+    <title>OpenShift :: Workday</title>
+
+    
+    <link href="../../css/nucleus.css?1573947786" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1573947786" rel="stylesheet">
+    <link href="../../css/hybrid.css?1573947786" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1573947786" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1573947786" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1573947786" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1573947786" rel="stylesheet">
+    <link href="../../css/theme.css?1573947786" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1573947786" rel="stylesheet">
+    
+      <link href="../../css/theme-blue.css?1573947786" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1573947786"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
+
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
+
+  </head>
+  <body class="" data-url="/deployment/openshit/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://iris-garcia.github.io/workday/"><img src="https://iris-garcia.github.io/workday//images/logo.png"/></a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1573947786"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1573947786"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1573947786"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/description/" title="Description" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../description/">
+          <b>1. </b>Description
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/description/why/" title="Why?" class="dd-item ">
+        <a href="../../description/why/">
+        Why?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/description/what/" title="What is Workday?" class="dd-item ">
+        <a href="../../description/what/">
+        What is Workday?
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/dev/" title="Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../dev/">
+          <b>2. </b>Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/dev/tools/" title="Toolchain" class="dd-item ">
+        <a href="../../dev/tools/">
+        Toolchain
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/dev/requirements/" title="Requirements" class="dd-item ">
+        <a href="../../dev/requirements/">
+        Requirements
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/dev/api/" title="API Test Class" class="dd-item ">
+        <a href="../../dev/api/">
+        API Test Class
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ci/" title="Continuous Integration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ci/">
+          <b>3. </b>Continuous Integration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ci/travis/" title="Travis CI" class="dd-item ">
+        <a href="../../ci/travis/">
+        Travis CI
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ci/github/" title="GitHub Actions" class="dd-item ">
+        <a href="../../ci/github/">
+        GitHub Actions
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/deployment/" title="Deployment" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../deployment/">
+          <b>4. </b>Deployment
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/deployment/openshit/" title="OpenShift" class="dd-item active">
+        <a href="../../deployment/openshit/">
+        OpenShift
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/howto/" title="How-to" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../howto/">
+          <b>5. </b>How-to
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/howto/gh-pages/" title="GitHub Pages" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../howto/gh-pages/">
+          GitHub Pages
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/howto/openshift/" title="Continuous Delivery" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../howto/openshift/">
+          Continuous Delivery
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/iris-garcia/workday"><i class='fab fa-github' style='margin-right:10px;'></i>Workday</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/iris-garcia/workday/tags"><i class='fas fa-tags'></i> Tags</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   OpenShift 
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#requirements">Requirements</a>
+<ul>
+<li><a href="#create-account-in-redhat">Create account in RedHat</a></li>
+<li><a href="#install-the-openshift-client">Install the OpenShift client</a></li>
+<li><a href="#get-the-login-command">Get the Login command</a></li>
+<li><a href="#create-a-dockerfile">Create a Dockerfile</a></li>
+</ul></li>
+<li><a href="#quickstart">QuickStart</a></li>
+<li><a href="#step-1-login-using-the-cli">Step 1: Login using the CLI</a></li>
+<li><a href="#step-2-create-a-new-project">Step 2: Create a new project</a></li>
+<li><a href="#step-3-create-a-new-mariadb-app">Step 3: Create a new MariaDB app</a></li>
+<li><a href="#step-4-create-a-template-for-our-service">Step 4: Create a template for our service</a></li>
+<li><a href="#step-5-create-a-new-app-using-the-above-template">Step 5: Create a new app using the above template</a></li>
+<li><a href="#step-6-trigger-the-build">Step 6: Trigger the build</a></li>
+<li><a href="#demo">Demo</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+<div class="tags">
+
+  <a class="tag-link" href="../../tags/cd">cd</a>
+
+</div>
+
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              OpenShift
+            </h1>
+          
+
+        
+
+
+
+
+
+<h2 id="requirements">Requirements</h2>
+
+<h3 id="create-account-in-redhat">Create account in RedHat</h3>
+
+<ol>
+<li>Create a new account using the <a href="https://developers.redhat.com/auth/realms/rhd/login-actions/registration?client%5Fid=oso&amp;tab%5Fid=ZoheL3ZSJ4g">Sign up</a> form.</li>
+<li>Sign in into <a href="https://manage.openshift.com/accounts/auth/keycloak">OpenShift</a>.</li>
+</ol>
+
+<h3 id="install-the-openshift-client">Install the OpenShift client</h3>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz
+tar xvzf oc.tar.gz
+sudo cp oc /usr/local/bin/</code></pre></div>
+
+<div class="notices tip" ><p><strong>The binary can be copied to any place as long as it is included in the $PATH.</strong></p>
+</div>
+
+
+<h3 id="get-the-login-command">Get the Login command</h3>
+
+<figure>
+    <img src="../../images/oc_login.png"/> 
+</figure>
+
+
+<h3 id="create-a-dockerfile">Create a Dockerfile</h3>
+
+<p>OpenShift can create a docker image given a source git repository, but
+it needs a Dockerfile definition which is shown below:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#6ab825;font-weight:bold">FROM</span><span style="color:#ed9d13"> golang:1.13</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">RUN</span> mkdir -p /go/src/github.com/iris-garcia/workday<span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">WORKDIR</span><span style="color:#ed9d13"> /go/src/github.com/iris-garcia/workday</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span>COPY . /go/src/github.com/iris-garcia/workday<span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">RUN</span> go get github.com/magefile/mage<span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">RUN</span> mage build<span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">EXPOSE</span><span style="color:#ed9d13"> 8080</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2">
+</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">CMD</span><span style="color:#ed9d13"> [&#34;./api_server&#34;]</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  Dockerfile
+</div>
+
+<p>The Dockerfile is quite simple and this is expected thanks to the
+configuration of the build tool.</p>
+
+<h2 id="quickstart">QuickStart</h2>
+
+<p>This is a summary of the needed commands to get the project working:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># Login</span>
+oc login --token={REDACTED} --server=https://api.us-east-2.starter.openshift-online.com:6443
+<span style="color:#999;font-style:italic"># New project</span>
+oc new-project workday
+<span style="color:#999;font-style:italic"># Not needed: mariadb service</span>
+oc new-app <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>        -e <span style="color:#40ffff">MYSQL_USER</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>        -e <span style="color:#40ffff">MYSQL_PASSWORD</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>        -e <span style="color:#40ffff">MYSQL_DATABASE</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>        mariadb
+<span style="color:#999;font-style:italic"># Our API service</span>
+oc new-app deployment/openshift.yml
+<span style="color:#999;font-style:italic"># Manually trigger a new build</span>
+oc start-build api</code></pre></div>
+
+<div class="notices tip" ><p><strong>For further explanation keep reading the step by step guide.</strong></p>
+</div>
+
+
+<h2 id="step-1-login-using-the-cli">Step 1: Login using the CLI</h2>
+
+<p>Use the login command from the previous step:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc login --token={REDACTED} --server=https://api.us-east-2.starter.openshift-online.com:6443</code></pre></div>
+<h2 id="step-2-create-a-new-project">Step 2: Create a new project</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-project workday</code></pre></div>
+<h2 id="step-3-create-a-new-mariadb-app">Step 3: Create a new MariaDB app</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-app <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>      -e <span style="color:#40ffff">MYSQL_USER</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>      -e <span style="color:#40ffff">MYSQL_PASSWORD</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>      -e <span style="color:#40ffff">MYSQL_DATABASE</span>=workday <span style="color:#ed9d13">\
+</span><span style="color:#ed9d13"></span>      mariadb</code></pre></div>
+
+<div class="notices warning" ><p><strong>This step is not needed yet, but it will be in a near future to get the service fully working.</strong></p>
+</div>
+
+
+<h2 id="step-4-create-a-template-for-our-service">Step 4: Create a template for our service</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">kind:<span style="color:#666"> </span>Template<span style="color:#666">
+</span><span style="color:#666"></span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666"></span>metadata:<span style="color:#666">
+</span><span style="color:#666">  </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>annotations:<span style="color:#666">
+</span><span style="color:#666">    </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Workday Api app&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>tags:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday,api,golang&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>iconClass:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;icon-go-gopher&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>labels:<span style="color:#666">
+</span><span style="color:#666">    </span>template:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;api&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>app:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;api&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>objects:<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>Service<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>annotations:<span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Exposes and load balances the application pods&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>spec:<span style="color:#666">
+</span><span style="color:#666">    </span>ports:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>web<span style="color:#666">
+</span><span style="color:#666">      </span>port:<span style="color:#666"> </span><span style="color:#3677a9">8080</span><span style="color:#666">
+</span><span style="color:#666">      </span>targetPort:<span style="color:#666"> </span><span style="color:#3677a9">8080</span><span style="color:#666">
+</span><span style="color:#666">    </span>selector:<span style="color:#666">
+</span><span style="color:#666">      </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>Route<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>spec:<span style="color:#666">
+</span><span style="color:#666">    </span>to:<span style="color:#666">
+</span><span style="color:#666">      </span>kind:<span style="color:#666"> </span>Service<span style="color:#666">
+</span><span style="color:#666">      </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>ImageStream<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>annotations:<span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Keeps track of changes in the application image&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>BuildConfig<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>annotations:<span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Defines how to build the application&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>spec:<span style="color:#666">
+</span><span style="color:#666">    </span>source:<span style="color:#666">
+</span><span style="color:#666">      </span>type:<span style="color:#666"> </span>Git<span style="color:#666">
+</span><span style="color:#666">      </span>git:<span style="color:#666">
+</span><span style="color:#666">        </span>uri:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${SOURCE_REPOSITORY_URL}&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span>ref:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${SOURCE_REPOSITORY_REF}&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>contextDir:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${CONTEXT_DIR}&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>strategy:<span style="color:#666">
+</span><span style="color:#666">      </span>type:<span style="color:#666"> </span>Docker<span style="color:#666">
+</span><span style="color:#666">      </span>dockerStrategy:<span style="color:#666"> </span>{}<span style="color:#666">
+</span><span style="color:#666">    </span>output:<span style="color:#666">
+</span><span style="color:#666">      </span>to:<span style="color:#666">
+</span><span style="color:#666">        </span>kind:<span style="color:#666"> </span>ImageStreamTag<span style="color:#666">
+</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>api:latest<span style="color:#666">
+</span><span style="color:#666">    </span>postCommit:<span style="color:#666">
+</span><span style="color:#666">      </span>script:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GIN_MODE=release go test -v ./...&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>resources:<span style="color:#666">
+</span><span style="color:#666">      </span>limits:<span style="color:#666">
+</span><span style="color:#666">        </span>cpu:<span style="color:#666"> </span>100m<span style="color:#666">
+</span><span style="color:#666">        </span>memory:<span style="color:#666"> </span>1Gi<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>DeploymentConfig<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>annotations:<span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Defines how to deploy the application server&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>spec:<span style="color:#666">
+</span><span style="color:#666">    </span>strategy:<span style="color:#666">
+</span><span style="color:#666">      </span>type:<span style="color:#666"> </span>Recreate<span style="color:#666">
+</span><span style="color:#666">    </span>triggers:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>type:<span style="color:#666"> </span>ImageChange<span style="color:#666">
+</span><span style="color:#666">      </span>imageChangeParams:<span style="color:#666">
+</span><span style="color:#666">        </span>automatic:<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">true</span><span style="color:#666">
+</span><span style="color:#666">        </span>containerNames:<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">        </span>from:<span style="color:#666">
+</span><span style="color:#666">          </span>kind:<span style="color:#666"> </span>ImageStreamTag<span style="color:#666">
+</span><span style="color:#666">          </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;api:latest&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>type:<span style="color:#666"> </span>ConfigChange<span style="color:#666">
+</span><span style="color:#666">    </span>replicas:<span style="color:#666"> </span><span style="color:#3677a9">1</span><span style="color:#666">
+</span><span style="color:#666">    </span>selector:<span style="color:#666">
+</span><span style="color:#666">      </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>template:<span style="color:#666">
+</span><span style="color:#666">      </span>metadata:<span style="color:#666">
+</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">        </span>labels:<span style="color:#666">
+</span><span style="color:#666">          </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">      </span>spec:<span style="color:#666">
+</span><span style="color:#666">        </span>containers:<span style="color:#666">
+</span><span style="color:#666">        </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">          </span>image:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">          </span>ports:<span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>containerPort:<span style="color:#666"> </span><span style="color:#3677a9">8080</span><span style="color:#666">
+</span><span style="color:#666">          </span>env:<span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>GIN_MODE<span style="color:#666">
+</span><span style="color:#666">            </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;release&#34;</span><span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>WORKDAY_DB_NAME<span style="color:#666">
+</span><span style="color:#666">            </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>WORKDAY_DB_USER<span style="color:#666">
+</span><span style="color:#666">            </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
+</span><span style="color:#666">          </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>WORKDAY_DB_PASSWORD<span style="color:#666">
+</span><span style="color:#666">            </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>parameters:<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>SOURCE_REPOSITORY_URL<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;The URL of the repository with your application source code&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;https://github.com/iris-garcia/workday.git&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>SOURCE_REPOSITORY_REF<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Set this to a branch name, tag or other ref of your repository if you are not using the default branch&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>CONTEXT_DIR<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Set this to the relative path to your project if it is not in the root of your repository&#34;</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2</span>:
+  openshift.yml
+</div>
+
+<p>The template defines 5 main resources to be created in OpenShift:</p>
+
+<ol>
+<li><strong>Service</strong>: exposes connectivity to the API container in a port.</li>
+<li><strong>Route</strong>: Creates and endpoint which points to the Service resource.</li>
+<li><strong>ImageStream</strong>: Keeps track of of changes in the application image.</li>
+<li><strong>BuildConfig</strong>: This resource as it is configured basically fetches
+the source code from the git repository then builds and tags a
+docker image and finally runs the tests to make sure it is a
+working image.</li>
+<li><strong>DeploymentConfig</strong>: This resource is the one spawning a new
+container/s with the built image, it has many parameters such as
+the ability to recreate the container automatically when the
+specified image has been changed or the number of replicas, it also
+allows to setup environment variables to the container/s.</li>
+</ol>
+
+<h2 id="step-5-create-a-new-app-using-the-above-template">Step 5: Create a new app using the above template</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-app deployment/openshift.yml</code></pre></div>
+<h2 id="step-6-trigger-the-build">Step 6: Trigger the build</h2>
+
+<p>The build can be triggered manually with the following command:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc start-build api</code></pre></div>
+<p>But we don&rsquo;t want to be triggering a new build everytime we integrate
+a new change in our service, therefore we have also set up a continuous
+delivery process which tests the new changes whenever there is a new
+push in the repository and deploys the new version if the tests
+passes.</p>
+
+<p>The documentation with a how-to guide can be found <a href="../../howto/openshift/">here</a>.</p>
+
+<h2 id="demo">Demo</h2>
+
+<p>
+    <asciinema-player
+        src="../../casts/openshift.cast"
+        cols="640"
+        rows="50"
+        
+        preload="1"
+        
+        start-at="0"
+        speed="1"
+        idle-time-limit="1"
+        
+        
+        
+        
+        
+        
+        
+    ></asciinema-player>
+</p>
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../deployment/" title="Deployment"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../howto/" title="How-to" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1573947786"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1573947786"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1573947786"></script>
+    <script src="../../js/jquery.sticky.js?1573947786"></script>
+    <script src="../../js/featherlight.min.js?1573947786"></script>
+    <script src="../../js/highlight.pack.js?1573947786"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1573947786"></script>
+    <script src="../../js/learn.js?1573947786"></script>
+    <script src="../../js/hugo-learn.js?1573947786"></script>
+
+    <link href="../../mermaid/mermaid.css?1573947786" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1573947786"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+<script src="../../js/asciinema-player.js"></script>
+
+
+  </body>
+</html>
+

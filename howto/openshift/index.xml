@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GitHub Pages on Workday</title>
-    <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-    <description>Recent content in GitHub Pages on Workday</description>
+    <title>Continuous Delivery on Workday</title>
+    <link>https://iris-garcia.github.io/workday/howto/openshift/</link>
+    <description>Recent content in Continuous Delivery on Workday</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Sat, 16 Nov 2019 19:58:27 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 21:42:17 +0100</lastBuildDate>
     
-	<atom:link href="https://iris-garcia.github.io/workday/howto/gh-pages/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://iris-garcia.github.io/workday/howto/openshift/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

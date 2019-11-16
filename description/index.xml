@@ -8,30 +8,30 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Tue, 05 Nov 2019 17:06:26 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 19:58:25 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/description/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Why?</title>
+      <link>https://iris-garcia.github.io/workday/description/why/</link>
+      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/description/why/</guid>
+      <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
+This process can be as simple as signing in a paper the checks in and checks out for every single workday; but any other process can be used and this is the reason for which I decided to develop this project.</description>
+    </item>
+    
+    <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Tue, 05 Nov 2019 17:06:26 +0100</pubDate>
+      <pubDate>Sat, 16 Nov 2019 19:58:25 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
 It allows the creation of different types of users (roles), initially there are two main roles:
  employee: The employee has permissions to:  Register checks in and checks out. Update their own password. Update their own schedule.  HR: The Human Resources role is the one with almost full control, it has the permissions of a regular employee plus:  Retrieve every employee&amp;rsquo;s schedule.</description>
-    </item>
-    
-    <item>
-      <title>Why?</title>
-      <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Tue, 05 Nov 2019 17:06:26 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/description/why/</guid>
-      <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
-This process can be as simple as signing in a paper the checks in and checks out for every single workday; but any other process can be used and this is the reason for which I decided to develop this project.</description>
     </item>
     
   </channel>
