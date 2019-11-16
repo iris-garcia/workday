@@ -32,14 +32,27 @@ The extended documentation is hosted under
 - [[https://iris-garcia.github.io/workday/deployment/][Deployment]]
 - [[https://iris-garcia.github.io/workday/dev/api/][API tests]]
 - [[https://iris-garcia.github.io/workday/coverage.html#file3][Code coverage]]
+- [[https://iris-garcia.github.io/workday/howto/openshift/][OpenShift Continuous Deployment]]
 
 ** Build Tool
 [[https://magefile.org/][Mage]] is the build tool used in this project, for further details
 check out the [[https://iris-garcia.github.io/workday/dev/tools/#mage][documentation]].
 
 #+begin_src bash
-buildtool: magefile.go
+  buildtool: magefile.go
 #+end_src
+
+** OpenShift Deployment
+#+begin_src bash
+  deployment: http://api-workday.apps.us-east-2.starter.openshift-online.com
+#+end_src
+
+The documentation showcasing how to get the project deployed in
+OpenShift is hosted [[https://iris-garcia.github.io/workday/deployment/openshit/][here]].
+
+And the documentation showcasing how to set up a continuous deployment
+from GitHub using Travis to test the new changes and deploying to
+OpenShift when they pass is hosted [[https://iris-garcia.github.io/workday/howto/openshift/][here]].
 
 * How to contribute
 ** Setup the environment
