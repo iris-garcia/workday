@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Creates and returns a Gin Router
+// GinRouter Creates and returns a Gin Router
 func GinRouter(db *sql.DB) *gin.Engine {
 	router := gin.Default()
 

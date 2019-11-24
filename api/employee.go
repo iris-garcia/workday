@@ -4,13 +4,13 @@ import (
 	"database/sql"
 )
 
-// Represents an employee
+// Employee Represents an employee
 type Employee struct {
 	ID        uint   `json:"id"`
 	Firstname string `binding:"required" json:"firstname"`
 	Lastname  string `binding:"required" json:"lastname"`
-	Role      uint   `binding:"required" json:role`
-	Password  string `binding:"required" json:password`
+	Role      uint   `binding:"required" json:"role"`
+	Password  string `binding:"required" json:"password"`
 }
 
 // CreateEmployee saves a new employee in DB.

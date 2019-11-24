@@ -6,9 +6,9 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-var ENV_VARS = []string{"MARIADB_SERVICE_HOST", "WORKDAY_DB_NAME", "WORKDAY_DB_USER", "WORKDAY_DB_PASSWORD"}
+var envVariables = []string{"MARIADB_SERVICE_HOST", "WORKDAY_DB_NAME", "WORKDAY_DB_USER", "WORKDAY_DB_PASSWORD"}
 
-// Represents database parameters
+// DBConfig Represents database parameters
 type DBConfig struct {
 	Host     string
 	Database string
@@ -26,11 +26,11 @@ func envVars(vars []string) bool {
 	return true
 }
 
-// Read and parse DB configuration; environment variables have precedence over config file.
+// LoadDBConfig Read and parse DB configuration; environment variables have precedence over config file.
 func LoadDBConfig(filepath string) (DBConfig, error) {
 	var c DBConfig
 
-	if envVars(ENV_VARS) {
+	if envVars(envVariables) {
 		host, _ := os.LookupEnv("MARIADB_SERVICE_HOST")
 		name, _ := os.LookupEnv("WORKDAY_DB_NAME")
 		user, _ := os.LookupEnv("WORKDAY_DB_USER")

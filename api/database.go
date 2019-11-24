@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" // Needed for mysql
 )
 
 // ConnectDB returns a sql.DB connection using a given DBConfig.
