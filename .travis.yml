@@ -11,7 +11,7 @@ jobs:
   - stage: test
     go: 1.13.x
     before_install:
-      - sudo apt-get -y install npm
+      - sudo apt-get -y install nodejs-dev node-gyp libssl1.0-dev npm
       - npm install pm2@latest -g
     install:
       - go get github.com/magefile/mage
