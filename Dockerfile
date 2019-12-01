@@ -17,7 +17,7 @@ RUN go get github.com/magefile/mage
 RUN mage build
 
 # Expose the PORT defined as environment variable
-EXPOSE $PORT
+EXPOSE 8080
 
 # Run the startapi stage
 CMD ["mage", "startapi"]
