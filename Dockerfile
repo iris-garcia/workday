@@ -14,7 +14,7 @@ RUN mkdir -p /go/src/github.com/iris-garcia/workday
 WORKDIR /go/src/github.com/iris-garcia/workday
 
 # Copy the needed files to build the project (using .dockerignore to ignore unneeded)
-ADD . /go/src/github.com/iris-garcia/workday
+COPY --chown=api . /go/src/github.com/iris-garcia/workday
 
 # Install our build tool Mage
 RUN go get github.com/magefile/mage
