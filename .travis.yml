@@ -21,6 +21,7 @@ jobs:
       - mage start
       - mage test
       - mage stop
+      
   - stage: test
     name: Test go 1.10.x
     go: 1.10.x
