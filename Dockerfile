@@ -1,5 +1,5 @@
 # Use the alpine version of golang which is way smaller.
-FROM golang:1.13-alpine
+FROM golang:1.13
 
 # Create the project's directory under the default GOPATH
 RUN mkdir -p /go/src/github.com/iris-garcia/workday
