@@ -9,6 +9,7 @@ stages:
 jobs:
   include:
   - stage: test
+    name: Test go 1.13.x
     go: 1.13.x
     before_install:
       - sudo apt-get -y install nodejs-dev node-gyp libssl1.0-dev npm
@@ -16,14 +17,19 @@ jobs:
     install:
       - go get github.com/magefile/mage
       - mage build
-    addons:
-      mariadb: '10.1'
-    services:
-      - mariadb
-    before_script:
-      - mysql -u root -e 'CREATE DATABASE workday;'
-      - mysql -u root -e "CREATE USER 'workday'@'%' IDENTIFIED BY 'workday';"
-      - mysql -u root -e "GRANT ALL ON workday.* TO 'workday'@'%'; FLUSH PRIVILEGES;"
+    script:
+      - mage start
+      - mage test
+      - mage stop
+  - stage: test
+    name: Test go 1.10.x
+    go: 1.10.x
+    before_install:
+      - sudo apt-get -y install nodejs-dev node-gyp libssl1.0-dev npm
+      - npm install pm2@latest -g
+    install:
+      - go get github.com/magefile/mage
+      - mage build
     script:
       - mage start
       - mage test
