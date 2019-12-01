@@ -16,7 +16,7 @@ RUN go get github.com/magefile/mage
 # Run the build stage
 RUN CGO_ENABLED=0 GOOS=linux mage build
 
-# Use a small image
+# Use a small image.
 FROM busybox:latest
 
 WORKDIR /root/
