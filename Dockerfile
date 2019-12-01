@@ -1,11 +1,14 @@
 # Use the alpine version of golang which is way smaller.
 FROM golang:1.13
 
-# Create the project's directory under the default GOPATH
-RUN mkdir -p /go/src/github.com/iris-garcia/workday/.cache
+# Create a new user api
+RUN useradd -s /bin/bash api
 
-# Workaround needed for OpenShift
-RUN chmod -R 777 /go/src/github.com/iris-garcia/workday/.cache
+# Use our user instead of root
+USER api
+
+# Create the project's directory under the default GOPATH
+RUN mkdir -p /go/src/github.com/iris-garcia/workday
 
 # Use this directory as working directory
 WORKDIR /go/src/github.com/iris-garcia/workday
