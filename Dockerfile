@@ -22,5 +22,9 @@ RUN go get github.com/magefile/mage
 # Run the build stage
 RUN mage build
 
+# Needed for OpenShift
+RUN chgrp -R 0 /go/src/github.com/iris-garcia/workday && \
+    chmod -R g=u /go/src/github.com/iris-garcia/workday
+
 # Run the startapi stage
 CMD ["mage", "startapi"]
