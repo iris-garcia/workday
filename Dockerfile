@@ -2,7 +2,7 @@
 FROM golang:1.13
 
 # Create the project's directory under the default GOPATH
-RUN mkdir -p /go/src/github.com/iris-garcia/workday
+RUN mkdir -p /go/src/github.com/iris-garcia/workday/.cache
 
 # Use this directory as working directory
 WORKDIR /go/src/github.com/iris-garcia/workday
