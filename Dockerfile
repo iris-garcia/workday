@@ -2,7 +2,7 @@
 FROM golang:1.13
 
 # Create a new user api
-RUN useradd -s /bin/bash api
+RUN useradd -ms /bin/bash api
 
 # Use our user instead of root
 USER api
@@ -14,16 +14,13 @@ RUN mkdir -p /go/src/github.com/iris-garcia/workday
 WORKDIR /go/src/github.com/iris-garcia/workday
 
 # Copy the needed files to build the project (using .dockerignore to ignore unneeded)
-COPY . /go/src/github.com/iris-garcia/workday
+ADD . /go/src/github.com/iris-garcia/workday
 
 # Install our build tool Mage
 RUN go get github.com/magefile/mage
 
 # Run the build stage
 RUN mage build
-
-# Expose the PORT defined as environment variable
-EXPOSE 8080
 
 # Run the startapi stage
 CMD ["mage", "startapi"]
