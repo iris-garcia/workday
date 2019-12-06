@@ -17,6 +17,8 @@ import (
 // Build builds the binary
 func Build() error {
 	mg.Deps(InstallDeps)
+	os.Setenv("CGO_ENABLED", "0")
+	os.Setenv("GOOS", "linux")
 	fmt.Println("Building...")
 	cmd := exec.Command("go", "build", "-o", "api_server", "./cmd/api/server.go")
 	return cmd.Run()
@@ -45,6 +47,16 @@ func Clean() {
 func Start() error {
 	mg.Deps(InstallDeps, Build)
 	cmd := exec.Command("pm2", "start", "./api_server", "--name", "api")
+	return cmd.Run()
+}
+
+// Start starts the API HTPP server. Currently using pm2 as process manager
+func StartAPI() error {
+	mg.Deps(InstallDeps, Build)
+	os.Setenv("GIN_MODE", "release")
+	cmd := exec.Command("./api_server")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
 

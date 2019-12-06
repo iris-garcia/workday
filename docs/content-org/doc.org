@@ -363,17 +363,181 @@ automatically update the documentation site.
 To get this one working there are some requisites explained in a howto
 [[/howto/gh-pages][document]].
 
+** Docker
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: docker
+:EXPORT_HUGO_WEIGHT: 4
+:END:
+*** Docker
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>4. </b>"
+:END:
+<h3> Chapter 4 </h3>
+<h1>Docker</h1>
+
+This chapter describes all the work done related to docker,
+e.g. Dockerfile creation, dockerhub upload, .dockerignore.
+*** Dockerfile                                                         :docker:
+:PROPERTIES:
+:EXPORT_FILE_NAME: docker/dockerfile
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 1
+:END:
+To create a Docker image, we have added two new files to our project:
+
+- ~Dockerfile~: Contains the needed commands to create the image.
+- ~.dockerignore~: It works like ~.gitignore~ for git, it allows to
+  define which file/s should not be included in the Docker image when
+  the command ~ADD~ or ~COPY~ is/are invoked.
+
+#+CAPTION: Dockerfile
+#+INCLUDE: "../../Dockerfile" src dockerfile
+
+The Dockerfile has comments for every command but it is worth to mention
+that we are using a multi stage build which allows to use different ~FROM~
+instructions, each of them begins a new stage of the build. 
+
+Then we can copy artifacts from one stage to another, leaving behind
+everything we don't want in the final image.
+
+#+CAPTION: .dockerignore
+#+INCLUDE: "../../.dockerignore" src bash
+
+*** Building the Docker image
+:PROPERTIES:
+:EXPORT_FILE_NAME: docker/build
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 2
+:END:
+To build the Docker image locally we can run the following command
+from the root directory of the project:
+
+#+begin_src bash
+  $ docker build . -t workday
+
+  Sending build context to Docker daemon  118.8kB
+  Step 1/11 : FROM golang:1.13 as builder
+   ---> a2e245db8bd3
+  Step 2/11 : RUN mkdir -p /go/src/github.com/iris-garcia/workday
+   ---> Running in 61717fb25087
+  Removing intermediate container 61717fb25087
+   ---> eaf6e4d73eb4
+  Step 3/11 : WORKDIR /go/src/github.com/iris-garcia/workday
+   ---> Running in 41ddb2a701bd
+  Removing intermediate container 41ddb2a701bd
+   ---> d5b6af426ca6
+  Step 4/11 : COPY . /go/src/github.com/iris-garcia/workday/
+   ---> d64c634bdf5d
+  Step 5/11 : RUN go get github.com/magefile/mage
+   ---> Running in 390e199e05f6
+  go: finding github.com/magefile/mage v1.9.0
+  go: downloading github.com/magefile/mage v1.9.0
+  go: extracting github.com/magefile/mage v1.9.0
+  Removing intermediate container 390e199e05f6
+   ---> a8cf88a8c7fe
+  Step 6/11 : RUN mage build
+   ---> Running in b2de42b4f44e
+  Installing Deps...
+  Building...
+  Removing intermediate container b2de42b4f44e
+   ---> cdb82f1fa6e2
+  Step 7/11 : FROM busybox:latest
+   ---> 020584afccce
+  Step 8/11 : WORKDIR /root
+   ---> Running in 4fcc3c788a2c
+  Removing intermediate container 4fcc3c788a2c
+   ---> 3f616f2908d0
+  Step 9/11 : COPY --from=builder /go/src/github.com/iris-garcia/workday/api_server .
+   ---> f3a03d0b5dd7
+  Step 10/11 : COPY --from=builder /go/src/github.com/iris-garcia/workday/db_config.toml .
+   ---> 1267efc3b59c
+  Step 11/11 : CMD ["./api_server"]
+   ---> Running in 01b44065e48f
+  Removing intermediate container 01b44065e48f
+   ---> d7a90aacccb6
+  Successfully built d7a90aacccb6
+  Successfully tagged workday:latest
+#+end_src
+
+This is basically telling docker to build a Docker image reading the
+~Dockerfile~ from the directory ~.~ (current working directory) and
+name it (~-t~) ~workday~.
+
+As we did not especify any tag after the name Docker defaults to
+~latest~.
+
+To check our newly created image we can run the command:
+#+begin_src bash
+  docker image ls
+
+  REPOSITORY      TAG                 IMAGE ID            CREATED             SIZE
+  workday         latest              d7a90aacccb6        3 minutes ago       17.2MB
+  <none>          <none>              cdb82f1fa6e2        3 minutes ago       910MB
+
+#+end_src
+
+{{% notice tip %}}
+*Thanks to the multi stage build we have our app in a 17.2MB container.*
+{{% /notice %}}
+
+
+And finally we can run our image as follows:
+#+begin_src bash
+  docker run -e PORT=8080 -p 9090:8080 workday
+#+end_src
+
+This will set the environment variable ~PORT~ to the value ~8080~ (this
+is internally used by our app), then the ~-p 9090:8080~ will publish the
+container port *8080* to the host port *9090*, therefore using
+http://localhost:9090 should hit our container app.
+
+*** Docker Hub
+:PROPERTIES:
+:EXPORT_FILE_NAME: docker/dockerhub
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 3
+:END:
+Now that we have a working Docker image we want to automate the
+building process, so it automatically builds and publishes the image with
+every new code change.
+
+**** Step 1: Register in [[https://hub.docker.com][Docker Hub]]
+Just click in ~Sing up~ and fill up the following form:
+
+[[/images/dockerhub_1.png]]
+
+**** Step 2: Create a new Repository
+Click in *Create Repository +* and name it accordingly, under the
+*Build Settings* section select the *Connected* option with a GitHub
+logo to autobuild a new image with every ~git push~ event as long as
+it matches the build rules, which in our case are the default ones
+(the Dockerfile is located in the root directory of the project).
+
+[[/images/dockerhub_2.png]]
+
+
+Click in *Create and Build* to start the first build of the image,
+then in the *Builds* tab we can see the process of the build and its
+logs as shown in the screenshot below:
+
+[[/images/dockerhub_3.png]]
+
+{{% notice tip %}}
+*Now with every new change detected in our GitHub repository a new build will be triggered in Docker Hub.*
+{{% /notice %}}
+
 ** Deployment
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: deployment
-:EXPORT_HUGO_WEIGHT: 4
+:EXPORT_HUGO_WEIGHT: 5
 :END:
 *** Deployment
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>4. </b>"
 :END:
-<h3> Chapter 4 </h3>
+<h3> Chapter 5 </h3>
 <h1>Deployment</h1>
 
 This chapter describes where and how is this project deployed.
@@ -385,7 +549,7 @@ This chapter describes where and how is this project deployed.
 :END:
 **** Requirements
 ***** Create account in RedHat
-1. Create a new account using the [[https://developers.redhat.com/auth/realms/rhd/login-actions/registration?client_id=oso&tab_id=ZoheL3ZSJ4g][Sign up]] form.
+1. Create a new account using the [[https://manage.openshift.com/accounts/auth/keycloak][Sign up]] form.
 2. Sign in into [[https://manage.openshift.com/accounts/auth/keycloak][OpenShift]].
 ***** Install the OpenShift client
 #+begin_src bash
@@ -399,15 +563,10 @@ This chapter describes where and how is this project deployed.
 {{% /notice %}}
 ***** Get the Login command
 [[/images/oc_login.png]]
+
 ***** Create a Dockerfile
 OpenShift can create a docker image given a source git repository, but
-it needs a Dockerfile definition which is shown below:
-#+CAPTION: Dockerfile
-#+INCLUDE: "../../Dockerfile" src dockerfile
-
-The Dockerfile is quite simple and this is expected thanks to the
-configuration of the build tool.
-
+it needs a Dockerfile definition which is shown [[/docker/dockerfile][here]].
 **** QuickStart
 This is a summary of the needed commands to get the project working:
 #+begin_src bash
@@ -476,7 +635,7 @@ The template defines 5 main resources to be created in OpenShift:
 
 **** Step 5: Create a new app using the above template
 #+begin_src bash
-oc new-app deployment/openshift.yml
+oc new-app deployment/openshift.yml -p GITHUB_SECRET=supersecret
 #+end_src
 
 **** Step 6: Trigger the build
@@ -487,11 +646,11 @@ The build can be triggered manually with the following command:
 
 But we don't want to be triggering a new build everytime we integrate
 a new change in our service, therefore we have also set up a continuous
-delivery process which tests the new changes whenever there is a new
-push in the repository and deploys the new version if the tests
-passes.
+delivery processes which deploys a new version of the app whenever there
+are new changes in the repository.
 
-The documentation with a how-to guide can be found [[/howto/openshift/][here]].
+1. Using Travis CI ([[/howto/travis-cd/][how-to documentation]]).
+2. Using GitHub ([[/howto/github-cd/][how-to documentation]]).
 
 **** Demo
 {{< asciinema key="openshift" rows="50" preload="1"
@@ -499,7 +658,7 @@ idle-time-limit="1" >}}
 ** How-to
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: howto
-:EXPORT_HUGO_WEIGHT: 5
+:EXPORT_HUGO_WEIGHT: 6
 :END:
 *** How-to
 :PROPERTIES:
@@ -615,12 +774,12 @@ section of your repository.
 
 [[/images/gh_action.png]]
 
-*** Continuous Delivery                                  :doc:cd:openshift:
+*** Continuous Delivery (Travis CI)                      :doc:cd:openshift:
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: howto/openshift
+:EXPORT_HUGO_SECTION: howto/travis-cd
 :EXPORT_HUGO_WEIGHT: 2
 :END:
-**** Continuous Delivery
+**** Continuous Delivery (Travis CI)
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
@@ -710,6 +869,143 @@ configuration file can be found [[https://github.com/iris-garcia/workday/blob/ma
   command (we don't have to waste time here).
 - Finally the ~on: branch~ parameter tells Travis to only deploy when
   there are changes in the *master* branch.
+
+*** Continuous Delivery (GitHub)                             :openshift:cd:
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: howto/github-cd
+:EXPORT_HUGO_WEIGHT: 3
+:END:
+**** Continuous Delivery (GitHub)                           :openshift:cd:
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:END:
+***** Step 1: Create a secret encoded in base64
+We need to create a secret which need to be known by our deployment in
+OpenShift and the Webhook in GitHub:
+#+begin_src bash
+  $ echo 'supersecret' | base64
+  c3VwZXJzZWNyZXQ=
+#+end_src
+***** Step 2: Deploy in OpenShift using the encoded secret
+The following resources in the OpenShift deployment template are the
+ones creating the secret and a trigger for GitHub.
+
+#+begin_src yaml
+  # ...
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: gh-secret
+      creationTimestamp:
+    data:
+      WebHookSecretKey: "${GITHUB_SECRET}"
+  # ...
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: api
+      annotations:
+        description: "Defines how to build the application"
+    spec:
+      source:
+        type: Git
+        git:
+          uri: "${SOURCE_REPOSITORY_URL}"
+          ref: "${SOURCE_REPOSITORY_REF}"
+        contextDir: "${CONTEXT_DIR}"
+      strategy:
+        type: Docker
+        dockerStrategy: {}
+      output:
+        to:
+          kind: ImageStreamTag
+          name: api:latest
+      postCommit:
+        script: "GIN_MODE=release go test -v ./..."
+      resources:
+        limits:
+          cpu: 100m
+          memory: 1Gi
+      triggers:
+      - type: "GitHub"
+        github:
+          secretReference:
+            name: "gh-secret"
+  #...
+  parameters:
+  - name: SOURCE_REPOSITORY_URL
+    description: "The URL of the repository with your application source code"
+    value: "https://github.com/iris-garcia/workday.git"
+  - name: SOURCE_REPOSITORY_REF
+    description: "Set this to a branch name, tag or other ref of your repository if you are not using the default branch"
+  - name: CONTEXT_DIR
+    description: "Set this to the relative path to your project if it is not in the root of your repository"
+  - name: GITHUB_SECRET
+    description: "Github webhook secret"
+#+end_src
+
+
+Then we simply need to run the deploy passing the encoded secret as a
+parameter:
+
+#+begin_src bash
+oc new-app deployment/openshift.yml -p GITHUB_SECRET='c3VwZXJzZWNyZXQ='
+#+end_src
+
+
+9928  12/1/2019 04:18  # Create the project passing a secret in base64 encoded (be careful with newlines!)
+9929  12/1/2019 04:18  # Create GitHub webhook using the endpoint from oc describe bc api endpoint 
+9930  12/1/2019 04:18  # Replace <secret> with the secret value
+9931  12/1/2019 04:18  # Do not use any secret in github
+***** Step 3: Create a GitHub webhook
+In this step we will create a new GitHub webhook which will send a
+/POST/ request to our OpenShift's app endpoint everytime there is a
+new push.
+
+To get the enpoint generated by OpenShift we just need to run the
+following command:
+#+begin_src bash
+  $ oc describe bc api endpoint
+  Name:		api
+  Namespace:	workday
+  Created:	5 days ago
+  Labels:		app=api
+  Description:	Defines how to build the application
+  Annotations:	openshift.io/generated-by=OpenShiftNewApp
+  Latest Version:	21
+
+  Strategy:	Docker
+  URL:		https://github.com/iris-garcia/workday.git
+  Output to:	ImageStreamTag api:latest
+
+  Build Run Policy:	Serial
+  Triggered by:		<none>
+  Webhook GitHub:
+          URL:	https://api.us-east-2.starter.openshift-online.com:6443/apis/build.openshift.io/v1/namespaces/workday/buildconfigs/api/webhooks/<secret>/github
+  Builds History Limit:
+          Successful:	5
+          Failed:		5
+#+end_src
+
+{{% notice note %}}
+*Save the URL, it will be needed in the creation of the GitHub's webhook, and replace the <secret> with the real secret used.*
+{{% /notice %}}
+
+To create the webhook browse to the GitHub's repository and click in
+*Settings*.
+[[/images/gh_oc_1.png]]
+
+In the *Settings* page, click in *Webhooks* then *Add webhook*.
+[[/images/gh_oc_2.png]]
+
+Then we need to fill the following fields:
+- *Payload URL*: The one we copied from OpenShift
+- *Content type*: It has to be ~application/json~
+- *Secret*: Leave it empty (the secret is included in the payload url).
+
+Then finally click in *Add webhook*.
+[[/images/gh_oc_3.png]]
 
 
 * Footnotes

@@ -1,7 +1,7 @@
 +++
 title = "OpenShift"
 author = ["Iris Garcia"]
-lastmod = 2019-11-17T00:12:51+01:00
+lastmod = 2019-12-06T18:24:52+01:00
 tags = ["cd"]
 draft = false
 weight = 1
@@ -13,7 +13,7 @@ asciinema = true
 
 ### Create account in RedHat {#create-account-in-redhat}
 
-1.  Create a new account using the [Sign up](https://developers.redhat.com/auth/realms/rhd/login-actions/registration?client%5Fid=oso&tab%5Fid=ZoheL3ZSJ4g) form.
+1.  Create a new account using the [Sign up](https://manage.openshift.com/accounts/auth/keycloak) form.
 2.  Sign in into [OpenShift](https://manage.openshift.com/accounts/auth/keycloak).
 
 
@@ -38,31 +38,7 @@ sudo cp oc /usr/local/bin/
 ### Create a Dockerfile {#create-a-dockerfile}
 
 OpenShift can create a docker image given a source git repository, but
-it needs a Dockerfile definition which is shown below:
-
-```dockerfile
-FROM golang:1.13
-
-RUN mkdir -p /go/src/github.com/iris-garcia/workday
-
-WORKDIR /go/src/github.com/iris-garcia/workday
-
-COPY . /go/src/github.com/iris-garcia/workday
-RUN go get github.com/magefile/mage
-RUN mage build
-
-EXPOSE 8080
-
-CMD ["./api_server"]
-```
-
-<div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 1</span>:
-  Dockerfile
-</div>
-
-The Dockerfile is quite simple and this is expected thanks to the
-configuration of the build tool.
+it needs a Dockerfile definition which is shown [here](/docker/dockerfile).
 
 
 ## QuickStart {#quickstart}
@@ -164,6 +140,13 @@ objects:
     name: api
     annotations:
       description: "Keeps track of changes in the application image"
+- kind: Secret
+  apiVersion: v1
+  metadata:
+    name: gh-secret
+    creationTimestamp:
+  data:
+    WebHookSecretKey: "${GITHUB_SECRET}"
 - kind: BuildConfig
   apiVersion: v1
   metadata:
@@ -190,6 +173,11 @@ objects:
       limits:
         cpu: 100m
         memory: 1Gi
+    triggers:
+    - type: "GitHub"
+      github:
+        secretReference:
+          name: "gh-secret"
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
@@ -241,10 +229,12 @@ parameters:
   description: "Set this to a branch name, tag or other ref of your repository if you are not using the default branch"
 - name: CONTEXT_DIR
   description: "Set this to the relative path to your project if it is not in the root of your repository"
+- name: GITHUB_SECRET
+  description: "Github webhook secret"
 ```
 
 <div class="src-block-caption">
-  <span class="src-block-number">Code Snippet 2</span>:
+  <span class="src-block-number">Code Snippet 1</span>:
   openshift.yml
 </div>
 
@@ -267,7 +257,7 @@ The template defines 5 main resources to be created in OpenShift:
 ## Step 5: Create a new app using the above template {#step-5-create-a-new-app-using-the-above-template}
 
 ```bash
-oc new-app deployment/openshift.yml
+oc new-app deployment/openshift.yml -p GITHUB_SECRET=supersecret
 ```
 
 
@@ -281,11 +271,11 @@ oc start-build api
 
 But we don't want to be triggering a new build everytime we integrate
 a new change in our service, therefore we have also set up a continuous
-delivery process which tests the new changes whenever there is a new
-push in the repository and deploys the new version if the tests
-passes.
+delivery processes which deploys a new version of the app whenever there
+are new changes in the repository.
 
-The documentation with a how-to guide can be found [here](/howto/openshift/).
+1.  Using Travis CI ([how-to documentation](/howto/travis-cd/)).
+2.  Using GitHub ([how-to documentation](/howto/github-cd/)).
 
 
 ## Demo {#demo}
