@@ -1,4 +1,4 @@
-# Use the alpine version of golang which is way smaller.
+# Use a golang image as base builder image
 FROM golang:1.13 as builder
 
 # Create the project's directory under the default GOPATH
@@ -14,12 +14,13 @@ COPY . /go/src/github.com/iris-garcia/workday/
 RUN go get github.com/magefile/mage
 
 # Run the build stage
-RUN CGO_ENABLED=0 GOOS=linux mage build
+RUN mage build
 
-# Use a small image.
+# Use a small image to run the binary
 FROM busybox:latest
 
-WORKDIR /root/
+# Use /root as working directory
+WORKDIR /root
 
 # Copy the built binary and its default config file
 COPY --from=builder /go/src/github.com/iris-garcia/workday/api_server .

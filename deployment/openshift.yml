@@ -37,6 +37,13 @@ objects:
     name: api
     annotations:
       description: "Keeps track of changes in the application image"
+- kind: Secret
+  apiVersion: v1
+  metadata:
+    name: gh-secret
+    creationTimestamp:
+  data:
+    WebHookSecretKey: "${GITHUB_SECRET}"
 - kind: BuildConfig
   apiVersion: v1
   metadata:
@@ -63,6 +70,11 @@ objects:
       limits:
         cpu: 100m
         memory: 1Gi
+    triggers:
+    - type: "GitHub"
+      github:
+        secretReference:
+          name: "gh-secret"
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
@@ -114,3 +126,5 @@ parameters:
   description: "Set this to a branch name, tag or other ref of your repository if you are not using the default branch"
 - name: CONTEXT_DIR
   description: "Set this to the relative path to your project if it is not in the root of your repository"
+- name: GITHUB_SECRET
+  description: "Github webhook secret"
