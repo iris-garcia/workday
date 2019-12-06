@@ -12,20 +12,20 @@
     <title>Continuous Delivery (GitHub) :: Workday</title>
 
     
-    <link href="../../css/nucleus.css?1575670684" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1575670684" rel="stylesheet">
-    <link href="../../css/hybrid.css?1575670684" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1575670684" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1575670684" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1575670684" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1575670684" rel="stylesheet">
-    <link href="../../css/theme.css?1575670684" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1575670684" rel="stylesheet">
+    <link href="../../css/nucleus.css?1575671726" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1575671726" rel="stylesheet">
+    <link href="../../css/hybrid.css?1575671726" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1575671726" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1575671726" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1575671726" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1575671726" rel="stylesheet">
+    <link href="../../css/theme.css?1575671726" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1575671726" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1575670684" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1575671726" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1575670684"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1575671726"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1575670684"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1575670684"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1575671726"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1575671726"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/iris-garcia.github.io\/workday\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1575670684"></script>
+<script type="text/javascript" src="../../js/search.js?1575671726"></script>
 
     
   </div>
@@ -746,11 +746,6 @@ ones creating the secret and a trigger for GitHub.</p>
 <p>Then we simply need to run the deploy passing the encoded secret as a
 parameter:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-app deployment/openshift.yml -p <span style="color:#40ffff">GITHUB_SECRET</span>=<span style="color:#ed9d13">&#39;c3VwZXJzZWNyZXQ=&#39;</span></code></pre></div>
-<p>9928  12/1/2019 04:18  # Create the project passing a secret in base64 encoded (be careful with newlines!)
-9929  12/1/2019 04:18  # Create GitHub webhook using the endpoint from oc describe bc api endpoint
-9930  12/1/2019 04:18  # Replace <secret> with the secret value
-9931  12/1/2019 04:18  # Do not use any secret in github</p>
-
 <h2 id="step-3-create-a-github-webhook">Step 3: Create a GitHub webhook</h2>
 
 <p>In this step we will create a new GitHub webhook which will send a
@@ -794,7 +789,7 @@ Builds History Limit:
 <p>Then we need to fill the following fields:</p>
 
 <ul>
-<li><strong>Payload URL</strong>: The one we copied from OpenShift</li>
+<li><strong>Payload URL</strong>: The one we copied in the <a href="https://iris-garcia.github.io/workday/howto/github-cd/#step-3-create-a-github-webhook">Step 3</a>.</li>
 <li><strong>Content type</strong>: It has to be <code>application/json</code></li>
 <li><strong>Secret</strong>: Leave it empty (the secret is included in the payload url).</li>
 </ul>
@@ -1188,19 +1183,19 @@ Builds History Limit:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1575670684"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1575670684"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1575670684"></script>
-    <script src="../../js/jquery.sticky.js?1575670684"></script>
-    <script src="../../js/featherlight.min.js?1575670684"></script>
-    <script src="../../js/highlight.pack.js?1575670684"></script>
+    <script src="../../js/clipboard.min.js?1575671726"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1575671726"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1575671726"></script>
+    <script src="../../js/jquery.sticky.js?1575671726"></script>
+    <script src="../../js/featherlight.min.js?1575671726"></script>
+    <script src="../../js/highlight.pack.js?1575671726"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1575670684"></script>
-    <script src="../../js/learn.js?1575670684"></script>
-    <script src="../../js/hugo-learn.js?1575670684"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1575671726"></script>
+    <script src="../../js/learn.js?1575671726"></script>
+    <script src="../../js/hugo-learn.js?1575671726"></script>
 
-    <link href="../../mermaid/mermaid.css?1575670684" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1575670684"></script>
+    <link href="../../mermaid/mermaid.css?1575671726" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1575671726"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

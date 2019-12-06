@@ -38,7 +38,7 @@ gem install travis GitHub and Travis integration Travis must be integrated in Gi
     <item>
       <title>Continuous Delivery (GitHub)</title>
       <link>https://iris-garcia.github.io/workday/howto/github-cd/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:53 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 23:33:09 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/github-cd/</guid>
       <description>Step 1: Create a secret encoded in base64 We need to create a secret which need to be known by our deployment in OpenShift and the Webhook in GitHub:
