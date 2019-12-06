@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Continuous Delivery (Travis CI) on Workday</title>
+    <link>https://iris-garcia.github.io/workday/howto/travis-cd/</link>
+    <description>Recent content in Continuous Delivery (Travis CI) on Workday</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Fri, 06 Dec 2019 18:24:53 +0100</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/howto/travis-cd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

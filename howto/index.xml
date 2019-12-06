@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Sat, 16 Nov 2019 19:58:27 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 18:24:52 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/howto/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>GitHub Pages</title>
       <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:27 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/gh-pages/</guid>
       <description>This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub&amp;rsquo;s Actions to automate the deployment process.
@@ -25,14 +25,25 @@ There are different alternatives to setup GitHub pages, the one used in here is 
     </item>
     
     <item>
-      <title>Continuous Delivery</title>
-      <link>https://iris-garcia.github.io/workday/howto/openshift/</link>
-      <pubDate>Sat, 16 Nov 2019 21:42:17 +0100</pubDate>
+      <title>Continuous Delivery (Travis CI)</title>
+      <link>https://iris-garcia.github.io/workday/howto/travis-cd/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:53 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/howto/openshift/</guid>
+      <guid>https://iris-garcia.github.io/workday/howto/travis-cd/</guid>
       <description>Travis offers a deployment configuration which fortunately supports OpenShift, the following steps shows how to get it working.
 Prerequisites Travis-CI command line client The command line client has been used to secure our OpenShift token. First of all we need to install the CLI following its documentation, but basically if we already have ruby installed in our system we just need to install the following gem:
 gem install travis GitHub and Travis integration Travis must be integrated in GitHub which can be done in a few steps:</description>
+    </item>
+    
+    <item>
+      <title>Continuous Delivery (GitHub)</title>
+      <link>https://iris-garcia.github.io/workday/howto/github-cd/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:53 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/howto/github-cd/</guid>
+      <description>Step 1: Create a secret encoded in base64 We need to create a secret which need to be known by our deployment in OpenShift and the Webhook in GitHub:
+$ echo &amp;#39;supersecret&amp;#39; | base64 c3VwZXJzZWNyZXQ= Step 2: Deploy in OpenShift using the encoded secret The following resources in the OpenShift deployment template are the ones creating the secret and a trigger for GitHub.
+# ...-kind:SecretapiVersion:v1metadata:name:gh-secretcreationTimestamp:data:WebHookSecretKey:&amp;#34;${GITHUB_SECRET}&amp;#34;# ...-kind:BuildConfigapiVersion:v1metadata:name:apiannotations:description:&amp;#34;Defines how to build the application&amp;#34;spec:source:type:Gitgit:uri:&amp;#34;${SOURCE_REPOSITORY_URL}&amp;#34;ref:&amp;#34;${SOURCE_REPOSITORY_REF}&amp;#34;contextDir:&amp;#34;${CONTEXT_DIR}&amp;#34;strategy:type:DockerdockerStrategy:{}output:to:kind:ImageStreamTagname:api:latestpostCommit:script:&amp;#34;GIN_MODE=release go test -v .</description>
     </item>
     
   </channel>

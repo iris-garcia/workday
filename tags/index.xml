@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Sun, 17 Nov 2019 00:12:51 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 18:24:52 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,16 +16,25 @@
     <item>
       <title>cd</title>
       <link>https://iris-garcia.github.io/workday/tags/cd/</link>
-      <pubDate>Sun, 17 Nov 2019 00:12:51 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/tags/cd/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>docker</title>
+      <link>https://iris-garcia.github.io/workday/tags/docker/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>bdd</title>
       <link>https://iris-garcia.github.io/workday/tags/bdd/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/tags/bdd/</guid>
       <description></description>
@@ -34,7 +43,7 @@
     <item>
       <title>ci</title>
       <link>https://iris-garcia.github.io/workday/tags/ci/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/tags/ci/</guid>
       <description></description>
@@ -43,7 +52,7 @@
     <item>
       <title>test</title>
       <link>https://iris-garcia.github.io/workday/tags/test/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/tags/test/</guid>
       <description></description>

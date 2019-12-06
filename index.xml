@@ -8,25 +8,35 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Sat, 16 Nov 2019 19:58:25 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 18:24:50 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Dockerfile</title>
+      <link>https://iris-garcia.github.io/workday/docker/dockerfile/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/docker/dockerfile/</guid>
+      <description>To create a Docker image, we have added two new files to our project:
+ Dockerfile: Contains the needed commands to create the image. .dockerignore: It works like .gitignore for git, it allows to define which file/s should not be included in the Docker image when the command ADD or COPY is/are invoked.   # Use a golang image as base builder imageFROMgolang:1.13 as builder# Create the project&amp;#39;s directory under the default GOPATHRUN mkdir -p /go/src/github.</description>
+    </item>
+    
+    <item>
       <title>OpenShift</title>
       <link>https://iris-garcia.github.io/workday/deployment/openshit/</link>
-      <pubDate>Sun, 17 Nov 2019 00:12:51 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/deployment/openshit/</guid>
       <description>Requirements Create account in RedHat  Create a new account using the Sign up form. Sign in into OpenShift.  Install the OpenShift client wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz tar xvzf oc.tar.gz sudo cp oc /usr/local/bin/ The binary can be copied to any place as long as it is included in the $PATH.
- Get the Login command   Create a Dockerfile OpenShift can create a docker image given a source git repository, but it needs a Dockerfile definition which is shown below:</description>
+ Get the Login command   Create a Dockerfile OpenShift can create a docker image given a source git repository, but it needs a Dockerfile definition which is shown here.</description>
     </item>
     
     <item>
       <title>Toolchain</title>
       <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
       <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
@@ -37,7 +47,7 @@ It is very well documented and provides many handy features like authentication,
     <item>
       <title>Travis CI</title>
       <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
       <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
@@ -47,19 +57,9 @@ Configuration To avoid replicating exactly the same workflows in GitHub Actions 
     </item>
     
     <item>
-      <title>Why?</title>
-      <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
-      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/description/why/</guid>
-      <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
-This process can be as simple as signing in a paper the checks in and checks out for every single workday; but any other process can be used and this is the reason for which I decided to develop this project.</description>
-    </item>
-    
-    <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:25 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
@@ -68,9 +68,29 @@ It allows the creation of different types of users (roles), initially there are 
     </item>
     
     <item>
+      <title>Why?</title>
+      <link>https://iris-garcia.github.io/workday/description/why/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/description/why/</guid>
+      <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
+This process can be as simple as signing in a paper the checks in and checks out for every single workday; but any other process can be used and this is the reason for which I decided to develop this project.</description>
+    </item>
+    
+    <item>
+      <title>Building the Docker image</title>
+      <link>https://iris-garcia.github.io/workday/docker/build/</link>
+      <pubDate>Fri, 06 Dec 2019 18:28:28 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/docker/build/</guid>
+      <description>To build the Docker image locally we can run the following command from the root directory of the project:
+$ docker build . -t workday Sending build context to Docker daemon 118.8kB Step 1/11 : FROM golang:1.13 as builder ---&amp;gt; a2e245db8bd3 Step 2/11 : RUN mkdir -p /go/src/github.com/iris-garcia/workday ---&amp;gt; Running in 61717fb25087 Removing intermediate container 61717fb25087 ---&amp;gt; eaf6e4d73eb4 Step 3/11 : WORKDIR /go/src/github.com/iris-garcia/workday ---&amp;gt; Running in 41ddb2a701bd Removing intermediate container 41ddb2a701bd ---&amp;gt; d5b6af426ca6 Step 4/11 : COPY .</description>
+    </item>
+    
+    <item>
       <title>GitHub Actions</title>
       <link>https://iris-garcia.github.io/workday/ci/github/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
       <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
@@ -82,7 +102,7 @@ An example of one run can be seen here.</description>
     <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
       <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
@@ -91,9 +111,20 @@ go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the 
     </item>
     
     <item>
+      <title>Docker Hub</title>
+      <link>https://iris-garcia.github.io/workday/docker/dockerhub/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/docker/dockerhub/</guid>
+      <description>Now that we have a working Docker image we want to automate the building process, so it automatically builds and publishes the image with every new code change.
+Step 1: Register in Docker Hub Just click in Sing up and fill up the following form:
+  Step 2: Create a new Repository Click in Create Repository + and name it accordingly, under the Build Settings section select the Connected option with a GitHub logo to autobuild a new image with every git push event as long as it matches the build rules, which in our case are the default ones (the Dockerfile is located in the root directory of the project).</description>
+    </item>
+    
+    <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Sat, 16 Nov 2019 19:58:26 +0100</pubDate>
+      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
       <description>User story As an admin employee, I want to be able to:

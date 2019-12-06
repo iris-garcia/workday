@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on Workday</title>
+    <link>https://iris-garcia.github.io/workday/tags/docker/</link>
+    <description>Recent content in docker on Workday</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Fri, 06 Dec 2019 18:24:52 +0100</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dockerfile</title>
+      <link>https://iris-garcia.github.io/workday/docker/dockerfile/</link>
+      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/docker/dockerfile/</guid>
+      <description>To create a Docker image, we have added two new files to our project:
+ Dockerfile: Contains the needed commands to create the image. .dockerignore: It works like .gitignore for git, it allows to define which file/s should not be included in the Docker image when the command ADD or COPY is/are invoked.   # Use a golang image as base builder imageFROMgolang:1.13 as builder# Create the project&amp;#39;s directory under the default GOPATHRUN mkdir -p /go/src/github.</description>
+    </item>
+    
+  </channel>
+</rss>

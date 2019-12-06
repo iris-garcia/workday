@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>GitHub Actions :: Workday</title>
+    <title>Continuous Delivery (GitHub) :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1575670684" rel="stylesheet">
@@ -40,7 +40,7 @@
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/ci/github/">
+  <body class="" data-url="/howto/github-cd/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -244,7 +244,7 @@
   
     
     <li data-nav-id="/ci/" title="Continuous Integration" class="dd-item 
-        parent
+        
         
         
         ">
@@ -289,7 +289,7 @@
  
   
     
-      <li data-nav-id="/ci/github/" title="GitHub Actions" class="dd-item active">
+      <li data-nav-id="/ci/github/" title="GitHub Actions" class="dd-item ">
         <a href="../../ci/github/">
         GitHub Actions
         <i class="fas fa-check read-icon"></i>
@@ -460,7 +460,7 @@
   
     
     <li data-nav-id="/howto/" title="How-to" class="dd-item 
-        
+        parent
         
         
         ">
@@ -541,8 +541,8 @@
   
     
     <li data-nav-id="/howto/github-cd/" title="Continuous Delivery (GitHub)" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="../../howto/github-cd/">
@@ -631,7 +631,7 @@
                   <span class="links">
                  
                  
-                   GitHub Actions 
+                   Continuous Delivery (GitHub) 
                  
                   </span>
                 </div>
@@ -642,12 +642,9 @@
 <ul>
 <li>
 <ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#configuration">Configuration</a>
-<ul>
-<li><a href="#test-with-verbosity-enabled">Test with verbosity enabled</a></li>
-<li><a href="#hugo-documentation-site">Hugo documentation site</a></li>
-</ul></li>
+<li><a href="#step-1-create-a-secret-encoded-in-base64">Step 1: Create a secret encoded in base64</a></li>
+<li><a href="#step-2-deploy-in-openshift-using-the-encoded-secret">Step 2: Deploy in OpenShift using the encoded secret</a></li>
+<li><a href="#step-3-create-a-github-webhook">Step 3: Create a GitHub webhook</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -662,7 +659,9 @@
         
 <div class="tags">
 
-  <a class="tag-link" href="../../tags/ci">ci</a>
+  <a class="tag-link" href="../../tags/openshift">openshift</a>
+
+  <a class="tag-link" href="../../tags/cd">cd</a>
 
 </div>
 
@@ -672,7 +671,7 @@
           
             <h1>
               
-              GitHub Actions
+              Continuous Delivery (GitHub)
             </h1>
           
 
@@ -681,121 +680,135 @@
 
 
 
+	
 
-<h2 id="description">Description</h2>
+<h2 id="step-1-create-a-secret-encoded-in-base64">Step 1: Create a secret encoded in base64</h2>
 
-<p>GitHub Actions is the new continuous integration and deployment system
-built and maintained by the community.</p>
+<p>We need to create a secret which need to be known by our deployment in
+OpenShift and the Webhook in GitHub:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#39;supersecret&#39;</span> | base64
+<span style="color:#40ffff">c3VwZXJzZWNyZXQ</span>=</code></pre></div>
+<h2 id="step-2-deploy-in-openshift-using-the-encoded-secret">Step 2: Deploy in OpenShift using the encoded secret</h2>
 
-<h2 id="configuration">Configuration</h2>
+<p>The following resources in the OpenShift deployment template are the
+ones creating the secret and a trigger for GitHub.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#999;font-style:italic"># ...</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>Secret<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>gh-secret<span style="color:#666">
+</span><span style="color:#666">    </span>creationTimestamp:<span style="color:#666">
+</span><span style="color:#666">  </span>data:<span style="color:#666">
+</span><span style="color:#666">    </span>WebHookSecretKey:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${GITHUB_SECRET}&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#999;font-style:italic"># ...</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>kind:<span style="color:#666"> </span>BuildConfig<span style="color:#666">
+</span><span style="color:#666">  </span>apiVersion:<span style="color:#666"> </span>v1<span style="color:#666">
+</span><span style="color:#666">  </span>metadata:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">    </span>annotations:<span style="color:#666">
+</span><span style="color:#666">      </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Defines how to build the application&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>spec:<span style="color:#666">
+</span><span style="color:#666">    </span>source:<span style="color:#666">
+</span><span style="color:#666">      </span>type:<span style="color:#666"> </span>Git<span style="color:#666">
+</span><span style="color:#666">      </span>git:<span style="color:#666">
+</span><span style="color:#666">        </span>uri:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${SOURCE_REPOSITORY_URL}&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span>ref:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${SOURCE_REPOSITORY_REF}&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>contextDir:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${CONTEXT_DIR}&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>strategy:<span style="color:#666">
+</span><span style="color:#666">      </span>type:<span style="color:#666"> </span>Docker<span style="color:#666">
+</span><span style="color:#666">      </span>dockerStrategy:<span style="color:#666"> </span>{}<span style="color:#666">
+</span><span style="color:#666">    </span>output:<span style="color:#666">
+</span><span style="color:#666">      </span>to:<span style="color:#666">
+</span><span style="color:#666">        </span>kind:<span style="color:#666"> </span>ImageStreamTag<span style="color:#666">
+</span><span style="color:#666">        </span>name:<span style="color:#666"> </span>api:latest<span style="color:#666">
+</span><span style="color:#666">    </span>postCommit:<span style="color:#666">
+</span><span style="color:#666">      </span>script:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GIN_MODE=release go test -v ./...&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>resources:<span style="color:#666">
+</span><span style="color:#666">      </span>limits:<span style="color:#666">
+</span><span style="color:#666">        </span>cpu:<span style="color:#666"> </span>100m<span style="color:#666">
+</span><span style="color:#666">        </span>memory:<span style="color:#666"> </span>1Gi<span style="color:#666">
+</span><span style="color:#666">    </span>triggers:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>type:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GitHub&#34;</span><span style="color:#666">
+</span><span style="color:#666">      </span>github:<span style="color:#666">
+</span><span style="color:#666">        </span>secretReference:<span style="color:#666">
+</span><span style="color:#666">          </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;gh-secret&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span><span style="color:#999;font-style:italic">#...</span><span style="color:#666">
+</span><span style="color:#666"></span>parameters:<span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>SOURCE_REPOSITORY_URL<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;The URL of the repository with your application source code&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>value:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;https://github.com/iris-garcia/workday.git&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>SOURCE_REPOSITORY_REF<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Set this to a branch name, tag or other ref of your repository if you are not using the default branch&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>CONTEXT_DIR<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Set this to the relative path to your project if it is not in the root of your repository&#34;</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>GITHUB_SECRET<span style="color:#666">
+</span><span style="color:#666">  </span>description:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Github webhook secret&#34;</span></code></pre></div>
+<p>Then we simply need to run the deploy passing the encoded secret as a
+parameter:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc new-app deployment/openshift.yml -p <span style="color:#40ffff">GITHUB_SECRET</span>=<span style="color:#ed9d13">&#39;c3VwZXJzZWNyZXQ=&#39;</span></code></pre></div>
+<p>9928  12/1/2019 04:18  # Create the project passing a secret in base64 encoded (be careful with newlines!)
+9929  12/1/2019 04:18  # Create GitHub webhook using the endpoint from oc describe bc api endpoint
+9930  12/1/2019 04:18  # Replace <secret> with the secret value
+9931  12/1/2019 04:18  # Do not use any secret in github</p>
 
-<p>Currently there are two workflows configured:</p>
+<h2 id="step-3-create-a-github-webhook">Step 3: Create a GitHub webhook</h2>
 
-<h3 id="test-with-verbosity-enabled">Test with verbosity enabled</h3>
+<p>In this step we will create a new GitHub webhook which will send a
+<em>POST</em> request to our OpenShift&rsquo;s app endpoint everytime there is a
+new push.</p>
 
-<p>To make it a bit different that the pipeline configured in Travis CI,
-this one will run the tests with verbosity enabled, this way it
-outputs every spec and API call done for each test case.</p>
+<p>To get the enpoint generated by OpenShift we just need to run the
+following command:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc api endpoint
+Name:		api
+Namespace:	workday
+Created:	<span style="color:#3677a9">5</span> days ago
+Labels:		<span style="color:#40ffff">app</span>=api
+Description:	Defines how to build the application
+Annotations:	openshift.io/generated-by=OpenShiftNewApp
+Latest Version:	<span style="color:#3677a9">21</span>
 
-<p>An example of one run can be seen <a href="https://github.com/iris-garcia/workday/runs/285177520">here</a>.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">on:<span style="color:#666"> </span>push<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>name:<span style="color:#666"> </span>Unit<span style="color:#666"> </span>tests<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>jobs:<span style="color:#666">
-</span><span style="color:#666">  </span>checks:<span style="color:#666">
-</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>run<span style="color:#666">
-</span><span style="color:#666">    </span>runs-on:<span style="color:#666"> </span>ubuntu-latest<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>steps:<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>uses:<span style="color:#666"> </span>actions/checkout@master<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>run<span style="color:#666">
-</span><span style="color:#666">      </span>uses:<span style="color:#666"> </span>cedrickring/golang-action@<span style="color:#3677a9">1.4.1</span><span style="color:#666">
-</span><span style="color:#666">      </span>env:<span style="color:#666">
-</span><span style="color:#666">        </span>GO111MODULE:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;on&#34;</span><span style="color:#666">
-</span><span style="color:#666">      </span>with:<span style="color:#666">
-</span><span style="color:#666">        </span>args:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">          go get github.com/magefile/mage &amp;&amp; \</span><span style="color:#666">
-</span><span style="color:#666">          </span>go<span style="color:#666"> </span>get<span style="color:#666"> </span>github.com/onsi/ginkgo/ginkgo<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
-</span><span style="color:#666">          </span>mage<span style="color:#666"> </span>build<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
-</span><span style="color:#666">          </span>mage<span style="color:#666"> </span>testverbose</code></pre></div>
-<p>There is just one job configured in this <strong>Action</strong> with the name
-<code>checks</code> and as stated in the line 8 of the configuration it uses
-<strong>Ubuntu</strong> in it latest available version.</p>
+Strategy:	Docker
+URL:		https://github.com/iris-garcia/workday.git
+Output to:	ImageStreamTag api:latest
 
-<p>There are two steps in this <em>job</em>:</p>
+Build Run Policy:	Serial
+Triggered by:		&lt;none&gt;
+Webhook GitHub:
+        URL:	https://api.us-east-2.starter.openshift-online.com:6443/apis/build.openshift.io/v1/namespaces/workday/buildconfigs/api/webhooks/&lt;secret&gt;/github
+Builds History Limit:
+        Successful:	<span style="color:#3677a9">5</span>
+        Failed:		<span style="color:#3677a9">5</span></code></pre></div>
 
-<p>The first one Checks out the project repository in its <code>master</code> branch.</p>
+<div class="notices note" ><p><strong>Save the URL, it will be needed in the creation of the GitHub&rsquo;s webhook, and replace the <secret> with the real secret used.</strong></p>
+</div>
 
-<p>The second one uses an action to automatically setup a Go workspace
-and run arbitrary commands, the documentation can be seen <a href="https://github.com/cedrickring/golang-action">here</a>.
-If no args are specified and a <code>Makefile</code> is detected, this action will
-run <code>make</code>. Otherwise <code>go test</code> and <code>go build</code> will be run.</p>
 
-<p>In this case it is overwritten in order to install <code>mage</code> and <code>ginkgo</code>
-CLIs to allow the build and run of the tests.</p>
+<p>To create the webhook browse to the GitHub&rsquo;s repository and click in
+<strong>Settings</strong>.
+<img src="../../images/gh_oc_1.png" alt="" /></p>
 
-<h3 id="hugo-documentation-site">Hugo documentation site</h3>
+<p>In the <strong>Settings</strong> page, click in <strong>Webhooks</strong> then <strong>Add webhook</strong>.
+<img src="../../images/gh_oc_2.png" alt="" /></p>
 
-<p>This workflow is not really a typical continuous integration one, but
-I think it makes sense to mention it here as it is taking care of
-automatically update the documentation site.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">on:<span style="color:#666">
-</span><span style="color:#666">  </span>push:<span style="color:#666">
-</span><span style="color:#666">    </span>paths:<span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span><span style="color:#ed9d13">&#39;docs/**&#39;</span><span style="color:#666">
-</span><span style="color:#666">      </span>-<span style="color:#666"> </span><span style="color:#ed9d13">&#39;.github/workflows/hugo.yml&#39;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>name:<span style="color:#666"> </span>Hugo<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666"></span>jobs:<span style="color:#666">
-</span><span style="color:#666">  </span>build:<span style="color:#666">
-</span><span style="color:#666">    </span>runs-on:<span style="color:#666"> </span>ubuntu-latest<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>steps:<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>uses:<span style="color:#666"> </span>actions/checkout@v1<span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Installs<span style="color:#666"> </span>hugo<span style="color:#666">
-</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">        cd /tmp</span><span style="color:#666">
-</span><span style="color:#666">        </span>wget<span style="color:#666"> </span>https://github.com/gohugoio/hugo/releases/download/v0<span style="color:#3677a9">.57.0</span>/hugo_0<span style="color:#3677a9">.57</span>.0_Linux-64bit.deb<span style="color:#666">
-</span><span style="color:#666">        </span>sudo<span style="color:#666"> </span>dpkg<span style="color:#666"> </span>-i<span style="color:#666"> </span>hugo_0<span style="color:#3677a9">.57</span>.0_Linux-64bit.deb<span style="color:#666">
-</span><span style="color:#666">        </span>hugo<span style="color:#666"> </span>version<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Build<span style="color:#666"> </span>hugo<span style="color:#666"> </span>site<span style="color:#666">
-</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">        cd docs</span><span style="color:#666">
-</span><span style="color:#666">        </span>rm<span style="color:#666"> </span>-rf<span style="color:#666"> </span>public<span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>worktree<span style="color:#666"> </span>add<span style="color:#666"> </span>-b<span style="color:#666"> </span>gh-pages<span style="color:#666"> </span>public<span style="color:#666"> </span>origin/gh-pages<span style="color:#666">
-</span><span style="color:#666">        </span>hugo<span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Configure<span style="color:#666"> </span>git<span style="color:#666"> </span>and<span style="color:#666"> </span>deployment<span style="color:#666"> </span>key<span style="color:#666">
-</span><span style="color:#666">      </span>env:<span style="color:#666">
-</span><span style="color:#666">        </span>GITHUB_TOKEN:<span style="color:#666"> </span>${{<span style="color:#666"> </span>secrets.GITHUB_TOKEN<span style="color:#666"> </span>}}<span style="color:#666">
-</span><span style="color:#666">        </span>GITHUB_DEPLOY_KEY:<span style="color:#666"> </span>${{<span style="color:#666"> </span>secrets.WORKDAY_GH<span style="color:#666"> </span>}}<span style="color:#666">
-</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">        mkdir /home/runner/.ssh</span><span style="color:#666">
-</span><span style="color:#666">        </span>ssh-keyscan<span style="color:#666"> </span>-t<span style="color:#666"> </span>rsa<span style="color:#666"> </span>github.com<span style="color:#666"> </span>&gt;/home/runner/.ssh/known_hosts<span style="color:#666">
-</span><span style="color:#666">        </span>echo<span style="color:#666"> </span><span style="color:#ed9d13">&#34;${GITHUB_DEPLOY_KEY}&#34;</span><span style="color:#666"> </span>&gt;<span style="color:#666"> </span>/home/runner/.ssh/id_rsa<span style="color:#666"> </span><span style="color:#cd2828;font-weight:bold">&amp;&amp;</span><span style="color:#666"> </span>\<span style="color:#666">
-</span><span style="color:#666">        </span>chmod<span style="color:#666"> </span><span style="color:#3677a9">400</span><span style="color:#666"> </span>/home/runner/.ssh/id_rsa<span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>remote<span style="color:#666"> </span>set-url<span style="color:#666"> </span>origin<span style="color:#666"> </span>git@github.com:iris-garcia/workday.git<span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>config<span style="color:#666"> </span>--global<span style="color:#666"> </span>user.name<span style="color:#666"> </span><span style="color:#ed9d13">&#34;GitHub Action&#34;</span><span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>config<span style="color:#666"> </span>--global<span style="color:#666"> </span>user.email<span style="color:#666"> </span><span style="color:#ed9d13">&#34;action@github.com&#34;</span><span style="color:#666">
-</span><span style="color:#666">
-</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Commit<span style="color:#666"> </span>and<span style="color:#666"> </span>push<span style="color:#666"> </span>changes<span style="color:#666"> </span>to<span style="color:#666"> </span>gh-pages<span style="color:#666">
-</span><span style="color:#666">      </span>run:<span style="color:#666"> </span><span style="color:#ed9d13">|
-</span><span style="color:#ed9d13">        cd docs/public</span><span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>add<span style="color:#666"> </span>.<span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>commit<span style="color:#666"> </span>-m<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Publishing to gh-pages branch&#34;</span><span style="color:#666">
-</span><span style="color:#666">        </span>git<span style="color:#666"> </span>push<span style="color:#666"> </span>origin<span style="color:#666"> </span>gh-pages</code></pre></div>
-<p>To get this one working there are some requisites explained in a howto
-<a href="../../howto/gh-pages">document</a>.</p>
+<p>Then we need to fill the following fields:</p>
+
+<ul>
+<li><strong>Payload URL</strong>: The one we copied from OpenShift</li>
+<li><strong>Content type</strong>: It has to be <code>application/json</code></li>
+<li><strong>Secret</strong>: Leave it empty (the secret is included in the payload url).</li>
+</ul>
+
+<p>Then finally click in <strong>Add webhook</strong>.
+<img src="../../images/gh_oc_3.png" alt="" /></p>
+
+
+
 
 
 <footer class=" footline" >
 	
 </footer>
-
 
         
         </div> 
@@ -943,7 +956,6 @@ automatically update the documentation site.</p>
             
                 
                     
-                    
                 
                 
 
@@ -956,9 +968,6 @@ automatically update the documentation site.</p>
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -975,7 +984,6 @@ automatically update the documentation site.</p>
             
             
                 
-                    
                     
                 
                 
@@ -995,9 +1003,6 @@ automatically update the documentation site.</p>
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1095,6 +1100,7 @@ automatically update the documentation site.</p>
             
                 
                     
+                    
                 
                 
 
@@ -1109,6 +1115,9 @@ automatically update the documentation site.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1141,6 +1150,7 @@ automatically update the documentation site.</p>
             
             
                 
+                    
                     
                 
                 
@@ -1165,10 +1175,10 @@ automatically update the documentation site.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ci/travis/" title="Travis CI"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../howto/travis-cd/" title="Continuous Delivery (Travis CI)"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../docker/" title="Docker" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../howto/gh-pages/" title="GitHub Pages" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1200,4 +1210,3 @@ automatically update the documentation site.</p>
 
   </body>
 </html>
-
