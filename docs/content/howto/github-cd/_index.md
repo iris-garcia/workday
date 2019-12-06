@@ -1,7 +1,7 @@
 +++
 title = "Continuous Delivery (GitHub)"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T18:24:53+01:00
+lastmod = 2019-12-06T23:33:09+01:00
 tags = ["openshift", "cd"]
 draft = false
 weight = 3
@@ -85,11 +85,6 @@ parameter:
 oc new-app deployment/openshift.yml -p GITHUB_SECRET='c3VwZXJzZWNyZXQ='
 ```
 
-9928  12/1/2019 04:18  # Create the project passing a secret in base64 encoded (be careful with newlines!)
-9929  12/1/2019 04:18  # Create GitHub webhook using the endpoint from oc describe bc api endpoint
-9930  12/1/2019 04:18  # Replace <secret> with the secret value
-9931  12/1/2019 04:18  # Do not use any secret in github
-
 
 ## Step 3: Create a GitHub webhook {#step-3-create-a-github-webhook}
 
@@ -136,7 +131,7 @@ In the **Settings** page, click in **Webhooks** then **Add webhook**.
 
 Then we need to fill the following fields:
 
--   **Payload URL**: The one we copied from OpenShift
+-   **Payload URL**: The one we copied in the [Step 3](https://iris-garcia.github.io/workday/howto/github-cd/#step-3-create-a-github-webhook).
 -   **Content type**: It has to be `application/json`
 -   **Secret**: Leave it empty (the secret is included in the payload url).
 
