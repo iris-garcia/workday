@@ -1,0 +1,57 @@
+- name: Base setup
+  hosts: api
+  gather_facts: no
+  become: yes
+  tags:
+    - base
+    
+  vars:
+    USER: "workday"
+    PACKAGES:
+      - git
+      - wget
+
+  pre_tasks:
+    - name: Install system packages
+      apt:
+        name: "{{ PACKAGES }}"
+        update_cache: yes
+
+  roles:
+    - role: user
+
+- name: Setup Golang
+  hosts: api
+  gather_facts: no
+  become: yes
+  tags:
+    - go
+
+  vars:
+    GO_VERSION: "1.13.3"
+
+  roles:
+    - role: go
+
+- name: Setup build tool Mage
+  hosts: api
+  gather_facts: no
+  become: yes
+  tags:
+    - buildtool
+    
+  vars:
+    USER: "workday"
+    
+  roles:
+    - role: mage
+
+- name: Setup process manager pm2
+  hosts: api
+  gather_facts: no
+  become: yes
+  tags:
+    - pm2
+    
+  roles:
+    - role: pm2

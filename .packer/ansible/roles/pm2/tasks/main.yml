@@ -1,0 +1,12 @@
+- name: Install npm
+  apt:
+    name: npm
+
+- name: Check if pm2 is installed
+  stat:
+    path: "/usr/local/bin/pm2"
+  register: pm2
+  
+- name: Install pm2
+  shell: "npm install -g pm2"
+  when: not pm2.stat.exists

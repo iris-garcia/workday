@@ -1,0 +1,17 @@
+- name: Create GOROOT for user
+  file:
+    path: "/home/{{ USER }}/go/src"
+    state: directory
+    owner: "{{ USER }}"
+    group: "{{ USER }}"
+    
+- name: Check if mage is installed
+  stat:
+    path: "/home/{{ USER }}/go/bin/mage"
+  register: mage
+
+- name: Install mage
+  environment:
+    GOROOT: "/home/{{ USER }}/go"
+  shell: "sudo -u {{ USER }} go get github.com/magefile/mage"
+  when: not mage.stat.exists
