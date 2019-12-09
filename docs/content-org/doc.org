@@ -655,17 +655,194 @@ are new changes in the repository.
 **** Demo
 {{< asciinema key="openshift" rows="50" preload="1"
 idle-time-limit="1" >}}
+** Provision
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: provision
+:EXPORT_HUGO_WEIGHT: 6
+:END:
+*** Provision
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>4. </b>"
+:END:
+<h3> Chapter 6 </h3>
+<h1>Provision</h1>
+
+This chapter describes the Operating System selected, how to create a VM and provision it using
+Ansible.
+*** Operating System
+:PROPERTIES:
+:EXPORT_FILE_NAME: provision/os
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 1
+:END:
+
+#+ATTR_HTML: :width 400px
+[[/images/debian.jpg]]
+
+Debian is the selected Operating System for the following reasons:
+
+**** Stability
+Debian is one of the oldest distributions and it is famous because of
+its stability, any package has been tested thoroughly before included
+in a Debian stable release.
+
+**** Security
+Debian community is very responsive to bug fixing, security is one of
+the most important Debian features and this is very convenient for a
+production server. 
+
+**** Free - Open Source
+Debian has a [[https://www.debian.org/social_contract][social contract]] with the Free Software Community, which
+means we are free to use any software that suits our needs.
+
+*** Ansible
+:PROPERTIES:
+:EXPORT_FILE_NAME: provision/ansible
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 2
+:END:
+
+**** Structure
+#+CAPTION: directory structure
+[[/images/ansible.png]]
+
+**** Playbook
+The following playbook has been created:
+#+CAPTION: .packer/ansible/workday.yml
+#+INCLUDE: ../../.packer/ansible/workday.yml src yaml
+
+It has four main tasks, each of them run a role and has a ~tag~
+defined to allow running a one or more tasks instead of the whole
+playbook.
+
+{{% notice tip %}}
+*The use of ~become: yes~ is needed because the playbook is ran using
+the ~vagrant~ user, therefore privileged rights are needed.*
+{{% /notice %}}
+
+**** Roles
+1. ~Base setup~: This role installs some base packages needed and
+   creates an APP user (*workday*) using a variable, this allows to
+   easily change the user name without having to change the role.
+   #+CAPTION: .packer/ansible/roles/user/tasks/main.yml
+   #+INCLUDE: ../../.packer/ansible/roles/user/tasks/main.yml src yaml
+
+2. ~Setup Golang~: This role downloads and installs a specific Go
+   version given as a variable, it also creates a symlink of the Go
+   binary to */usr/local/bin/go*.
+   #+CAPTION: .packer/ansible/roles/go/tasks/main.yml
+   #+INCLUDE: ../../.packer/ansible/roles/go/tasks/main.yml src yaml
+
+3. ~Setup Mage~: This is the build tool used in this project, this
+   role installs Mage in the /GOROOT/ path of the user given as a
+   variable.
+   #+CAPTION: .packer/ansible/roles/mage/tasks/main.yml
+   #+INCLUDE: ../../.packer/ansible/roles/mage/tasks/main.yml src yaml
+
+4. ~Setup Process Manager~: A role to install npm and pm2, which will
+   be used once we deploy the project.
+   #+CAPTION: .packer/ansible/roles/pm2/tasks/main.yml
+   #+INCLUDE: ../../.packer/ansible/roles/pm2/tasks/main.yml src yaml
+
+{{% notice tip %}}
+*Every role has checks to make sure the tasks are idempotent, this
+means we can run the playbook as many times as we want and we will get the same result.*
+{{% /notice %}}
+
+**** Inventory
+The inventory created is for a ~packer~ environment, that's why the
+ansible host points to localhost.
+#+CAPTION: .packer/ansible/env/packer/hosts.yml
+#+INCLUDE: ../../.packer/ansible/env/packer/hosts.yml src yaml
+
+*** Creation of VM
+:PROPERTIES:
+:EXPORT_FILE_NAME: provision/vm
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 3
+:END:
+The creation of the VM has been done using [[https://www.packer.io/][packer]] and adapting a
+packer's template from this [[https://github.com/geerlingguy/packer-debian-10][project]].
+
+#+CAPTION: Packer template
+#+INCLUDE: ../../.packer/debian10.json src json
+
+A new provisioner has been added to run our Ansible playbook.
+
+Running the command ~mage createvm~
+starts the build of the VM and does the following:
+
+- Create a VirtualBox VM
+- Download the Debian 10.20 ISO
+- Boot the VM and install the Operating System
+- Wait until the SSH service is running
+- SSH into the machine and run the provisioners.
+- Export the machine as type ~vagrant~ box.
+
+**** Demo
+{{< asciinema key="packer" rows="50" preload="1"
+idle-time-limit="1" >}}
+
+
+*** Task manager configuration
+:PROPERTIES:
+:EXPORT_FILE_NAME: provision/task-manager
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :asciinema true
+:EXPORT_HUGO_WEIGHT: 4
+:END:
+Two new tasks has been added to the task manager:
+
+**** Create VM and Provision
+#+begin_src go
+  // CreateVM creates a vagrant box already provisioned
+  func CreateVM() error {
+          cwd, err := os.Getwd()
+          if err != nil {
+                  fmt.Printf("Error: ", err.Error())
+          }
+          cmd := exec.Command("packer", "build", "-var", "'version=10.2.0'", "debian10.json")
+          cmd.Dir = cwd + "/.packer"
+          cmd.Stdout = os.Stdout
+          cmd.Stderr = os.Stderr
+          return cmd.Run()
+  }
+#+end_src
+
+A wrapper which creates a VirtualBox VM and then provisions it with
+Ansible.
+
+**** Provision a host
+#+begin_src go
+  // ProvisionVM runs an Ansible playbook to provision the configured host.
+  func ProvisionVM() error {
+          cwd, err := os.Getwd()
+          if err != nil {
+                  fmt.Printf("Error: ", err.Error())
+          }
+          cmd := exec.Command("ansible-playbook", "-i", "env/packer", "workday.yml")
+          cmd.Dir = cwd + "/.packer/ansible"
+          cmd.Stdout = os.Stdout
+          cmd.Stderr = os.Stderr
+          return cmd.Run()
+  }
+
+#+end_src
+
+This action runs ~ansible-playbook~ to provision a host previously
+configured in the inventory.
+
 ** How-to
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: howto
-:EXPORT_HUGO_WEIGHT: 6
+:EXPORT_HUGO_WEIGHT: 7
 :END:
 *** How-to
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :chapter true :pre "<b>5. </b>"
 :END:
-<h3> Chapter 5 </h3>
+<h3> Chapter 7 </h3>
 <h1>How to's</h1>
 
 This chapter hosts all the step by step guides which I find useful to

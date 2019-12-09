@@ -1,7 +1,7 @@
 +++
 title = "Continuous Delivery (Travis CI)"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T18:24:53+01:00
+lastmod = 2019-12-09T18:37:06+01:00
 tags = ["doc", "cd", "openshift"]
 draft = false
 weight = 2

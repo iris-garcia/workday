@@ -1,7 +1,7 @@
 +++
 title = "Continuous Delivery (GitHub)"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T23:33:09+01:00
+lastmod = 2019-12-09T18:37:06+01:00
 tags = ["openshift", "cd"]
 draft = false
 weight = 3

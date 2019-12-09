@@ -64,6 +64,18 @@ The latest version of the project as a Docker image is hosted in
   dockerhub: https://hub.docker.com/r/irisgarcia/workday
 #+end_src
 
+** Provision
+There is an Ansible playbook which can be used to provision a machine,
+setting up the infrastructure needed to deploy the app.
+#+begin_src bash
+  provision: .packer/ansible/workday.yml
+#+end_src
+
+The vagrant box already provisioned can be downloaded here:
+#+begin_src bash
+  vagrant: https://app.vagrantup.com/igarcia/boxes/workday
+#+end_src
+
 * How to contribute
 ** Setup the environment
 1. Fork the repository.

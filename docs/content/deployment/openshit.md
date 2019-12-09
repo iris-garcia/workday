@@ -1,7 +1,7 @@
 +++
 title = "OpenShift"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T18:24:52+01:00
+lastmod = 2019-12-09T18:37:04+01:00
 tags = ["cd"]
 draft = false
 weight = 1

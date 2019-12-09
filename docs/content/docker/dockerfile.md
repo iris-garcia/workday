@@ -1,7 +1,7 @@
 +++
 title = "Dockerfile"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T18:24:52+01:00
+lastmod = 2019-12-09T18:37:03+01:00
 tags = ["docker"]
 draft = false
 weight = 1
@@ -76,6 +76,9 @@ workday.coverprofile
 LICENSE
 Dockerfile
 README.org
+.packer/.vagrant
+.packer/packer_cache
+.packer/builds
 ```
 
 <div class="src-block-caption">

@@ -1,7 +1,7 @@
 +++
 title = "GitHub Actions"
 author = ["Iris Garcia"]
-lastmod = 2019-12-06T18:24:51+01:00
+lastmod = 2019-12-09T18:37:03+01:00
 tags = ["ci"]
 draft = false
 weight = 2

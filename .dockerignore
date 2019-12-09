@@ -11,3 +11,6 @@ workday.coverprofile
 LICENSE
 Dockerfile
 README.org
+.packer/.vagrant
+.packer/packer_cache
+.packer/builds
