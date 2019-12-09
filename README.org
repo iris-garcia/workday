@@ -35,6 +35,7 @@ The extended documentation is hosted under
 - [[https://iris-garcia.github.io/workday/docker/][Docker]]
 - [[https://iris-garcia.github.io/workday/howto/github-cd/][Continuous Deployment (GitHub webhook)]]
 - [[https://iris-garcia.github.io/workday/howto/travis-cd/][Continuous Deployment (Travis CI)]]
+- [[https://iris-garcia.github.io/workday/provision/][Provision]]
 
 ** Build Tool
 [[https://magefile.org/][Mage]] is the build tool used in this project, for further details
