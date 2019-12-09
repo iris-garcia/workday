@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>bdd :: Workday</title>
+    <title>Ansible :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1575912935" rel="stylesheet">
@@ -34,11 +34,13 @@
       
     </style>
     
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
 
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/tags/bdd/">
+  <body class="" data-url="/provision/ansible/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -458,7 +460,7 @@
   
     
     <li data-nav-id="/provision/" title="Provision" class="dd-item 
-        
+        parent
         
         
         ">
@@ -503,7 +505,7 @@
  
   
     
-      <li data-nav-id="/provision/ansible/" title="Ansible" class="dd-item ">
+      <li data-nav-id="/provision/ansible/" title="Ansible" class="dd-item active">
         <a href="../../provision/ansible/">
         Ansible
         <i class="fas fa-check read-icon"></i>
@@ -739,14 +741,24 @@
                   <span class="links">
                  
                  
-                   bdd 
+                   Ansible 
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#playbook">Playbook</a></li>
+<li><a href="#roles">Roles</a></li>
+<li><a href="#inventory">Inventory</a></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -762,9 +774,7 @@
           
             <h1>
               
-                taxonomy ::
-              
-              bdd
+              Ansible
             </h1>
           
 
@@ -774,17 +784,209 @@
 
 
 
+<h2 id="structure">Structure</h2>
 
-<ul>
-	
-		<li><a href="../../dev/api/">API Test Class</a></li>
-	
-</ul>
+<figure>
+    <img src="../../images/ansible.png"
+         alt="Figure 1: directory structure"/> <figcaption>
+            <p>Figure 1: directory structure</p>
+        </figcaption>
+</figure>
+
+
+<h2 id="playbook">Playbook</h2>
+
+<p>The following playbook has been created:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Base<span style="color:#666"> </span>setup<span style="color:#666">
+</span><span style="color:#666">  </span>hosts:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>gather_facts:<span style="color:#666"> </span>no<span style="color:#666">
+</span><span style="color:#666">  </span>become:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">  </span>tags:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>base<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>vars:<span style="color:#666">
+</span><span style="color:#666">    </span>USER:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>PACKAGES:<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>git<span style="color:#666">
+</span><span style="color:#666">      </span>-<span style="color:#666"> </span>wget<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>pre_tasks:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Install<span style="color:#666"> </span>system<span style="color:#666"> </span>packages<span style="color:#666">
+</span><span style="color:#666">      </span>apt:<span style="color:#666">
+</span><span style="color:#666">        </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;{{ PACKAGES }}&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span>update_cache:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>roles:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>role:<span style="color:#666"> </span>user<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Setup<span style="color:#666"> </span>Golang<span style="color:#666">
+</span><span style="color:#666">  </span>hosts:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>gather_facts:<span style="color:#666"> </span>no<span style="color:#666">
+</span><span style="color:#666">  </span>become:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">  </span>tags:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>go<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>vars:<span style="color:#666">
+</span><span style="color:#666">    </span>GO_VERSION:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;1.13.3&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>roles:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>role:<span style="color:#666"> </span>go<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Setup<span style="color:#666"> </span>build<span style="color:#666"> </span>tool<span style="color:#666"> </span>Mage<span style="color:#666">
+</span><span style="color:#666">  </span>hosts:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>gather_facts:<span style="color:#666"> </span>no<span style="color:#666">
+</span><span style="color:#666">  </span>become:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">  </span>tags:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>buildtool<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>vars:<span style="color:#666">
+</span><span style="color:#666">    </span>USER:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;workday&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>roles:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>role:<span style="color:#666"> </span>mage<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Setup<span style="color:#666"> </span>process<span style="color:#666"> </span>manager<span style="color:#666"> </span>pm2<span style="color:#666">
+</span><span style="color:#666">  </span>hosts:<span style="color:#666"> </span>api<span style="color:#666">
+</span><span style="color:#666">  </span>gather_facts:<span style="color:#666"> </span>no<span style="color:#666">
+</span><span style="color:#666">  </span>become:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">  </span>tags:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>pm2<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666">  </span>roles:<span style="color:#666">
+</span><span style="color:#666">    </span>-<span style="color:#666"> </span>role:<span style="color:#666"> </span>pm2</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  .packer/ansible/workday.yml
+</div>
+
+<p>It has four main tasks, each of them run a role and has a <code>tag</code>
+defined to allow running a one or more tasks instead of the whole
+playbook.</p>
+
+
+<div class="notices tip" ><p><strong>The use of <code>become: yes</code> is needed because the playbook is ran using
+the <code>vagrant</code> user, therefore privileged rights are needed.</strong></p>
+</div>
+
+
+<h2 id="roles">Roles</h2>
+
+<ol>
+<li><p><code>Base setup</code>: This role installs some base packages needed and
+creates an APP user (<strong>workday</strong>) using a variable, this allows to
+easily change the user name without having to change the role.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">​-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Create<span style="color:#666"> </span>App<span style="color:#666"> </span>user<span style="color:#666">
+</span><span style="color:#666">  </span>user:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;{{ USER }}&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>shell:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/bin/bash&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>create_home:<span style="color:#666"> </span>True</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 2</span>:
+  .packer/ansible/roles/user/tasks/main.yml
+</div></li>
+
+<li><p><code>Setup Golang</code>: This role downloads and installs a specific Go
+version given as a variable, it also creates a symlink of the Go
+binary to <strong>/usr/local/bin/go</strong>.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">​-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Check<span style="color:#666"> </span>if<span style="color:#666"> </span>go<span style="color:#666"> </span>is<span style="color:#666"> </span>already<span style="color:#666"> </span>installed<span style="color:#666">
+</span><span style="color:#666">  </span>stat:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/usr/local/bin/go&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>register:<span style="color:#666"> </span>go_binary<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Download<span style="color:#666"> </span>Go<span style="color:#666"> </span>archive<span style="color:#666">
+</span><span style="color:#666">  </span>get_url:<span style="color:#666">
+</span><span style="color:#666">    </span>url:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;https://dl.google.com/go/go{{ GO_VERSION }}.linux-amd64.tar.gz&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>dest:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/tmp/go{{ GO_VERSION }}.linux-amd.tar.gz&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>when:<span style="color:#666"> </span>not<span style="color:#666"> </span>go_binary.stat.exists<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Unarchive<span style="color:#666"> </span>Go<span style="color:#666"> </span>archive<span style="color:#666">
+</span><span style="color:#666">  </span>unarchive:<span style="color:#666">
+</span><span style="color:#666">    </span>src:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/tmp/go{{ GO_VERSION }}.linux-amd.tar.gz&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>dest:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/usr/local&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>remote_src:<span style="color:#666"> </span>yes<span style="color:#666">
+</span><span style="color:#666">  </span>when:<span style="color:#666"> </span>not<span style="color:#666"> </span>go_binary.stat.exists<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Symlink<span style="color:#666"> </span>Go<span style="color:#666"> </span>binary<span style="color:#666">
+</span><span style="color:#666">  </span>file:<span style="color:#666">
+</span><span style="color:#666">    </span>src:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/usr/local/go/bin/go&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>dest:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/usr/local/bin/go&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>state:<span style="color:#666"> </span>link<span style="color:#666">
+</span><span style="color:#666">  </span>when:<span style="color:#666"> </span>not<span style="color:#666"> </span>go_binary.stat.exists</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 3</span>:
+  .packer/ansible/roles/go/tasks/main.yml
+</div></li>
+
+<li><p><code>Setup Mage</code>: This is the build tool used in this project, this
+role installs Mage in the <em>GOROOT</em> path of the user given as a
+variable.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">​-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Create<span style="color:#666"> </span>GOROOT<span style="color:#666"> </span>for<span style="color:#666"> </span>user<span style="color:#666">
+</span><span style="color:#666">  </span>file:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/home/{{ USER }}/go/src&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>state:<span style="color:#666"> </span>directory<span style="color:#666">
+</span><span style="color:#666">    </span>owner:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;{{ USER }}&#34;</span><span style="color:#666">
+</span><span style="color:#666">    </span>group:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;{{ USER }}&#34;</span><span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Check<span style="color:#666"> </span>if<span style="color:#666"> </span>mage<span style="color:#666"> </span>is<span style="color:#666"> </span>installed<span style="color:#666">
+</span><span style="color:#666">  </span>stat:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/home/{{ USER }}/go/bin/mage&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>register:<span style="color:#666"> </span>mage<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Install<span style="color:#666"> </span>mage<span style="color:#666">
+</span><span style="color:#666">  </span>environment:<span style="color:#666">
+</span><span style="color:#666">    </span>GOROOT:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/home/{{ USER }}/go&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>shell:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;sudo -u {{ USER }} go get github.com/magefile/mage&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>when:<span style="color:#666"> </span>not<span style="color:#666"> </span>mage.stat.exists</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 4</span>:
+  .packer/ansible/roles/mage/tasks/main.yml
+</div></li>
+
+<li><p><code>Setup Process Manager</code>: A role to install npm and pm2, which will
+be used once we deploy the project.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">​-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Install<span style="color:#666"> </span>npm<span style="color:#666">
+</span><span style="color:#666">  </span>apt:<span style="color:#666">
+</span><span style="color:#666">    </span>name:<span style="color:#666"> </span>npm<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Check<span style="color:#666"> </span>if<span style="color:#666"> </span>pm2<span style="color:#666"> </span>is<span style="color:#666"> </span>installed<span style="color:#666">
+</span><span style="color:#666">  </span>stat:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;/usr/local/bin/pm2&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>register:<span style="color:#666"> </span>pm2<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>name:<span style="color:#666"> </span>Install<span style="color:#666"> </span>pm2<span style="color:#666">
+</span><span style="color:#666">  </span>shell:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;npm install -g pm2&#34;</span><span style="color:#666">
+</span><span style="color:#666">  </span>when:<span style="color:#666"> </span>not<span style="color:#666"> </span>pm2.stat.exists</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 5</span>:
+  .packer/ansible/roles/pm2/tasks/main.yml
+</div></li>
+</ol>
+
+
+<div class="notices tip" ><p><strong>Every role has checks to make sure the tasks are idempotent, this
+means we can run the playbook as many times as we want and we will get the same result.</strong></p>
+</div>
+
+
+<h2 id="inventory">Inventory</h2>
+
+<p>The inventory created is for a <code>packer</code> environment, that&rsquo;s why the
+ansible host points to localhost.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#666">
+</span><span style="color:#666"></span>all:<span style="color:#666">
+</span><span style="color:#666">  </span>hosts:<span style="color:#666">
+</span><span style="color:#666">    </span>api:<span style="color:#666">
+</span><span style="color:#666">      </span>ansible_host:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;127.0.0.1&#34;</span></code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 6</span>:
+  .packer/ansible/env/packer/hosts.yml
+</div>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -1076,6 +1278,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1088,6 +1291,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1105,6 +1311,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1120,6 +1327,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1226,8 +1436,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="../../provision/os/" title="Operating System"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="../../description/" title="Description" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="../../provision/vm/" title="Creation of VM" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1254,6 +1466,9 @@
         mermaid.initialize({ startOnLoad: true });
     </script>
     
+<script src="../../js/asciinema-player.js"></script>
+
 
   </body>
 </html>
+

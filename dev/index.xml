@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:51 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:02 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/dev/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>Toolchain</title>
       <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
       <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
@@ -27,7 +27,7 @@ It is very well documented and provides many handy features like authentication,
     <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
       <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
@@ -38,7 +38,7 @@ go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the 
     <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
       <description>User story As an admin employee, I want to be able to:

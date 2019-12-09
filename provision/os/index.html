@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>bdd :: Workday</title>
+    <title>Operating System :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1575912935" rel="stylesheet">
@@ -34,11 +34,13 @@
       
     </style>
     
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
 
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/tags/bdd/">
+  <body class="" data-url="/provision/os/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -458,7 +460,7 @@
   
     
     <li data-nav-id="/provision/" title="Provision" class="dd-item 
-        
+        parent
         
         
         ">
@@ -484,7 +486,7 @@
  
   
     
-      <li data-nav-id="/provision/os/" title="Operating System" class="dd-item ">
+      <li data-nav-id="/provision/os/" title="Operating System" class="dd-item active">
         <a href="../../provision/os/">
         Operating System
         <i class="fas fa-check read-icon"></i>
@@ -739,14 +741,23 @@
                   <span class="links">
                  
                  
-                   bdd 
+                   Operating System 
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#stability">Stability</a></li>
+<li><a href="#security">Security</a></li>
+<li><a href="#free-open-source">Free - Open Source</a></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -762,9 +773,7 @@
           
             <h1>
               
-                taxonomy ::
-              
-              bdd
+              Operating System
             </h1>
           
 
@@ -774,17 +783,35 @@
 
 
 
+<figure>
+    <img src="../../images/debian.jpg" width="400px"/> 
+</figure>
 
-<ul>
-	
-		<li><a href="../../dev/api/">API Test Class</a></li>
-	
-</ul>
+
+<p>Debian is the selected Operating System for the following reasons:</p>
+
+<h2 id="stability">Stability</h2>
+
+<p>Debian is one of the oldest distributions and it is famous because of
+its stability, any package has been tested thoroughly before included
+in a Debian stable release.</p>
+
+<h2 id="security">Security</h2>
+
+<p>Debian community is very responsive to bug fixing, security is one of
+the most important Debian features and this is very convenient for a
+production server.</p>
+
+<h2 id="free-open-source">Free - Open Source</h2>
+
+<p>Debian has a <a href="https://www.debian.org/social%5Fcontract">social contract</a> with the Free Software Community, which
+means we are free to use any software that suits our needs.</p>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -1076,6 +1103,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1088,6 +1116,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -1104,6 +1133,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1226,8 +1258,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="../../provision/" title="Provision"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="../../description/" title="Description" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="../../provision/ansible/" title="Ansible" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1254,6 +1288,9 @@
         mermaid.initialize({ startOnLoad: true });
     </script>
     
+<script src="../../js/asciinema-player.js"></script>
+
 
   </body>
 </html>
+

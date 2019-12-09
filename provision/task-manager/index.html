@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>bdd :: Workday</title>
+    <title>Task manager configuration :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1575912935" rel="stylesheet">
@@ -34,11 +34,13 @@
       
     </style>
     
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
 
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/tags/bdd/">
+  <body class="" data-url="/provision/task-manager/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -458,7 +460,7 @@
   
     
     <li data-nav-id="/provision/" title="Provision" class="dd-item 
-        
+        parent
         
         
         ">
@@ -541,7 +543,7 @@
  
   
     
-      <li data-nav-id="/provision/task-manager/" title="Task manager configuration" class="dd-item ">
+      <li data-nav-id="/provision/task-manager/" title="Task manager configuration" class="dd-item active">
         <a href="../../provision/task-manager/">
         Task manager configuration
         <i class="fas fa-check read-icon"></i>
@@ -739,14 +741,22 @@
                   <span class="links">
                  
                  
-                   bdd 
+                   Task manager configuration 
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#create-vm-and-provision">Create VM and Provision</a></li>
+<li><a href="#provision-a-host">Provision a host</a></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -762,9 +772,7 @@
           
             <h1>
               
-                taxonomy ::
-              
-              bdd
+              Task manager configuration
             </h1>
           
 
@@ -774,17 +782,45 @@
 
 
 
+<p>Two new tasks has been added to the task manager:</p>
 
-<ul>
-	
-		<li><a href="../../dev/api/">API Test Class</a></li>
-	
-</ul>
+<h2 id="create-vm-and-provision">Create VM and Provision</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// CreateVM creates a vagrant box already provisioned
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">CreateVM</span>() <span style="color:#6ab825;font-weight:bold">error</span> {
+        cwd, err := os.<span style="color:#447fcf">Getwd</span>()
+        <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+                fmt.<span style="color:#447fcf">Printf</span>(<span style="color:#ed9d13">&#34;Error: &#34;</span>, err.<span style="color:#447fcf">Error</span>())
+        }
+        cmd := exec.<span style="color:#447fcf">Command</span>(<span style="color:#ed9d13">&#34;packer&#34;</span>, <span style="color:#ed9d13">&#34;build&#34;</span>, <span style="color:#ed9d13">&#34;-var&#34;</span>, <span style="color:#ed9d13">&#34;&#39;version=10.2.0&#39;&#34;</span>, <span style="color:#ed9d13">&#34;debian10.json&#34;</span>)
+        cmd.Dir = cwd + <span style="color:#ed9d13">&#34;/.packer&#34;</span>
+        cmd.Stdout = os.Stdout
+        cmd.Stderr = os.Stderr
+        <span style="color:#6ab825;font-weight:bold">return</span> cmd.<span style="color:#447fcf">Run</span>()
+}</code></pre></div>
+<p>A wrapper which creates a VirtualBox VM and then provisions it with
+Ansible.</p>
+
+<h2 id="provision-a-host">Provision a host</h2>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#999;font-style:italic">// ProvisionVM runs an Ansible playbook to provision the configured host.
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">ProvisionVM</span>() <span style="color:#6ab825;font-weight:bold">error</span> {
+        cwd, err := os.<span style="color:#447fcf">Getwd</span>()
+        <span style="color:#6ab825;font-weight:bold">if</span> err != <span style="color:#6ab825;font-weight:bold">nil</span> {
+                fmt.<span style="color:#447fcf">Printf</span>(<span style="color:#ed9d13">&#34;Error: &#34;</span>, err.<span style="color:#447fcf">Error</span>())
+        }
+        cmd := exec.<span style="color:#447fcf">Command</span>(<span style="color:#ed9d13">&#34;ansible-playbook&#34;</span>, <span style="color:#ed9d13">&#34;-i&#34;</span>, <span style="color:#ed9d13">&#34;env/packer&#34;</span>, <span style="color:#ed9d13">&#34;workday.yml&#34;</span>)
+        cmd.Dir = cwd + <span style="color:#ed9d13">&#34;/.packer/ansible&#34;</span>
+        cmd.Stdout = os.Stdout
+        cmd.Stderr = os.Stderr
+        <span style="color:#6ab825;font-weight:bold">return</span> cmd.<span style="color:#447fcf">Run</span>()
+}</code></pre></div>
+<p>This action runs <code>ansible-playbook</code> to provision a host previously
+configured in the inventory.</p>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -1076,6 +1112,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1088,6 +1125,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1137,6 +1177,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1155,6 +1196,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1226,8 +1270,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="../../provision/vm/" title="Creation of VM"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="../../description/" title="Description" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="../../howto/" title="How-to" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1254,6 +1300,9 @@
         mermaid.initialize({ startOnLoad: true });
     </script>
     
+<script src="../../js/asciinema-player.js"></script>
+
 
   </body>
 </html>
+

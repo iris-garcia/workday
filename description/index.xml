@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:50 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:01 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/description/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:01 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
@@ -27,7 +27,7 @@ It allows the creation of different types of users (roles), initially there are 
     <item>
       <title>Why?</title>
       <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:01 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/why/</guid>
       <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.

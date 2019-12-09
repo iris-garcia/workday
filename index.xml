@@ -8,25 +8,27 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:50 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:01 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Dockerfile</title>
-      <link>https://iris-garcia.github.io/workday/docker/dockerfile/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <title>Operating System</title>
+      <link>https://iris-garcia.github.io/workday/provision/os/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/docker/dockerfile/</guid>
-      <description>To create a Docker image, we have added two new files to our project:
- Dockerfile: Contains the needed commands to create the image. .dockerignore: It works like .gitignore for git, it allows to define which file/s should not be included in the Docker image when the command ADD or COPY is/are invoked.   # Use a golang image as base builder imageFROMgolang:1.13 as builder# Create the project&amp;#39;s directory under the default GOPATHRUN mkdir -p /go/src/github.</description>
+      <guid>https://iris-garcia.github.io/workday/provision/os/</guid>
+      <description>Debian is the selected Operating System for the following reasons:
+Stability Debian is one of the oldest distributions and it is famous because of its stability, any package has been tested thoroughly before included in a Debian stable release.
+Security Debian community is very responsive to bug fixing, security is one of the most important Debian features and this is very convenient for a production server.
+Free - Open Source Debian has a social contract with the Free Software Community, which means we are free to use any software that suits our needs.</description>
     </item>
     
     <item>
       <title>OpenShift</title>
       <link>https://iris-garcia.github.io/workday/deployment/openshit/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:04 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/deployment/openshit/</guid>
       <description>Requirements Create account in RedHat  Create a new account using the Sign up form. Sign in into OpenShift.  Install the OpenShift client wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz tar xvzf oc.tar.gz sudo cp oc /usr/local/bin/ The binary can be copied to any place as long as it is included in the $PATH.
@@ -34,20 +36,19 @@
     </item>
     
     <item>
-      <title>Toolchain</title>
-      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <title>Dockerfile</title>
+      <link>https://iris-garcia.github.io/workday/docker/dockerfile/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
-      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
-      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
-Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
-It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+      <guid>https://iris-garcia.github.io/workday/docker/dockerfile/</guid>
+      <description>To create a Docker image, we have added two new files to our project:
+ Dockerfile: Contains the needed commands to create the image. .dockerignore: It works like .gitignore for git, it allows to define which file/s should not be included in the Docker image when the command ADD or COPY is/are invoked.   # Use a golang image as base builder imageFROMgolang:1.13 as builder# Create the project&amp;#39;s directory under the default GOPATHRUN mkdir -p /go/src/github.</description>
     </item>
     
     <item>
       <title>Travis CI</title>
       <link>https://iris-garcia.github.io/workday/ci/travis/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/travis/</guid>
       <description>Description Travis is a hosted continuous integration service used to build and test software projects hosted at GitHub.
@@ -57,9 +58,20 @@ Configuration To avoid replicating exactly the same workflows in GitHub Actions 
     </item>
     
     <item>
+      <title>Toolchain</title>
+      <link>https://iris-garcia.github.io/workday/dev/tools/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/dev/tools/</guid>
+      <description>Go The open source programming language Go will be used to develop the whole project, mainly because I want to try a new language and this one is becoming quite popular nowadays.
+Gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance &amp;ndash; up to 40 times faster.
+It is very well documented and provides many handy features like authentication, data validation and a configurable logger out of the box.</description>
+    </item>
+    
+    <item>
       <title>What is Workday?</title>
       <link>https://iris-garcia.github.io/workday/description/what/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:01 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/what/</guid>
       <description>Workday is a RESTful API project that allows the management of workers&amp;rsquo; day registration, for this purpose it makes use of a relational database where such data persists.
@@ -70,7 +82,7 @@ It allows the creation of different types of users (roles), initially there are 
     <item>
       <title>Why?</title>
       <link>https://iris-garcia.github.io/workday/description/why/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:50 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:01 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/description/why/</guid>
       <description>Since last May 12, 2019 every Spanish company is required to provide their employees a process to record their working hours.
@@ -78,9 +90,21 @@ This process can be as simple as signing in a paper the checks in and checks out
     </item>
     
     <item>
+      <title>Ansible</title>
+      <link>https://iris-garcia.github.io/workday/provision/ansible/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/ansible/</guid>
+      <description>Structure   Figure 1: directory structure
+  Playbook The following playbook has been created:
+-name:Basesetuphosts:apigather_facts:nobecome:yestags:-basevars:USER:&amp;#34;workday&amp;#34;PACKAGES:-git-wgetpre_tasks:-name:Installsystempackagesapt:name:&amp;#34;{{ PACKAGES }}&amp;#34;update_cache:yesroles:-role:user-name:SetupGolanghosts:apigather_facts:nobecome:yestags:-govars:GO_VERSION:&amp;#34;1.13.3&amp;#34;roles:-role:go-name:SetupbuildtoolMagehosts:apigather_facts:nobecome:yestags:-buildtoolvars:USER:&amp;#34;workday&amp;#34;roles:-role:mage-name:Setupprocessmanagerpm2hosts:apigather_facts:nobecome:yestags:-pm2roles:-role:pm2 Code Snippet 1: .packer/ansible/workday.yml  It has four main tasks, each of them run a role and has a tag defined to allow running a one or more tasks instead of the whole playbook.
+The use of become: yes is needed because the playbook is ran using the vagrant user, therefore privileged rights are needed.</description>
+    </item>
+    
+    <item>
       <title>Building the Docker image</title>
       <link>https://iris-garcia.github.io/workday/docker/build/</link>
-      <pubDate>Fri, 06 Dec 2019 18:28:28 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/docker/build/</guid>
       <description>To build the Docker image locally we can run the following command from the root directory of the project:
@@ -90,7 +114,7 @@ $ docker build . -t workday Sending build context to Docker daemon 118.8kB Step 
     <item>
       <title>GitHub Actions</title>
       <link>https://iris-garcia.github.io/workday/ci/github/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/ci/github/</guid>
       <description>Description GitHub Actions is the new continuous integration and deployment system built and maintained by the community.
@@ -102,7 +126,7 @@ An example of one run can be seen here.</description>
     <item>
       <title>Requirements</title>
       <link>https://iris-garcia.github.io/workday/dev/requirements/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/requirements/</guid>
       <description>Go  Version used: 1.13.1 Setup: Most of the linux distributions provide a package to install Go, but it is also possible to download its binary.
@@ -111,9 +135,19 @@ go get github.com/magefile/mage  MariaDB  Version used: 10.4 Setup: Most of the 
     </item>
     
     <item>
+      <title>Creation of VM</title>
+      <link>https://iris-garcia.github.io/workday/provision/vm/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/vm/</guid>
+      <description>The creation of the VM has been done using packer and adapting a packer&amp;rsquo;s template from this project.
+{ &amp;#34;variables&amp;#34;: { &amp;#34;version&amp;#34;: &amp;#34;&amp;#34; }, &amp;#34;provisioners&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;shell&amp;#34;, &amp;#34;execute_command&amp;#34;: &amp;#34;echo &amp;#39;vagrant&amp;#39; | {{.Vars}} sudo -S -E bash &amp;#39;{{.Path}}&amp;#39;&amp;#34;, &amp;#34;script&amp;#34;: &amp;#34;scripts/setup.sh&amp;#34; }, { &amp;#34;type&amp;#34;: &amp;#34;shell&amp;#34;, &amp;#34;execute_command&amp;#34;: &amp;#34;echo &amp;#39;vagrant&amp;#39; | {{.Vars}} sudo -S -E bash &amp;#39;{{.Path}}&amp;#39;&amp;#34;, &amp;#34;script&amp;#34;: &amp;#34;scripts/ansible.sh&amp;#34; }, { &amp;#34;type&amp;#34;: &amp;#34;ansible-local&amp;#34;, &amp;#34;playbook_file&amp;#34;: &amp;#34;ansible/workday.yml&amp;#34;, &amp;#34;inventory_file&amp;#34;: &amp;#34;ansible/env/packer/hosts.yml&amp;#34;, &amp;#34;role_paths&amp;#34;: [ &amp;#34;ansible/roles/go&amp;#34;, &amp;#34;ansible/roles/mage&amp;#34;, &amp;#34;ansible/roles/pm2&amp;#34;, &amp;#34;ansible/roles/user&amp;#34; ] } ], &amp;#34;builders&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;virtualbox-iso&amp;#34;, &amp;#34;boot_command&amp;#34;: [ &amp;#34;&amp;lt;esc&amp;gt;&amp;lt;wait&amp;gt;&amp;#34;, &amp;#34;install &amp;lt;wait&amp;gt;&amp;#34;, &amp;#34; preseed/url=http://{{ .</description>
+    </item>
+    
+    <item>
       <title>Docker Hub</title>
       <link>https://iris-garcia.github.io/workday/docker/dockerhub/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:04 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/docker/dockerhub/</guid>
       <description>Now that we have a working Docker image we want to automate the building process, so it automatically builds and publishes the image with every new code change.
@@ -124,11 +158,21 @@ Step 1: Register in Docker Hub Just click in Sing up and fill up the following f
     <item>
       <title>API Test Class</title>
       <link>https://iris-garcia.github.io/workday/dev/api/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:51 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:02 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/dev/api/</guid>
       <description>User story As an admin employee, I want to be able to:
  Add new employees to the system. Edit already existing employees&amp;rsquo; details. List all the employees existing in the system. Retrieve the details of any employee given its ID. Delete an employee from the system given its ID.  Endpoints    Method Endpoint     GET /status   GET /employees   POST /employees   GET /employees/{id}   PUT /employees/{id}   DELETE /employees/{id}     GET /status: Returns a 200 and {&amp;quot;status&amp;quot;: &amp;quot;OK&amp;quot;} in the body.</description>
+    </item>
+    
+    <item>
+      <title>Task manager configuration</title>
+      <link>https://iris-garcia.github.io/workday/provision/task-manager/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/task-manager/</guid>
+      <description>Two new tasks has been added to the task manager:
+Create VM and Provision // CreateVM creates a vagrant box already provisioned func CreateVM() error { cwd, err := os.Getwd() if err != nil { fmt.Printf(&amp;#34;Error: &amp;#34;, err.Error()) } cmd := exec.Command(&amp;#34;packer&amp;#34;, &amp;#34;build&amp;#34;, &amp;#34;-var&amp;#34;, &amp;#34;&amp;#39;version=10.2.0&amp;#39;&amp;#34;, &amp;#34;debian10.json&amp;#34;) cmd.Dir = cwd + &amp;#34;/.packer&amp;#34; cmd.Stdout = os.Stdout cmd.Stderr = os.Stderr return cmd.Run() } A wrapper which creates a VirtualBox VM and then provisions it with Ansible.</description>
     </item>
     
   </channel>

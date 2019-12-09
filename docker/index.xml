@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:51 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:03 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/docker/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>Dockerfile</title>
       <link>https://iris-garcia.github.io/workday/docker/dockerfile/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/docker/dockerfile/</guid>
       <description>To create a Docker image, we have added two new files to our project:
@@ -26,7 +26,7 @@
     <item>
       <title>Building the Docker image</title>
       <link>https://iris-garcia.github.io/workday/docker/build/</link>
-      <pubDate>Fri, 06 Dec 2019 18:28:28 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:03 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/docker/build/</guid>
       <description>To build the Docker image locally we can run the following command from the root directory of the project:
@@ -36,7 +36,7 @@ $ docker build . -t workday Sending build context to Docker daemon 118.8kB Step 
     <item>
       <title>Docker Hub</title>
       <link>https://iris-garcia.github.io/workday/docker/dockerhub/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:04 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/docker/dockerhub/</guid>
       <description>Now that we have a working Docker image we want to automate the building process, so it automatically builds and publishes the image with every new code change.

@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:52 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:04 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/deployment/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>OpenShift</title>
       <link>https://iris-garcia.github.io/workday/deployment/openshit/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:04 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/deployment/openshit/</guid>
       <description>Requirements Create account in RedHat  Create a new account using the Sign up form. Sign in into OpenShift.  Install the OpenShift client wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz tar xvzf oc.tar.gz sudo cp oc /usr/local/bin/ The binary can be copied to any place as long as it is included in the $PATH.

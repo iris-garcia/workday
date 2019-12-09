@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
     <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
-    <lastBuildDate>Fri, 06 Dec 2019 18:24:52 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:06 +0100</lastBuildDate>
     
 	<atom:link href="https://iris-garcia.github.io/workday/howto/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>GitHub Pages</title>
       <link>https://iris-garcia.github.io/workday/howto/gh-pages/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:52 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:06 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/gh-pages/</guid>
       <description>This document ilustrates how to setup GitHub Pages using Hugo as website generator and GitHub&amp;rsquo;s Actions to automate the deployment process.
@@ -27,7 +27,7 @@ There are different alternatives to setup GitHub pages, the one used in here is 
     <item>
       <title>Continuous Delivery (Travis CI)</title>
       <link>https://iris-garcia.github.io/workday/howto/travis-cd/</link>
-      <pubDate>Fri, 06 Dec 2019 18:24:53 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:06 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/travis-cd/</guid>
       <description>Travis offers a deployment configuration which fortunately supports OpenShift, the following steps shows how to get it working.
@@ -38,7 +38,7 @@ gem install travis GitHub and Travis integration Travis must be integrated in Gi
     <item>
       <title>Continuous Delivery (GitHub)</title>
       <link>https://iris-garcia.github.io/workday/howto/github-cd/</link>
-      <pubDate>Fri, 06 Dec 2019 23:33:09 +0100</pubDate>
+      <pubDate>Mon, 09 Dec 2019 18:37:06 +0100</pubDate>
       <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
       <guid>https://iris-garcia.github.io/workday/howto/github-cd/</guid>
       <description>Step 1: Create a secret encoded in base64 We need to create a secret which need to be known by our deployment in OpenShift and the Webhook in GitHub:

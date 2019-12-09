@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Provision on Workday</title>
+    <link>https://iris-garcia.github.io/workday/provision/</link>
+    <description>Recent content in Provision on Workday</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>iris.garcia.desebastian@gmail.com (Iris Garcia)</managingEditor>
+    <webMaster>iris.garcia.desebastian@gmail.com (Iris Garcia)</webMaster>
+    <lastBuildDate>Mon, 09 Dec 2019 18:37:05 +0100</lastBuildDate>
+    
+	<atom:link href="https://iris-garcia.github.io/workday/provision/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Operating System</title>
+      <link>https://iris-garcia.github.io/workday/provision/os/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/os/</guid>
+      <description>Debian is the selected Operating System for the following reasons:
+Stability Debian is one of the oldest distributions and it is famous because of its stability, any package has been tested thoroughly before included in a Debian stable release.
+Security Debian community is very responsive to bug fixing, security is one of the most important Debian features and this is very convenient for a production server.
+Free - Open Source Debian has a social contract with the Free Software Community, which means we are free to use any software that suits our needs.</description>
+    </item>
+    
+    <item>
+      <title>Ansible</title>
+      <link>https://iris-garcia.github.io/workday/provision/ansible/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/ansible/</guid>
+      <description>Structure   Figure 1: directory structure
+  Playbook The following playbook has been created:
+-name:Basesetuphosts:apigather_facts:nobecome:yestags:-basevars:USER:&amp;#34;workday&amp;#34;PACKAGES:-git-wgetpre_tasks:-name:Installsystempackagesapt:name:&amp;#34;{{ PACKAGES }}&amp;#34;update_cache:yesroles:-role:user-name:SetupGolanghosts:apigather_facts:nobecome:yestags:-govars:GO_VERSION:&amp;#34;1.13.3&amp;#34;roles:-role:go-name:SetupbuildtoolMagehosts:apigather_facts:nobecome:yestags:-buildtoolvars:USER:&amp;#34;workday&amp;#34;roles:-role:mage-name:Setupprocessmanagerpm2hosts:apigather_facts:nobecome:yestags:-pm2roles:-role:pm2 Code Snippet 1: .packer/ansible/workday.yml  It has four main tasks, each of them run a role and has a tag defined to allow running a one or more tasks instead of the whole playbook.
+The use of become: yes is needed because the playbook is ran using the vagrant user, therefore privileged rights are needed.</description>
+    </item>
+    
+    <item>
+      <title>Creation of VM</title>
+      <link>https://iris-garcia.github.io/workday/provision/vm/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/vm/</guid>
+      <description>The creation of the VM has been done using packer and adapting a packer&amp;rsquo;s template from this project.
+{ &amp;#34;variables&amp;#34;: { &amp;#34;version&amp;#34;: &amp;#34;&amp;#34; }, &amp;#34;provisioners&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;shell&amp;#34;, &amp;#34;execute_command&amp;#34;: &amp;#34;echo &amp;#39;vagrant&amp;#39; | {{.Vars}} sudo -S -E bash &amp;#39;{{.Path}}&amp;#39;&amp;#34;, &amp;#34;script&amp;#34;: &amp;#34;scripts/setup.sh&amp;#34; }, { &amp;#34;type&amp;#34;: &amp;#34;shell&amp;#34;, &amp;#34;execute_command&amp;#34;: &amp;#34;echo &amp;#39;vagrant&amp;#39; | {{.Vars}} sudo -S -E bash &amp;#39;{{.Path}}&amp;#39;&amp;#34;, &amp;#34;script&amp;#34;: &amp;#34;scripts/ansible.sh&amp;#34; }, { &amp;#34;type&amp;#34;: &amp;#34;ansible-local&amp;#34;, &amp;#34;playbook_file&amp;#34;: &amp;#34;ansible/workday.yml&amp;#34;, &amp;#34;inventory_file&amp;#34;: &amp;#34;ansible/env/packer/hosts.yml&amp;#34;, &amp;#34;role_paths&amp;#34;: [ &amp;#34;ansible/roles/go&amp;#34;, &amp;#34;ansible/roles/mage&amp;#34;, &amp;#34;ansible/roles/pm2&amp;#34;, &amp;#34;ansible/roles/user&amp;#34; ] } ], &amp;#34;builders&amp;#34;: [ { &amp;#34;type&amp;#34;: &amp;#34;virtualbox-iso&amp;#34;, &amp;#34;boot_command&amp;#34;: [ &amp;#34;&amp;lt;esc&amp;gt;&amp;lt;wait&amp;gt;&amp;#34;, &amp;#34;install &amp;lt;wait&amp;gt;&amp;#34;, &amp;#34; preseed/url=http://{{ .</description>
+    </item>
+    
+    <item>
+      <title>Task manager configuration</title>
+      <link>https://iris-garcia.github.io/workday/provision/task-manager/</link>
+      <pubDate>Mon, 09 Dec 2019 18:37:05 +0100</pubDate>
+      <author>iris.garcia.desebastian@gmail.com (Iris Garcia)</author>
+      <guid>https://iris-garcia.github.io/workday/provision/task-manager/</guid>
+      <description>Two new tasks has been added to the task manager:
+Create VM and Provision // CreateVM creates a vagrant box already provisioned func CreateVM() error { cwd, err := os.Getwd() if err != nil { fmt.Printf(&amp;#34;Error: &amp;#34;, err.Error()) } cmd := exec.Command(&amp;#34;packer&amp;#34;, &amp;#34;build&amp;#34;, &amp;#34;-var&amp;#34;, &amp;#34;&amp;#39;version=10.2.0&amp;#39;&amp;#34;, &amp;#34;debian10.json&amp;#34;) cmd.Dir = cwd + &amp;#34;/.packer&amp;#34; cmd.Stdout = os.Stdout cmd.Stderr = os.Stderr return cmd.Run() } A wrapper which creates a VirtualBox VM and then provisions it with Ansible.</description>
+    </item>
+    
+  </channel>
+</rss>

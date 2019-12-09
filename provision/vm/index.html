@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="https://iris-garcia.github.io/workday//images/favicon.png" type="image/x-icon" />
 
-    <title>bdd :: Workday</title>
+    <title>Creation of VM :: Workday</title>
 
     
     <link href="../../css/nucleus.css?1575912935" rel="stylesheet">
@@ -34,11 +34,13 @@
       
     </style>
     
+<link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/asciinema-player.css" />
+
 
 <link rel="stylesheet" type="text/css" href="https://iris-garcia.github.io/workday//css/custom.css" />
 
   </head>
-  <body class="" data-url="/tags/bdd/">
+  <body class="" data-url="/provision/vm/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -458,7 +460,7 @@
   
     
     <li data-nav-id="/provision/" title="Provision" class="dd-item 
-        
+        parent
         
         
         ">
@@ -522,7 +524,7 @@
  
   
     
-      <li data-nav-id="/provision/vm/" title="Creation of VM" class="dd-item ">
+      <li data-nav-id="/provision/vm/" title="Creation of VM" class="dd-item active">
         <a href="../../provision/vm/">
         Creation of VM
         <i class="fas fa-check read-icon"></i>
@@ -739,14 +741,21 @@
                   <span class="links">
                  
                  
-                   bdd 
+                   Creation of VM 
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#demo">Demo</a></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -762,9 +771,7 @@
           
             <h1>
               
-                taxonomy ::
-              
-              bdd
+              Creation of VM
             </h1>
           
 
@@ -774,17 +781,148 @@
 
 
 
+<p>The creation of the VM has been done using <a href="https://www.packer.io/">packer</a> and adapting a
+packer&rsquo;s template from this <a href="https://github.com/geerlingguy/packer-debian-10">project</a>.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#6ab825;font-weight:bold">&#34;variables&#34;</span>: {
+        <span style="color:#6ab825;font-weight:bold">&#34;version&#34;</span>: <span style="color:#ed9d13">&#34;&#34;</span>
+    },
+    <span style="color:#6ab825;font-weight:bold">&#34;provisioners&#34;</span>: [
+        {
+            <span style="color:#6ab825;font-weight:bold">&#34;type&#34;</span>: <span style="color:#ed9d13">&#34;shell&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;execute_command&#34;</span>: <span style="color:#ed9d13">&#34;echo &#39;vagrant&#39; | {{.Vars}} sudo -S -E bash &#39;{{.Path}}&#39;&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;script&#34;</span>: <span style="color:#ed9d13">&#34;scripts/setup.sh&#34;</span>
+        },
+        {
+            <span style="color:#6ab825;font-weight:bold">&#34;type&#34;</span>: <span style="color:#ed9d13">&#34;shell&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;execute_command&#34;</span>: <span style="color:#ed9d13">&#34;echo &#39;vagrant&#39; | {{.Vars}} sudo -S -E bash &#39;{{.Path}}&#39;&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;script&#34;</span>: <span style="color:#ed9d13">&#34;scripts/ansible.sh&#34;</span>
+        },
+        {
+            <span style="color:#6ab825;font-weight:bold">&#34;type&#34;</span>: <span style="color:#ed9d13">&#34;ansible-local&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;playbook_file&#34;</span>: <span style="color:#ed9d13">&#34;ansible/workday.yml&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;inventory_file&#34;</span>: <span style="color:#ed9d13">&#34;ansible/env/packer/hosts.yml&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;role_paths&#34;</span>: [
+                <span style="color:#ed9d13">&#34;ansible/roles/go&#34;</span>,
+                <span style="color:#ed9d13">&#34;ansible/roles/mage&#34;</span>,
+                <span style="color:#ed9d13">&#34;ansible/roles/pm2&#34;</span>,
+                <span style="color:#ed9d13">&#34;ansible/roles/user&#34;</span>
+            ]
+        }
+    ],
+    <span style="color:#6ab825;font-weight:bold">&#34;builders&#34;</span>: [
+        {
+            <span style="color:#6ab825;font-weight:bold">&#34;type&#34;</span>: <span style="color:#ed9d13">&#34;virtualbox-iso&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;boot_command&#34;</span>: [
+                <span style="color:#ed9d13">&#34;&lt;esc&gt;&lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;install &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34; preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;debian-installer=en_US.UTF-8 &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;auto &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;locale=en_US.UTF-8 &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;kbd-chooser/method=us &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;keyboard-configuration/xkb-keymap=us &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;netcfg/get_hostname={{ .Name }} &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;netcfg/get_domain=vagrantup.com &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;fb=false &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;debconf/frontend=noninteractive &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;console-setup/ask_detect=false &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;console-keymaps-at/keymap=us &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;grub-installer/bootdev=/dev/sda &lt;wait&gt;&#34;</span>,
+                <span style="color:#ed9d13">&#34;&lt;enter&gt;&lt;wait&gt;&#34;</span>
+            ],
+            <span style="color:#6ab825;font-weight:bold">&#34;boot_wait&#34;</span>: <span style="color:#ed9d13">&#34;5s&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;disk_size&#34;</span>: <span style="color:#3677a9">81920</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;guest_os_type&#34;</span>: <span style="color:#ed9d13">&#34;Debian_64&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;headless&#34;</span>: <span style="color:#6ab825;font-weight:bold">true</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;http_directory&#34;</span>: <span style="color:#ed9d13">&#34;http&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;iso_urls&#34;</span>: [
+                <span style="color:#ed9d13">&#34;iso/debian-10.2.0-amd64-netinst.iso&#34;</span>,
+                <span style="color:#ed9d13">&#34;https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.2.0-amd64-netinst.iso&#34;</span>
+            ],
+            <span style="color:#6ab825;font-weight:bold">&#34;iso_checksum_type&#34;</span>: <span style="color:#ed9d13">&#34;sha256&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;iso_checksum&#34;</span>: <span style="color:#ed9d13">&#34;e43fef979352df15056ac512ad96a07b515cb8789bf0bfd86f99ed0404f885f5&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;ssh_username&#34;</span>: <span style="color:#ed9d13">&#34;vagrant&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;ssh_password&#34;</span>: <span style="color:#ed9d13">&#34;vagrant&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;ssh_port&#34;</span>: <span style="color:#3677a9">22</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;ssh_wait_timeout&#34;</span>: <span style="color:#ed9d13">&#34;10000s&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;shutdown_command&#34;</span>: <span style="color:#ed9d13">&#34;echo &#39;vagrant&#39;|sudo -S shutdown -P now&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;guest_additions_path&#34;</span>: <span style="color:#ed9d13">&#34;VBoxGuestAdditions_{{.Version}}.iso&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;virtualbox_version_file&#34;</span>: <span style="color:#ed9d13">&#34;.vbox_version&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;vm_name&#34;</span>: <span style="color:#ed9d13">&#34;packer-debian-10-amd64&#34;</span>,
+            <span style="color:#6ab825;font-weight:bold">&#34;vboxmanage&#34;</span>: [
+                [
+                    <span style="color:#ed9d13">&#34;modifyvm&#34;</span>,
+                    <span style="color:#ed9d13">&#34;{{.Name}}&#34;</span>,
+                    <span style="color:#ed9d13">&#34;--memory&#34;</span>,
+                    <span style="color:#ed9d13">&#34;2048&#34;</span>
+                ],
+                [
+                    <span style="color:#ed9d13">&#34;modifyvm&#34;</span>,
+                    <span style="color:#ed9d13">&#34;{{.Name}}&#34;</span>,
+                    <span style="color:#ed9d13">&#34;--cpus&#34;</span>,
+                    <span style="color:#ed9d13">&#34;2&#34;</span>
+                ]
+            ]
+        }
+    ],
+    <span style="color:#6ab825;font-weight:bold">&#34;post-processors&#34;</span>: [
+        [
+            {
+                <span style="color:#6ab825;font-weight:bold">&#34;output&#34;</span>: <span style="color:#ed9d13">&#34;builds/{{.Provider}}-workday.box&#34;</span>,
+                <span style="color:#6ab825;font-weight:bold">&#34;type&#34;</span>: <span style="color:#ed9d13">&#34;vagrant&#34;</span>
+            }
+        ]
+    ]
+}</code></pre></div>
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1</span>:
+  Packer template
+</div>
+
+<p>A new provisioner has been added to run our Ansible playbook.</p>
+
+<p>Running the command <code>mage createvm</code>
+starts the build of the VM and does the following:</p>
 
 <ul>
-	
-		<li><a href="../../dev/api/">API Test Class</a></li>
-	
+<li>Create a VirtualBox VM</li>
+<li>Download the Debian 10.20 ISO</li>
+<li>Boot the VM and install the Operating System</li>
+<li>Wait until the SSH service is running</li>
+<li>SSH into the machine and run the provisioners.</li>
+<li>Export the machine as type <code>vagrant</code> box.</li>
 </ul>
+
+<h2 id="demo">Demo</h2>
+
+<p>
+    <asciinema-player
+        src="../../casts/packer.cast"
+        cols="640"
+        rows="50"
+        
+        preload="1"
+        
+        start-at="0"
+        speed="1"
+        idle-time-limit="1"
+        
+        
+        
+        
+        
+        
+        
+    ></asciinema-player>
+</p>
+
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -1076,6 +1214,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1088,6 +1227,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1121,6 +1263,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1136,6 +1279,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1226,8 +1372,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="../../provision/ansible/" title="Ansible"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="../../description/" title="Description" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="../../provision/task-manager/" title="Task manager configuration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1254,6 +1402,9 @@
         mermaid.initialize({ startOnLoad: true });
     </script>
     
+<script src="../../js/asciinema-player.js"></script>
+
 
   </body>
 </html>
+
