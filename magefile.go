@@ -67,9 +67,6 @@ func Stop() error {
 }
 
 // StartDev startdev bootstraps a working dev environment.
-// TODO:
-//  - Use realize to automatically reload the api server on fiche changes
-//  - Check if the docker container for mariadb is already running
 func StartDev() error {
 	cwd, err := os.Getwd()
 	if err != nil {
@@ -88,6 +85,32 @@ func StartDev() error {
 	}
 
 	return nil
+}
+
+// CreateVM creates a vagrant box already provisioned
+func CreateVM() error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("Error: ", err.Error())
+	}
+	cmd := exec.Command("packer", "build", "-var", "'version=10.2.0'", "debian10.json")
+	cmd.Dir = cwd + "/.packer"
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
+// ProvisionVM runs an Ansible playbook to provision the configured host.
+func ProvisionVM() error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("Error: ", err.Error())
+	}
+	cmd := exec.Command("ansible-playbook", "-i", "env/packer", "workday.yml")
+	cmd.Dir = cwd + "/.packer/ansible"
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
 
 // Test runs the tests suite.
